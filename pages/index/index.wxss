@@ -1,21 +1,59 @@
-/**index.wxss**/
-.userinfo {
+.main {
+  width: 100%;
+  height: 800rpx;
+}
+
+.main .header {
+  width: 100%;
+  height: 400rpx;
+}
+.main .header image {
+  height: 100%;
+}
+
+.main .nav {
+  height: 200rpx;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+.main .nav .nav_item {
+  margin: auto 64rpx;
+}
+.main .nav .logo {
+  font-size: 64rpx;
+  font-weight: bold;
+}
+.main .nav .nav_item .nav_item_text {
+  font-size: 32rpx;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.main .contant {
+  height: 100%;
+  width: 100%;
+}
+.main .contant .title {
+  height: 100rpx;
+  background-color: #41C7DB;
+  line-height: 100rpx;
+  font-size: 32rpx;
+}
+.main .contant .title_text {
+  padding-left: 26rpx;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.main .contant .contant_list {
+  width: 100%;
+  height: 100%;
+  border-bottom: 1rpx solid #000;
+  display: flex;
+  justify-content: space-between;
+  font-size: 32rpx; 
 }
-
-.usermotto {
-  margin-top: 200px;
+.main .contant .contant_list .contant_name {
+  padding: 26rpx;
+  border-bottom: 1rpx solid #000; 
+}
+.main .contant .contant_list .contant_people {
+  padding: 26rpx 104rpx 26rpx 0;
 }

@@ -4,8 +4,8 @@
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarBackgroundColor": "#00CC6A",
+    "navigationBarTitleText": "校园审批系统",
     "navigationBarTextStyle":"black"
   }
 }
