@@ -1,5 +1,5 @@
 <view class='main'>
-  <view class='header'><image src='../../static/img/index_bg.jpg'></image></view>
+  <view class='header'><image src='../../static/img/index_bg.jpg' mode='aspectFill'></image></view>
   <view class='nav'>
 
     <view class='nav_item'>
