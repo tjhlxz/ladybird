@@ -7,13 +7,5 @@
     "navigationBarBackgroundColor": "#00CC6A",
     "navigationBarTitleText": "校园审批系统",
     "navigationBarTextStyle":"black"
-  },
-  "tabBar": {
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "首页",
-      "iconPath": "./static/ico/homepage.png",
-      "selectedIconPath": "./static/ico/homepage_fill.png"
-    }]
   }
 }
