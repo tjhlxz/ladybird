@@ -2,17 +2,17 @@
   <view class='header'><image src='../../static/img/index_bg.jpg' mode='aspectFill'></image></view>
   <view class='nav'>
 
-    <view class='nav_item'>
+    <view class='nav_item' bindtap='myRequest'>
       <view class='logo'>图</view>
       <view class='nav_item_text'>我的申请</view>
     </view>
 
-    <view class='nav_item'>
+    <view class='nav_item' bindtap='myApproval'>
       <view class='logo'>图</view>
       <view class='nav_item_text'>我审批的</view>
     </view>
 
-    <view class='nav_item'>
+    <view class='nav_item' bindtap='demo'>
       <view class='logo'>图</view>
       <view class='nav_item_text'>我叫督导</view>
     </view>

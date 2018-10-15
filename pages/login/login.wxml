@@ -1,2 +1,15 @@
-<!--pages/login/login.wxml-->
-<text>pages/login/login.wxml</text>
+<view class='wrapper'>
+  <view class='title'>
+    <text>登录</text>
+  </view>
+  <view class='content'>
+    <label for='username' class='username_label'>教工号</label>
+    <input name='username' class='user_inp' bindinput='usernameInput'></input>
+    <label for='password' class='password_label'>密码</label>
+    <input name='password' class='pass_inp' bindinput='passwordInput'></input>
+    <button class='btn' bindtap='click'>登录</button>
+  </view>
+  <!-- <view class='footer'>
+      <label class='footer_label' bindtap='bindTap'>忘记密码</label>
+  </view> -->
+</view>

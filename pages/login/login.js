@@ -1,65 +1,32 @@
-// pages/login/login.js
+var app = getApp();
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
+    username: null,
+    password: null
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
+  usernameInput: function (e) {
+    var _this = this;
+    _this.setData({ username: e.detail.value })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  passwordInput: function (e) {
+    var _this = this;
+    _this.setData({ password: e.detail.value })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
+  click: function (e) {
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+    //向服务器发送请求 由此用户则登录
+    app.globalData.userInfo = { username: this.data.username, password: this.data.password };
+    wx.switchTab({
+      url: '../index/index'
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
+  // bindTap: function (e) {
+  //   wx.navigateTo({
+  //     url: '../forget/forget',
+  //   })
+  // }
 })

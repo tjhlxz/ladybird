@@ -1,1 +1,57 @@
-/* pages/login/login.wxss */
+.wrapper {
+  width: 100%;
+  color: rgb(105, 105, 105);
+  font-size: 14px;
+}
+.title {
+  text-align: center;
+  margin: 36px 0;
+  color: rgb(10,177,121);
+  font-size: 58px;
+  font-weight: bold;
+}
+.content {
+  width: 80%;
+  margin:0 auto;
+}
+.content .user_inp {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0 0 0;
+}
+.content .pass_inp {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0 0 0;
+}
+.content .btn {
+  width: 80%;
+  height: 36px;
+  margin-top: 30px;
+  background-color: rgb(10,177,121);
+  color: #fff;
+  text-align: center;
+  line-height: 36px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.footer {
+  width: 100%;
+  height: 60px;
+  margin: 30px auto;
+  text-align: center;
+}
+.footer .footer_label {
+  border: 1px solid #fff;
+  width: 80%;
+  height: 75rpx;
+  margin: 0 auto;
+  padding-top: 25rpx;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+}
+.footer image {
+  width:54px;
+  height: 52px;
+  margin-top: 30px;
+}
