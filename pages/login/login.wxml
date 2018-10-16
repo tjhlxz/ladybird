@@ -9,7 +9,7 @@
     <input name='password' class='pass_inp' bindinput='passwordInput'></input>
     <button class='btn' bindtap='click'>登录</button>
   </view>
-  <!-- <view class='footer'>
+  <view class='footer'>
       <label class='footer_label' bindtap='bindTap'>忘记密码</label>
-  </view> -->
+  </view>
 </view>
