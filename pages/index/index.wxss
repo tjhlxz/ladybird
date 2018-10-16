@@ -35,7 +35,7 @@
 }
 .main .contant .title {
   height: 100rpx;
-  background-color: #41C7DB;
+  background-color: #0ab179;
   line-height: 100rpx;
   font-size: 32rpx;
 }

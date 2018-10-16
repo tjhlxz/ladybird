@@ -1,1 +1,65 @@
 /* pages/user/user.wxss */
+
+.container {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: MicroSoft Yahei;
+}
+
+.person-container {
+    margin-top: 50rpx;
+    margin-bottom: 50rpx;
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar {
+    margin-bottom: 50rpx;
+    height: 200rpx;
+    width: 200rpx;
+    border-radius: 50%;
+}
+
+.username {
+    font-size: 35rpx;
+}
+
+.list-container {
+    background-color: #fff;
+    width: 100%;
+}
+
+.list {
+    padding-top:10rpx;
+    width: 100%;
+    height: 40rpx;
+    margin-bottom:30rpx;
+    display: flex;
+    flex-direction: raw
+}
+
+.list_icon {
+    margin-left: 30rpx;
+    margin-right: 20rpx;
+    width: 40rpx;
+    height: 40rpx;
+    opacity: 0.7;
+}
+
+.list_text {
+    display: inline-block;
+    height: 40rpx;
+    line-height: 40rpx;
+    font-size: 30rpx;
+}
+
+.nextstep {
+    margin-left: 480rpx;
+    width: 40rpx;
+    height: 40rpx;
+    opacity: 0.7;
+}

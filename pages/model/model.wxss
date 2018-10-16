@@ -1,1 +1,27 @@
-/* pages/model/model.wxss */
+.model {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1rpx solid #f2f2f2;
+    align-items: center;
+    padding-top:10rpx;
+    padding-bottom: 30rpx;
+    height: 100%;
+}
+.model_icon{
+    margin-left: 30rpx;
+    width: 90rpx;
+    height: 90rpx;
+}
+.model_title {
+    margin-left: 20rpx;
+    font-size: 30rpx;
+}
+
+.model_use {
+    margin-left: 200rpx;
+    width: 120rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 30rpx;
+    background-color: #fff;
+}
