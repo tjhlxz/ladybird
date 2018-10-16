@@ -5,49 +5,17 @@ Page({
   },
 
   onLoad: function () {
-    var that = this;
-    // 查看是否授权
-    wx.getSetting({
-      success: function (res) {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: function (res) {
-              //从数据库获取用户信息
-              // that.queryUsreInfo();
-              //用户已经授权过
-              wx.switchTab({
-                url: '../index/index'
-              })
-            }
-          });
-        }
-      }
-    })
+    if (wx.getStorageSync('userInfo')) {
+          //用户已经授权过
+          wx.switchTab({
+            url: '../index/index'
+          })
+    }
   },
 
   bindGetUserInfo: function (e) {
     if (e.detail.userInfo) {
-      //用户按了允许授权按钮
-      // var that = this;
-      // //插入登录的用户的相关信息到数据库
-      // wx.request({
-      //   url: getApp().globalData.urlPath + 'hstc_interface/insert_user',
-      //   data: {
-      //     openid: getApp().globalData.openid,
-      //     nickName: e.detail.userInfo.nickName,
-      //     avatarUrl: e.detail.userInfo.avatarUrl,
-      //     province: e.detail.userInfo.province,
-      //     city: e.detail.userInfo.city
-      //   },
-      //   header: {
-      //     'content-type': 'application/json'
-      //   },
-      //   success: function (res) {
-      //     //从数据库获取用户信息
-      //     that.queryUsreInfo();
-      //     console.log("插入小程序登录用户信息成功！");
-      //   }
-      // });
+      wx.setStorageSync('userInfo', e.detail.userInfo)
       //授权成功后，跳转进入小程序首页
       wx.switchTab({
         url: '../index/index'
@@ -66,22 +34,5 @@ Page({
         }
       })
     }
-  },
-  // //获取用户信息接口
-  // queryUsreInfo: function () {
-  //   wx.request({
-  //     url: getApp().globalData.urlPath + 'hstc_interface/queryByOpenid',
-  //     data: {
-  //       openid: getApp().globalData.openid
-  //     },
-  //     header: {
-  //       'content-type': 'application/json'
-  //     },
-  //     success: function (res) {
-  //       console.log(res.data);
-  //       getApp().globalData.userInfo = res.data;
-  //     }
-  //   });
-  // },
-
+  }
 })
