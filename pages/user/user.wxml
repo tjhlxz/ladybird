@@ -1,2 +1,23 @@
-<!--pages/user/user.wxml-->
-<text>pages/user/user.wxml</text>
+<view class='container'>
+    <view class='person-container'>
+        <image class='avatar' src='../../static/img/avatar.jpeg'></image>
+        <text class='username'>肖敏</text>
+    </view>
+    <view class='list-container'>
+        <view class='list' catchtap='updateTap'>
+            <image class='list_icon' src='../../static/ico/password.png'></image>
+            <text class='list_text'>修改密码</text>
+            <image class='nextstep' src='../../static/ico/nextstep.png'></image>
+        </view>
+        <view class='list' catchtap='helpTap'>
+            <image class='list_icon' src='../../static/ico/help.png'></image>
+            <text class='list_text'>使用帮助</text>
+            <image class='nextstep' src='../../static/ico/nextstep.png'></image>
+        </view>
+        <view class='list' catchtap='aboutTap'>
+            <image class='list_icon' src='../../static/ico/aboutme.png'></image>
+            <text class='list_text'>关于我们</text>
+            <image class='nextstep' src='../../static/ico/nextstep.png'></image>
+        </view>
+    </view>
+</view>

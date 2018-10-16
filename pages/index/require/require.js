@@ -1,11 +1,19 @@
-// pages/model/model.js
+// pages/index/require/require.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    items: [{
+      name: '课程表变更审批表',
+      date: '2018-10-11',
+      state: '审批成功'
+    },{
+      name: '课程表变更审批表',
+      date: '2018-10-16',
+      state: '审批中'
+    }]
   },
 
   /**
@@ -14,11 +22,7 @@ Page({
   onLoad: function (options) {
   
   },
-    modelUseTap(event){
-        wx.navigateTo({
-            url: 'model_detail/model_detail',
-        })
-    },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

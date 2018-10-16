@@ -1,0 +1,96 @@
+.model_detail_container{
+    display: flex;
+    flex-direction: column;
+    background-color: #F4F4F4;
+}
+text{
+    color:#222;
+}
+.model_detail_head{
+    background-color: #fff;
+    display: flex;
+    flex: row;
+    height: 100rpx;
+    padding-top:10rpx;
+    padding-bottom: 10rpx;
+    align-items: center;
+}
+.model_detail_head image{
+    margin-left: 30rpx;
+    width: 90rpx;
+    height: 90rpx;
+
+}
+
+.model_detail_head text{
+    margin-left: 20rpx;
+    font-size: 40rpx;
+}
+
+.model_form_container{
+    background-color: #fff;
+    margin:30rpx 30rpx;
+    border-radius: 10rpx;
+    padding: 30rpx 20rpx;
+    box-shadow:2px 4px 8px 4px rgba(0,0,0,0.20);
+}
+.form_border{
+    border:1rpx solid #e6e6e6;
+    background-color: #F4F4F4;
+}
+
+.model_column{
+    background-color: #fff;
+    padding:25rpx 15rpx;
+    margin-bottom: 15rpx;
+    font-size: 32rpx;
+}
+
+.describe{
+    margin-left: 20rpx;
+    font-size: 25rpx;
+    color: rgba(0,0,0,0.4)
+}
+.right{
+    float:right; 
+}
+.last{
+    margin-bottom: 0rpx;
+}
+radio{
+    margin-left:20rpx;
+}
+.picker_value{
+    color: #222;
+}
+.class_input{
+    flex-direction: column;
+}
+input{
+    width:600rpx; 
+    color:#666;
+    margin-top: 15rpx;
+    font-size: 30rpx;
+}
+.date{
+    display: flex;
+    flex-direction: column;
+}
+.date_after_text{
+    float: right;
+}
+.reason-input{
+    margin-top: 15rpx;
+    font-size: 30rpx;
+    height:450rpx;
+    color:#666;
+}
+.submit{
+    margin-left: 500rpx;
+    margin-bottom: 30rpx;
+    background-color: #0AB179;
+    color: #fff;
+    border: #0AB179;
+    border-radius: 60rpx;
+    width: 200rpx;
+}

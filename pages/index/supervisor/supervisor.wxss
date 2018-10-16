@@ -1,0 +1,26 @@
+.contant {
+  width: 100%;
+  height: 100%;
+  font-size: 26rpx;
+}
+
+.table {
+  border: 0px solid darkgray;
+  font-size: 26rpx;
+  width: 100%;
+  margin: 0 auto;
+}
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: centers;
+  height: 2rem;
+  align-items: center;
+}
+.td {
+    flex: 1;
+    width:50%;
+    justify-content: center;
+    text-align: center;
+    word-wrap: wrap;
+}
