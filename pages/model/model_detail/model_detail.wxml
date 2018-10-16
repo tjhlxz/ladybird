@@ -1,0 +1,59 @@
+<view class="model_detail_container">
+    <view class='model_detail_head'>
+        <image src='/static/ico/model.png'></image>
+        <text>课程变更调换申请表</text>
+    </view>
+    <view class='model_form_container'>
+        <view class="form_border">
+            <form class='model_detail_form' catchsubmit="formSubmit" catchreset="formReset">
+                <view class='model_column first'>
+                    <text class='describe'>用于教师课程变更调换申请</text>
+                </view>
+                <view class='model_column'>
+                    <text class='username'>申请人</text>
+                    <view class='right'>
+                        <text class='usrname_text'>肖敏</text>
+                    </view>
+                </view>
+                <view class='model_column'>
+                    <text class='college'>所在学院</text>
+                    <view class='right'>
+                        <text class='usrname_text'>计算机与信息工程学院</text>
+                    </view>
+                </view>
+                <view class='model_column'>
+                    <text class='college'>教研室</text>
+                    <view class='right'>
+                        <text class='usrname_text'>网络教研室</text>
+                    </view>
+                </view>
+                <view class='model_column'>
+                    <text class='type'>申请类型</text>
+                    <view class='right'>
+                        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                            <text wx:if="{{index==null}}">请选择</text>
+                            <text class='picker_value'>{{array[index]}}</text>
+                        </picker>
+                    </view>
+                </view>
+                <view class='model_column class_input'>
+                    <text class='class'>课程</text>
+                    <input name="classname" placeholder='请在此处填写课程名'></input>
+                </view>
+                <view class='model_column date'>
+                    <text class='date'>调整课程时间</text>
+                    <view class='date_text'>
+                        <text class='date_before_text'>调整前</text>
+                        <text class='date_after_text'>调整后</text>
+                    </view>
+                </view>
+                <view class='model_column'>
+                    <text class='reason'>申请原因</text>
+                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="-1" placeholder="请在此处填写申请原因"></textarea>
+                </view>
+            </form>
+        </view>
+        
+    </view>
+    <button class='submit' catchtap='submitTap'>提交</button>
+</view>
