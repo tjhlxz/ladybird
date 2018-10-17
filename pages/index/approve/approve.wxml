@@ -1,6 +1,6 @@
 <view class='contant'>
   <view class='table'>
-    <view class='tr'>
+    <view class='tr title'>
       <view class='td'>审批表名称</view>
       <view class='td'>发起时间</view>
       <view class='td'>审批状态</view>
