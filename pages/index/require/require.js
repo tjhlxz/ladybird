@@ -6,10 +6,12 @@ Page({
    */
   data: {
     items: [{
+      num: '',
       name: '课程表变更审批表',
       date: '2018-10-11',
       state: '审批成功'
     },{
+      num: '',
       name: '课程表变更审批表',
       date: '2018-10-16',
       state: '审批中'
@@ -18,7 +20,7 @@ Page({
 
   myRequest: function() {
     wx.navigateTo({
-      url: '',
+      url: './require_detail/require_detail',
     })
   },
   /**

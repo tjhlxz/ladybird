@@ -103,7 +103,6 @@ input {
     font-size: 35rpx;
     height: 400rpx;
     color: #222;
-    z-index:-1;
     font-family: MicroSoft Yahei
 }
 

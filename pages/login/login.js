@@ -17,20 +17,40 @@ Page({
   },
 
   click: function (e) {
+    var _this = this;
     if (this.data.username == null) {
       wx.showToast({
         title: '教工号不能为空',
         icon: 'none'
       })
     }else {
+      var num = this.data.username;
       //向服务器发送请求 由此用户则登录
-      // wx.request({
-      //   url: '',
-      //   success(res) {}
-      // }),
-        wx.setStorageSync('user', { username: this.data.username, password: this.data.password });
-      wx.switchTab({
-        url: '../index/index'
+      wx.request({
+        url: 'http://www.flowhandsome.cn/ladybird/public/login?staff_id='+num,
+        success(res) {
+          if(res.data.status == 200) {
+            wx.setStorageSync('user', { username: _this.data.username, password: _this.data.password });
+            wx.setStorageSync('data', res.data.data)
+            console.log(res.data)
+            wx.showModal({
+              title: res.data.message,
+              icon: 'none',
+              showCancel: false,
+              success: function() {
+                  wx.switchTab({
+                  url: '../index/index'
+                })
+              }
+            });
+          }else {
+            wx.showToast({
+              title: res.data.message,
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        }
       })
     }
   },
