@@ -8,7 +8,8 @@
     "pages/test/test",
     "pages/index/require/require",
     "pages/index/approve/approve",
-    "pages/index/supervisor/supervisor"
+    "pages/index/supervisor/supervisor",
+    "pages/index/require/require_detail/require_detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

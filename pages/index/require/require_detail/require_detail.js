@@ -1,31 +1,18 @@
-// pages/index/require/require.js
+// pages/index/require/require_detail/require_detail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    items: [{
-      name: '课程表变更审批表',
-      date: '2018-10-11',
-      state: '审批成功'
-    },{
-      name: '课程表变更审批表',
-      date: '2018-10-16',
-      state: '审批中'
-    }]
+  
   },
 
-  myRequest: function() {
-    wx.navigateTo({
-      url: '',
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+  
   },
 
   /**
