@@ -4,7 +4,7 @@
     
         <view class='list_container'>
             <text class='title'>原密码</text>
-            <input placeholder="请输入原密码" name="oldpwd" password='true'></input>
+            <input placeholder="请输入原密码" auto-focus="true" name="oldpwd" password='true'></input>
         </view>
         <view class='list_container'>
             <text class='title'>新密码</text>

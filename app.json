@@ -19,6 +19,7 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "校园审批系统",
     "navigationBarTextStyle": "black"
+    
   },
   "tabBar": {
     "list": [

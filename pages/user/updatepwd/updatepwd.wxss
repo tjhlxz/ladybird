@@ -30,6 +30,10 @@ input{
     border-bottom: 1rpx solid #f2f2f2;
 }
 input:hover{
+    height: 30rpx;
+    width: 450rpx;
+    padding-left: 20rpx;
+    font-size: 30rpx;
     border-bottom: 1rpx solid #0AB179;
 }
 button{

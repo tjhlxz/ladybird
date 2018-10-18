@@ -1,28 +1,43 @@
 <view class='main'>
-  <view class='header'><image src='../../static/img/index_bg.jpg' mode='aspectFill'></image></view>
-  <view class='nav'>
-
-    <view class='nav_item' bindtap='myRequest'>
-      <view class='logo'>图</view>
-      <view class='nav_item_text'>我的申请</view>
+    <view class='header'>
+        <!-- <image src='../../static/ico/logo1.jpg' mode='aspectFill'></image> -->
+        <text class='title_header'>黑龙江科技大学审批系统</text>
     </view>
+    <view class='nav'>
 
-    <view class='nav_item' bindtap='myApproval'>
-      <view class='logo'>图</view>
-      <view class='nav_item_text'>我审批的</view>
-    </view>
+        <view class='nav_item' bindtap='myRequest'>
+            <view class='logo'>
+                <image src='../../static/ico/send.png'></image>
+            </view>
+            <view class='nav_item_text'>我的申请</view>
+        </view>
 
-    <view class='nav_item' bindtap='demo'>
-      <view class='logo'>图</view>
-      <view class='nav_item_text'>我叫督导</view>
-    </view>
+        <view class='nav_item' bindtap='myApproval'>
+            <view class='logo'>
+                <image src='../../static/ico/approve.png'></image>
+            </view>
+            <view class='nav_item_text'>我审批的</view>
+        </view>
 
-  </view>
-  <view class='contant'>
-    <view class='title'><view class='title_text'>审批进度</view></view>
-    <view class='contant_list'>
-      <view class='contant_name'><view class='contant_name_text'>审批表名称</view></view>
-      <view class='contant_people'><view class='contant_people_text'>当前审批人</view></view>
+        <view class='nav_item' bindtap='demo'>
+            <view class='logo'>
+                <image src='../../static/ico/supervise.png'></image>
+            </view>
+            <view class='nav_item_text'>我叫督导</view>
+        </view>
+
     </view>
-  </view>
+    <view class='contant'>
+        <view class='title'>
+            <view class='title_text'>当前审批进度</view>
+        </view>
+        <view class='contant_list'>
+            <view class='contant_name'>
+                <view class='contant_name_text'>审批表名称</view>
+            </view>
+            <view class='contant_people'>
+                <view class='contant_people_text'>当前审批人</view>
+            </view>
+        </view>
+    </view>
 </view>
