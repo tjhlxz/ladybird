@@ -9,6 +9,6 @@
   box-sizing: border-box;
 }
 text{
-    color: #666; 
+    color: #222; 
     font-family: MicroSoft Yahei;
 }

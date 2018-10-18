@@ -1,0 +1,17 @@
+<template name="picker_date">
+    <view class='picker_date'>
+        <picker class="date_picker" name="before_date" mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiArray[0][multiIndex[0]]+' '+multiArray[1][multiIndex[1]]+' '+multiArray[2][multiIndex[2]]}}" range="{{multiArray}}" data-key='{{key}}'>
+            <text wx:if="{{multiIndex[0]===''}}">点击此处选择</text>
+            <view class="picker">
+                {{multiArray[0][multiIndex[0]]}} {{multiArray[1][multiIndex[1]]}} {{multiArray[2][multiIndex[2]]}} 
+            </view>
+        </picker>
+        <image class="change_ico" src='../../../static/ico/change.png'></image>
+        <picker class="date_picker right_p" name="after_date" mode="multiSelector" bindchange="bindMultiPickerChange2" value="{{multiArray[0][multiIndex2[0]]+' '+multiArray[1][multiIndex2[1]]+' '+multiArray[2][multiIndex2[2]]}}" range="{{multiArray}}" data-key='{{key}}'>
+            <text wx:if="{{multiIndex2[0]===''}}">点击此处选择</text>
+            <view class="picker">
+                {{multiArray[0][multiIndex2[0]]}} {{multiArray[1][multiIndex2[1]]}} {{multiArray[2][multiIndex2[2]]}}
+            </view>
+        </picker>
+    </view>
+</template>

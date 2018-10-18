@@ -1,10 +1,13 @@
 {
     "pages": [
+        "pages/login/login",
         "pages/index/index",
         "pages/model/model_detail/model_detail",
         "pages/model/model",
         "pages/user/user",
-        "pages/login/login"
+        "pages/user/help/help",
+        "pages/user/about/about",
+        "pages/user/updatepwd/updatepwd"
     ],
     "window": {
         "backgroundTextStyle": "light",
