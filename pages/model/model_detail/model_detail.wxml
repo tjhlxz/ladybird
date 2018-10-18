@@ -57,7 +57,6 @@
                     <text wx:if="{{length!==8}}" catchtap='addchange'>添加</text>
                     <text wx:else catchtap='noadd'>添加</text>
                     </view>
-                    <!-- <image class="jian_picker" catchtap="deletechange" src='../../../static/ico/jian_picker.png'></image> -->
                 </view>
                 <view class='model_column last'>
                     <text class='reason'>申请原因</text>

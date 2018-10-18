@@ -6,6 +6,7 @@
     padding-top:10rpx;
     padding-bottom: 30rpx;
     height: 100%;
+    margin-top: 40rpx;
 }
 .model_icon{
     margin-left: 30rpx;

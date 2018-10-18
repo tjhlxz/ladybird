@@ -69,10 +69,9 @@ Page({
         })
     },
     formSubmit(e) {
-        console.log(e);
         var data = e.detail.value;
-
-
+        console.log(wx.getStorageSync("data"))
+        
         if (!data.type) {
             this.submitFail(e);
         } else {
@@ -80,7 +79,18 @@ Page({
                 if (data.classname == '' || data.reason_input == '') {
                     this.submitFail(e);
                 } else {
-                    this.submitSuccess(e);
+                    wx.request({
+                        url: 'http://www.flowhandsome.cn/ladybird/public/add_form_base',
+                        data: {
+                            
+                        },
+                        header: {
+                            'content-type': 'application/json'
+                        },
+                        success: (res) => {
+
+                        }
+                    })
                 }
             } else {
                 var str = data.after_date;
@@ -88,9 +98,9 @@ Page({
                 var patt1 = /undefined/;
                 var date1 = str.match(patt1);
                 var date2 = str1.match(patt1);
-                if (data.classname =='' || data.reason_input =='' || date2 !== null || date1 !== null) {
+                if (data.classname == '' || data.reason_input == '' || date2 !== null || date1 !== null) {
                     this.submitFail(e);
-                }else{
+                } else {
                     this.submitSuccess(e);
                 }
             }

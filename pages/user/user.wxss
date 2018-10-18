@@ -40,7 +40,6 @@
     padding-bottom:25rpx;
     display: flex;
     flex-direction: raw;
-    border-bottom:1rpx solid #f2f2f2;
 }
 
 .list_icon {
