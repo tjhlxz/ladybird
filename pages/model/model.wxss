@@ -18,8 +18,8 @@
 }
 
 .model_use {
-    margin-left: 200rpx;
-    width: 120rpx;
+    margin-left: 180rpx;
+    width: 150rpx;
     height: 60rpx;
     line-height: 60rpx;
     font-size: 30rpx;

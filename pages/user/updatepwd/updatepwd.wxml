@@ -1,0 +1,23 @@
+<view class='pwd_container'>
+<text class='name'>修改密码</text>
+    <form catchsubmit="formSubmit">
+    
+        <view class='list_container'>
+            <text class='title'>原密码</text>
+            <input placeholder="请输入原密码" name="oldpwd" password='true'></input>
+        </view>
+        <view class='list_container'>
+            <text class='title'>新密码</text>
+            <input placeholder="请输入新密码" name="newpwd" password='true'></input>
+        </view>
+        <view class='list_container'>
+            <text class='title'>确认密码</text>
+            <input placeholder="请确认密码" name="newpwdagin" password='true'></input>
+        </view>
+        
+        <view class='desc'>
+        <text >密码必须是6-16位的数字、字母、符号组合(不能是纯数字、纯字母)</text>
+        </view>
+        <button form-type='submit'>确定</button>
+    </form>
+</view>

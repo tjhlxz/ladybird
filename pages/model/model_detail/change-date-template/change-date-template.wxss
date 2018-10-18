@@ -1,0 +1,32 @@
+.picker_date{
+    display: flex;
+    flex-direction: row;
+    font-size: 25rpx;
+    margin-top: 20rpx;
+    margin-bottom: 30rpx;
+}
+.date_text{
+    font-size: 30rpx;
+    margin-top: 30rpx;
+    padding-bottom: 10rpx;
+}
+.date_picker{
+    width: 300rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+    border-bottom: 1rpx solid #0AB179;
+}
+.change_ico{
+    height: 50rpx;
+    width: 60rpx;
+}
+.add_picker{
+    width: 50rpx;
+    height: 50rpx;
+}
+.jian_picker{
+
+    width: 30rpx;
+    height: 30rpx;
+}

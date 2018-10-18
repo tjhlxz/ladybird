@@ -2,7 +2,7 @@
     <view class='person-container'>
         <image class='avatar' src='../../static/img/avatar.jpeg'></image>
         <text class='username'>肖敏</text>
-    </view>
+    </view> 
     <view class='list-container'>
         <view class='list' catchtap='updateTap'>
             <image class='list_icon' src='../../static/ico/password.png'></image>

@@ -9,7 +9,10 @@
     "pages/index/require/require",
     "pages/index/approve/approve",
     "pages/index/supervisor/supervisor",
-    "pages/index/require/require_detail/require_detail"
+    "pages/index/require/require_detail/require_detail",
+    "pages/user/help/help",
+    "pages/user/about/about",
+    "pages/user/updatepwd/updatepwd"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -37,6 +40,7 @@
         "iconPath": "static/ico/addressbook.png",
         "selectedIconPath": "static/ico/addressbook_fill.png"
       }
+
     ],
     "selectedColor": "#0AB179"
   }
