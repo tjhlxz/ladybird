@@ -5,14 +5,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+      storage_userInfo:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+      var storage_userInfo=wx.getStorageSync("userInfo");
+        this.setData({
+            storage_userInfo:storage_userInfo
+        })
   },
     updateTap(event){
         wx.navigateTo({
