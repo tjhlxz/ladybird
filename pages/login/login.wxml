@@ -3,10 +3,14 @@
     <text>登录</text>
   </view>
   <view class='content'>
-    <label for='username' class='username_label'>教工号</label>
-    <input name='username' class='user_inp' bindinput='usernameInput'></input>
-    <label for='password' class='password_label'>密码</label>
-    <input name='password' class='pass_inp' bindinput='passwordInput'></input>
+    <view class='username'>
+      <label for='username' class='username_label'>教工号</label>
+      <input name='username' class='user_inp' bindinput='usernameInput'></input>
+    </view>
+    <view class='password'>
+      <label for='password' class='password_label'>密码</label>
+      <input name='password' class='pass_inp' bindinput='passwordInput'></input>
+    </view>
     <button class='btn' bindtap='click'>登录</button>
   </view>
   <view class='footer'>
