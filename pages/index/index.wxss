@@ -17,8 +17,8 @@
 }
 
 .title_header {
-    margin-top: 150rpx;
-    font-size: 50rpx;
+    margin-top: 100rpx;
+    font-size: 65rpx;
     font-family: Microsoft Yahei;
     font-weight: 700;
     color: #0ab179;

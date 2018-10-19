@@ -1,3 +1,4 @@
+var app = getApp();
 Page({
     /** 
      * 页面的初始数据
@@ -81,7 +82,7 @@ Page({
                     this.submitFail(e);
                 } else {
                     wx.request({
-                        url: 'http://www.flowhandsome.cn/ladybird/public/add_form_base',
+                        url: app.globalData.config + "add_form_base",
                         method: "POST",
                         data: {
                             form_proposer_id: this.data.storage_data.staff_id,
@@ -98,15 +99,35 @@ Page({
                             'content-type': 'application/x-www-form-urlencoded'
                         },
                         success: (res) => {
-                            console.log(res);
+                            console.log(res.data.data.form_id);
+                            var form_id = res.data.data.form_id;
                             if (res.data.status === 200) {
-                                wx.showToast({
-                                    title: '提交中',
-                                    mask:true
+                                wx.showLoading({
+                                    title: res.data.message,
+                                })
+                                wx.request({
+                                    url: app.globalData.config + "build?staff_id=" + this.data.storage_data.staff_id + "&form_id=" + form_id,
+                                    success(res) {
+                                        
+                                        if (res.data.status === 200) {
+                                            wx.hideLoading();
+                                            wx.showToast({
+                                                title: res.data.message,
+                                                mask: true
+                                            })
+                                        }
+                                        else{
+                                            wx.showToast({
+                                                title: '提交失败',
+                                                image: '/static/ico/fail.png'
+                                            })
+                                        }
+                                    }
                                 })
                             } else {
                                 wx.showToast({
                                     title: '提交失败',
+                                    image: '/static/ico/fail.png'
                                 })
                             }
                         }
@@ -123,7 +144,7 @@ Page({
                     this.submitFail(e)
                 } else {
                     wx.request({
-                        url: 'http://www.flowhandsome.cn/ladybird/public/add_form_base',
+                        url: app.globalData.config + "add_form_base",
                         method: "POST",
                         data: {
                             form_proposer_id: this.data.storage_data.staff_id,
@@ -140,15 +161,35 @@ Page({
                             'content-type': 'application/x-www-form-urlencoded'
                         },
                         success: (res) => {
-                            console.log(res);
+                            console.log(res.data.data.form_id);
+                            var form_id = res.data.data.form_id;
                             if (res.data.status === 200) {
-                                wx.showToast({
+                                wx.showLoading({
                                     title: res.data.message,
-                                    mask: true
+                                })
+                                wx.request({
+                                    url: app.globalData.config + "build?staff_id=" + this.data.storage_data.staff_id + "&form_id=" + form_id,
+                                    success(res) {
+                                        
+                                        if (res.data.status === 200) {
+                                            wx.hideLoading();
+                                            wx.showToast({
+                                                title: res.data.message,
+                                                mask: true
+                                            })
+                                        }
+                                        else{
+                                            wx.showToast({
+                                                title: '提交失败',
+                                                image: '/static/ico/fail.png'
+                                            })
+                                        }
+                                    }
                                 })
                             } else {
                                 wx.showToast({
                                     title: '提交失败',
+                                    image: '/static/ico/fail.png'
                                 })
                             }
                         }

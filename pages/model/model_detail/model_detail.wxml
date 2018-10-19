@@ -2,7 +2,7 @@
 <view class="model_detail_container">
     <view class='model_detail_head'>
         <image src='/static/ico/model.png'></image>
-        <text>课程变更调换申请表</text>
+        <text>课程表变更审批表</text>
     </view>
     <view class='model_form_container'>
         <view class="form_border">
@@ -33,7 +33,9 @@
                             <text class='picker_value'>{{array[index]}}</text>
                         </picker>
                     </view>
+                    
                 </view>
+                
                 <view class='model_column class_input'>
                     <text class='classname'>课程</text>
                     <input name="classname" placeholder='请在此处填写课程名'></input>
@@ -62,8 +64,14 @@
                     <text class='reason'>申请原因</text>
                     <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="-1" placeholder="请在此处填写申请原因"></textarea>
                 </view>
+                
                 <button class='submit' form-type='submit'>提交</button>
             </form>
         </view>
     </view>
+    <view class='remarks_container'>
+                    <text class='remarks'>备注:</text>
+                    <text class="remarks_detail">1、申请表中，如仅有几次课的时间需调整，申请类型需选择"调串"选项；如因故需要调整整门课的上课时间或将课程转给其他老师，申请类型需选择"变更"选项。</text>
+                    <text class="remarks_detail"> 2、除极特殊原因外，不可随意调串课。凡因公出差、因病者，该教学单位必须在同时间、同地点安排代课教师。</text>
+                </view>
 </view>
