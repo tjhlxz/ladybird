@@ -10,25 +10,25 @@
                 <view class='model_column first'>
                     <text class='username'>申请人</text>
                     <view class='right'>
-                        <text class='usrname_text'>肖敏</text>
+                        <text class='usrname_text'>{{storage_data.staff_name}}</text>
                     </view>
                 </view>
                 <view class='model_column'>
                     <text class='college'>所在学院</text>
                     <view class='right'>
-                        <text class='usrname_text'>计算机与信息工程学院</text>
+                        <text class='usrname_text'>{{storage_data.college}}</text>
                     </view>
                 </view>
                 <view class='model_column'>
                     <text class='college'>教研室</text>
                     <view class='right'>
-                        <text class='usrname_text'>网络教研室</text>
+                        <text class='usrname_text'>{{storage_data.staff_room}}</text>
                     </view>
                 </view>
                 <view class='model_column'>
                     <text class='type'>申请类型</text>
                     <view class='right'>
-                        <picker name="type" bindchange="bindPickerChange" value="{{array[index]}}" range="{{array}}">
+                        <picker name="type" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
                             <text wx:if="{{index==null}}">请选择</text>
                             <text class='picker_value'>{{array[index]}}</text>
                         </picker>

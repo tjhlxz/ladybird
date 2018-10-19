@@ -6,6 +6,9 @@ Page({
         length: 0,
         nums: [],
         array: ['变更', '调串'],
+        storage_data: {},
+        date1_null: "",
+        date2_null: ""
     },
     bindPickerChange: function(event) {
         console.log('picker发送选择改变，携带值为', event.detail.value)
@@ -70,25 +73,42 @@ Page({
     },
     formSubmit(e) {
         var data = e.detail.value;
-        console.log(wx.getStorageSync("data"))
-        
         if (!data.type) {
             this.submitFail(e);
         } else {
-            if (data.type === "变更") {
+            if (data.type === "0") {
                 if (data.classname == '' || data.reason_input == '') {
                     this.submitFail(e);
                 } else {
                     wx.request({
                         url: 'http://www.flowhandsome.cn/ladybird/public/add_form_base',
+                        method: "POST",
                         data: {
-                            
+                            form_proposer_id: this.data.storage_data.staff_id,
+                            form_proposer_name: this.data.storage_data.staff_name,
+                            form_college: this.data.storage_data.college,
+                            form_staff_room: this.data.storage_data.staff_room,
+                            form_type: +data.type + 1,
+                            form_course: data.classname,
+                            form_before_adjust: '',
+                            form_later_adjust: '',
+                            form_reason: data.reason_input
                         },
                         header: {
-                            'content-type': 'application/json'
+                            'content-type': 'application/x-www-form-urlencoded'
                         },
                         success: (res) => {
-
+                            console.log(res);
+                            if (res.data.status === 200) {
+                                wx.showToast({
+                                    title: '提交中',
+                                    mask:true
+                                })
+                            } else {
+                                wx.showToast({
+                                    title: '提交失败',
+                                })
+                            }
                         }
                     })
                 }
@@ -96,16 +116,46 @@ Page({
                 var str = data.after_date;
                 var str1 = data.before_date;
                 var patt1 = /undefined/;
+                console.log(str);
                 var date1 = str.match(patt1);
                 var date2 = str1.match(patt1);
                 if (data.classname == '' || data.reason_input == '' || date2 !== null || date1 !== null) {
-                    this.submitFail(e);
+                    this.submitFail(e)
                 } else {
-                    this.submitSuccess(e);
+                    wx.request({
+                        url: 'http://www.flowhandsome.cn/ladybird/public/add_form_base',
+                        method: "POST",
+                        data: {
+                            form_proposer_id: this.data.storage_data.staff_id,
+                            form_proposer_name: this.data.storage_data.staff_name,
+                            form_college: this.data.storage_data.college,
+                            form_staff_room: this.data.storage_data.staff_room,
+                            form_type: +data.type + 1,
+                            form_course: data.classname,
+                            form_before_adjust: str1,
+                            form_later_adjust: str,
+                            form_reason: data.reason_input
+                        },
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded'
+                        },
+                        success: (res) => {
+                            console.log(res);
+                            if (res.data.status === 200) {
+                                wx.showToast({
+                                    title: res.data.message,
+                                    mask: true
+                                })
+                            } else {
+                                wx.showToast({
+                                    title: '提交失败',
+                                })
+                            }
+                        }
+                    })
                 }
             }
         }
-
     },
     submitFail(e) {
         wx.showToast({
@@ -114,20 +164,16 @@ Page({
         })
     },
     submitSuccess(e) {
-        wx.showToast({
-            title: '提交成功',
-            duration: 1000
-        })
-        setTimeout(function() {
-            wx.switchTab({
-                url: '../../index/index',
-            })
-        }, 1000);
+        var data = e.detail.value;
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        var storage_data = wx.getStorageSync("data");
+        this.setData({
+            storage_data: storage_data
+        })
         this.addchange();
     },
 
