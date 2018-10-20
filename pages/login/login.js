@@ -36,7 +36,7 @@ Page({
                   console.log(res.data)
                     if (res.data.status == 200) {
                         wx.setStorageSync('user', {
-                            username: _this.data.username,
+                            staff_id: _this.data.username,
                             password: _this.data.password
                         });
                         wx.setStorageSync('data', res.data.data)

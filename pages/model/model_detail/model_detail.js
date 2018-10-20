@@ -8,6 +8,7 @@ Page({
         nums: [],
         array: ['变更', '调串'],
         storage_data: {},
+        _data: {},
         date1_null: "",
         date2_null: "",
         array_Identity:['讲师','教研室主任','教学院长','教务处处长','教务科','评估中心','督导']
@@ -19,9 +20,17 @@ Page({
         })
     },
     bindIdentityPickerChange(event){
-        this.setData({
-            identity_index: event.detail.value
+      var _this = this;
+      if (_this.data.storage_data[event.detail.value]){
+        _this.setData({
+          identity_index: event.detail.value,
+          _data: _this.data.storage_data[event.detail.value]
         })
+      }else {
+        _this.setData({
+          _data: null
+        })
+      }
     },
     bindMultiPickerChange: function(e) {
         console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -87,6 +96,7 @@ Page({
                 if (data.classname == '' || data.reason_input == '') {
                     this.submitFail(e);
                 } else {
+                  var _this = this;
                     wx.request({
                         url: app.globalData.config + "add_form_base",
                         method: "POST",
@@ -105,6 +115,7 @@ Page({
                             'content-type': 'application/x-www-form-urlencoded'
                         },
                         success: (res) => {
+                          console.log(res)
                             var form_id = res.data.data.form_id;
                             if (res.data.status === 200) {
                                 wx.showLoading({
@@ -112,7 +123,7 @@ Page({
                                     
                                 })
                                 wx.request({
-                                    url: app.globalData.config + "build?staff_id=" + this.data.storage_data.staff_id + "&form_id=" + form_id,
+                                  url: app.globalData.config + "build?staff_id=" + _this.data.storage_data.staff_id + "&form_id=" + form_id + "&staff_level=" + + "&staff_room=" + _this.data.storage_data.staff_room + "&college=" + _this.data.storage_data.college,
                                     success(res) {
                                         if (res.data.status === 200) {
                                             setTimeout(function(){

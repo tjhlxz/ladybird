@@ -1,46 +1,33 @@
 <view class='container'>
-    <view class='require_container'>
-        <view class='detail_list'>
-            <image class='avatar'>{{storage_userInfo.avatarUrl}}</image>
-            <text>课程表表更申请</text>
-        </view>
-        <view class='detail_list'>
-            <text>申请人</text>
-            <text>肖敏</text>
-        </view>
-        <view class='detail_list'>
-            <text>申请时间</text>
-            <text>2018年</text>
-        </view>
-        <view class='detail_list'>
-            <text>申请类型</text>
-            <text>变更</text>
-            <text>调串</text>
-        </view>
-        <view class='detail_list'>
-            <text>课程名</text>
-            <text>计算机组成原理</text>
-        </view>
-        <view class='detail_list'>
-            <text>调整课程时间</text>
-        </view>
-        <view class='detail_list'>
-            <text>调整前</text>
-            <text>调整后</text>
-        </view>
-        <view class='detail_list'>
-            <text>第1周 星期二 第1、2节</text>
-            <image src=''></image>
-            <text>第1周 星期二 第1、2节</text>
-        </view>
-        <view class='detail_list'>
-            <text>申请原因</text>
-        </view>
-        <view class='detail_list'>
-            <view>因为我爸爸是市长</view>
-        </view>
-
+  <view class='main'>
+    <view class='staff'>
+      <view class='staff_name'>{{staff_name}}的审批表</view>
+      <view class='staff_state'>{{staff_state}}</view>
     </view>
-    <view class='require_approve'>
+    <view class='table'>
+      <view class='tr'>
+        <view class='td title'>所在学院</view>
+        <view class='td title'>申请人</view>
+        <view class='td title'>申请日期</view>
+        <view class='td title'>申请课程</view>
+        <view class='td title'>调整前</view>
+        <view class='td title'>调整后</view>
+      </view>
+      <view class='tr' wx:for='{{items}}' wx:key='staff_name'>
+        <view class='td'>{{item.xueyuan}}</view>
+        <view class='td'>{{item.staff_name}}</view>
+        <view class='td'>{{item.date}}</view>
+        <view class='td'>{{item.collage}}</view>
+        <view class='td dd'>{{item.before}}</view>
+        <view class='td dd'>{{item.after}}</view>
+      </view>
     </view>
+  </view>
+  <view class='footer'>
+    <view class='footer_contant table' wx:for='{{forms}}' wx:key='formname'>
+      <view class='form_name tr'>{{item.formname}}</view>
+      <view class='form_state tr'>{{item.formstate}}</view>
+      <view class='form_date tr'>{{item.formdate}}</view>
+    </view>
+  </view>
 </view>

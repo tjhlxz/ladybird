@@ -10,7 +10,7 @@
                 <view class='model_column first'>
                     <text class='username'>申请人</text>
                     <view class='right'>
-                        <text class='usrname_text'>{{storage_data.staff_name}}</text>
+                        <text class='usrname_text'>{{storage_data[0].staff_name}}</text>
                     </view>
                 </view>
                 <view class='model_column'>
@@ -26,13 +26,13 @@
                 <view class='model_column'>
                     <text class='college'>所在学院</text>
                     <view class='right'>
-                        <text class='usrname_text'>{{storage_data.college}}</text>
+                        <text class='usrname_text'>{{_data.college}}</text>
                     </view>
                 </view>
                 <view class='model_column'>
                     <text class='college'>教研室</text>
                     <view class='right'>
-                        <text class='usrname_text'>{{storage_data.staff_room}}</text>
+                        <text class='usrname_text'>{{_data.staff_room}}</text>
                     </view>
                 </view>
                 </view>
