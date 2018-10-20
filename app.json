@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/index/require/require_detail/require_detail",
+    
     "pages/model/model_detail/model_detail",
     "pages/model/model",
     "pages/user/user",
@@ -9,7 +11,7 @@
     "pages/index/require/require",
     "pages/index/approve/approve",
     "pages/index/supervisor/supervisor",
-    "pages/index/require/require_detail/require_detail",
+    
     "pages/user/help/help",
     "pages/user/about/about",
     "pages/user/updatepwd/updatepwd"

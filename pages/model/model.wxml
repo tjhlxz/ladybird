@@ -2,7 +2,7 @@
 <view class='model_container'>
     <view class='model'>
     <image class="model_icon" src='/static/ico/model.png'></image>
-    <text class='model_title'>课程变更调换申请表</text>
+    <text class='model_title'>课程表变更审批表</text>
     <button class="model_use" catchtap='modelUseTap'>使用</button>
     </view>
 </view>

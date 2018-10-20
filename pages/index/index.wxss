@@ -17,8 +17,8 @@
 }
 
 .title_header {
-    margin-top: 150rpx;
-    font-size: 50rpx;
+    margin-top: 100rpx;
+    font-size: 65rpx;
     font-family: Microsoft Yahei;
     font-weight: 700;
     color: #0ab179;
@@ -65,22 +65,28 @@
 
 .main .contant .title_text {
     padding-left: 26rpx;
+    width: 95%;
+    margin: 0 auto;
+    border-bottom: 1rpx solid #ccc;
 }
 
 .main .contant .contant_list {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-content: center;
     font-size: 32rpx;
 }
 
 .main .contant .contant_list .contant_name {
-    padding: 26rpx;
+    padding: 22rpx;
+    flex:1;
 }
 
 .main .contant .contant_list .contant_people {
-    padding: 26rpx 104rpx 26rpx 0;
+    padding: 22rpx;
+    flex:1;
 }
 
 .logo image {

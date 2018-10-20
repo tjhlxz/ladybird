@@ -5,18 +5,27 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+      storage_userInfo:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+<<<<<<< HEAD
     if (!wx.getStorageSync('user')) {
       wx.navigateTo({
         url: '../login/login',
       })
     }
+=======
+    
+      var storage_userInfo=wx.getStorageSync("userInfo");
+        this.setData({
+            storage_userInfo:storage_userInfo
+        })
+    
+>>>>>>> test
   },
     updateTap(event){
         wx.navigateTo({
@@ -45,8 +54,22 @@ Page({
    */
   onShow: function () {
     if (!wx.getStorageSync('user')) {
+<<<<<<< HEAD
       wx.navigateTo({
         url: '../login/login',
+=======
+      wx.switchTab({
+        url: '../index/index',
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
+      wx.navigateTo({
+        url: '../login/login',
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
+>>>>>>> test
       })
     }
   },
@@ -55,14 +78,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    
   },
 
   /**

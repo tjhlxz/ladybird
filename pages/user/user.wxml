@@ -1,7 +1,7 @@
 <view class='container'>
     <view class='person-container'>
-        <image class='avatar' src='../../static/img/avatar.jpeg'></image>
-        <text class='username'>肖敏</text>
+        <image class='avatar' src='{{storage_userInfo.avatarUrl}}'></image>
+        <text class='username'>{{storage_userInfo.nickName}}</text>
     </view> 
     <view class='list-container'>
         <view class='list' catchtap='updateTap'>
