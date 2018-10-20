@@ -9,12 +9,18 @@ Page({
         array: ['变更', '调串'],
         storage_data: {},
         date1_null: "",
-        date2_null: ""
+        date2_null: "",
+        array_Identity:['讲师','教研室主任','教学院长','教务处处长','教务科','评估中心','督导']
     },
     bindPickerChange: function(event) {
         console.log('picker发送选择改变，携带值为', event.detail.value)
         this.setData({
             index: event.detail.value
+        })
+    },
+    bindIdentityPickerChange(event){
+        this.setData({
+            identity_index: event.detail.value
         })
     },
     bindMultiPickerChange: function(e) {
@@ -99,24 +105,29 @@ Page({
                             'content-type': 'application/x-www-form-urlencoded'
                         },
                         success: (res) => {
-                            console.log(res.data.data.form_id);
                             var form_id = res.data.data.form_id;
                             if (res.data.status === 200) {
                                 wx.showLoading({
                                     title: res.data.message,
+                                    
                                 })
                                 wx.request({
                                     url: app.globalData.config + "build?staff_id=" + this.data.storage_data.staff_id + "&form_id=" + form_id,
                                     success(res) {
-                                        
                                         if (res.data.status === 200) {
-                                            wx.hideLoading();
-                                            wx.showToast({
-                                                title: res.data.message,
-                                                mask: true
-                                            })
-                                        }
-                                        else{
+                                            setTimeout(function(){
+                                                wx.hideLoading();
+                                                wx.showToast({
+                                                    title: res.data.message,
+                                                    mask: true
+                                                })
+                                                setTimeout(function () {
+                                                    wx.switchTab({
+                                                        url: '../../index/index',
+                                                    })
+                                                }, 1000)
+                                            },1000)
+                                        } else {
                                             wx.showToast({
                                                 title: '提交失败',
                                                 image: '/static/ico/fail.png'
@@ -170,18 +181,24 @@ Page({
                                 wx.request({
                                     url: app.globalData.config + "build?staff_id=" + this.data.storage_data.staff_id + "&form_id=" + form_id,
                                     success(res) {
-                                        
                                         if (res.data.status === 200) {
-                                            wx.hideLoading();
-                                            wx.showToast({
-                                                title: res.data.message,
-                                                mask: true
-                                            })
-                                        }
-                                        else{
+                                            setTimeout(function () {
+                                                wx.hideLoading();
+                                                wx.showToast({
+                                                    title: res.data.message,
+                                                    mask: true
+                                                })
+                                                setTimeout(function () {
+                                                    wx.switchTab({
+                                                        url: '../../index/index',
+                                                    })
+                                                }, 1000)
+                                            }, 1000)
+                                        } else {
                                             wx.showToast({
                                                 title: '提交失败',
-                                                image: '/static/ico/fail.png'
+                                                image: '/static/ico/fail.png',
+                                                mask: true
                                             })
                                         }
                                     }
@@ -189,7 +206,8 @@ Page({
                             } else {
                                 wx.showToast({
                                     title: '提交失败',
-                                    image: '/static/ico/fail.png'
+                                    image: '/static/ico/fail.png',
+                                    mask: true
                                 })
                             }
                         }
