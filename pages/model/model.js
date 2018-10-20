@@ -14,22 +14,7 @@ Page({
   onLoad: function (options) {
   
   },
-<<<<<<< HEAD
-  modelUseTap(event){
-    if (!wx.getStorageSync('user')) {
-      wx.navigateTo({
-        url: '../login/login',
-        success: function (res) { },
-        fail: function (res) { },
-        complete: function (res) { },
-      })
-    }else {
-      wx.navigateTo({
-          url: 'model_detail/model_detail',
-      })
-    }
-  },
-=======
+
     modelUseTap(event){
       if (!wx.getStorageSync('user')) {
         wx.navigateTo({
@@ -44,7 +29,6 @@ Page({
         })
       }
     },
->>>>>>> test
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

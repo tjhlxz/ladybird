@@ -1,0 +1,16 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20rpx;
+}
+
+.container image {
+    width: 30rpx;
+    height: 30rpx;
+}
+
+.detail_list {
+    height: 100rpx;
+    background-color: #fff;
+}

@@ -1,0 +1,46 @@
+<view class='container'>
+    <view class='require_container'>
+        <view class='detail_list'>
+            <image class='avatar'>{{storage_userInfo.avatarUrl}}</image>
+            <text>课程表表更申请</text>
+        </view>
+        <view class='detail_list'>
+            <text>申请人</text>
+            <text>肖敏</text>
+        </view>
+        <view class='detail_list'>
+            <text>申请时间</text>
+            <text>2018年</text>
+        </view>
+        <view class='detail_list'>
+            <text>申请类型</text>
+            <text>变更</text>
+            <text>调串</text>
+        </view>
+        <view class='detail_list'>
+            <text>课程名</text>
+            <text>计算机组成原理</text>
+        </view>
+        <view class='detail_list'>
+            <text>调整课程时间</text>
+        </view>
+        <view class='detail_list'>
+            <text>调整前</text>
+            <text>调整后</text>
+        </view>
+        <view class='detail_list'>
+            <text>第1周 星期二 第1、2节</text>
+            <image src=''></image>
+            <text>第1周 星期二 第1、2节</text>
+        </view>
+        <view class='detail_list'>
+            <text>申请原因</text>
+        </view>
+        <view class='detail_list'>
+            <view>因为我爸爸是市长</view>
+        </view>
+
+    </view>
+    <view class='require_approve'>
+    </view>
+</view>

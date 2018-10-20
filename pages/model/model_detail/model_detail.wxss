@@ -33,7 +33,7 @@ text {
 
 .model_form_container {
     background-color: #fff;
-    margin: 30rpx 30rpx 80rpx 30rpx;
+    margin: 30rpx 30rpx 50rpx 30rpx;
     border-radius: 10rpx;
     padding: 30rpx 20rpx;
     box-shadow: 2px 4px 8px 4px rgba(0, 0, 0, 0.20);
