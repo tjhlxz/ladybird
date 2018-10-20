@@ -4,6 +4,7 @@ const app = getApp()
 
 Page({
   data: {
+    items: []
   },
   //事件处理函数
   myRequest: function() {
@@ -48,6 +49,20 @@ Page({
       })
     }
   },
+  detail: function() {
+    if (!wx.getStorageSync('user')) {
+      wx.navigateTo({
+        url: '../login/login',
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
+    } else {
+      wx.navigateTo({
+        url: './require/require',
+      })
+    }
+  },
   bindViewTap: function() {
   },
   
@@ -59,6 +74,15 @@ Page({
     }
   },
   onShow: function() {
-    
+    var _this = this;
+    // wx.request({
+    //   url: '',
+    //   success(res) {
+        
+    //   }
+    // })
+    var data = wx.getStorageSync('data')
+    _this.setData({items: data})
+
   }
 })

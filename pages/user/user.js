@@ -12,10 +12,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
       var storage_userInfo=wx.getStorageSync("userInfo");
         this.setData({
             storage_userInfo:storage_userInfo
         })
+    
   },
     updateTap(event){
         wx.navigateTo({
@@ -43,21 +45,34 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    if (!wx.getStorageSync('user')) {
+      wx.switchTab({
+        url: '../index/index',
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
+      wx.navigateTo({
+        url: '../login/login',
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    
   },
 
   /**

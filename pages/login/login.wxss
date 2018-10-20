@@ -14,13 +14,23 @@
   width: 80%;
   margin:0 auto;
 }
+.content .username {
+  width: 100%;
+  height: 200rpx;
+}
+.content .password {
+  width: 100%;
+  height: 200rpx;
+}
 .content .user_inp {
+  border: 0px solid #000;
   border-bottom: 1px solid #ccc;
-  padding: 10px 0 0 0;
+  padding: 6px 0;
 }
 .content .pass_inp {
+  border: 0px solid #000;
   border-bottom: 1px solid #ccc;
-  padding: 10px 0 0 0;
+  padding: 6px 0;
 }
 .content .btn {
   width: 80%;
