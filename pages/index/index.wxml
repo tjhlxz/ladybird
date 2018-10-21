@@ -39,7 +39,7 @@
                 <view class='contant_people_text'>当前审批人</view>
             </view>
         </view>
-        <view class='contant_list' wx:for='{{data}}' bindtap='detail'>
+        <view class='contant_list' wx:for='{{items}}' bindtap='detail' wx:key="detail">
             <view class='contant_name'>
                 <view class='contant_name_text'>课程表变更审批表</view>
             </view>
