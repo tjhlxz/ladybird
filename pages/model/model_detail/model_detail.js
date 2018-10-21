@@ -18,7 +18,7 @@ Page({
             ['第1-2节', '第3-4节', '第5-6节', '第7-8节', '第9-10节']
         ]
     },
-    bindPickerChange: function (event) {
+    bindPickerChange: function(event) {
         this.setData({
             index: event.detail.value
         })
@@ -28,7 +28,7 @@ Page({
             identity_index: event.detail.value
         })
     },
-    bindMultiPickerChange: function (e) {
+    bindMultiPickerChange: function(e) {
         var tmpnums = this.data.nums;
         tmpnums[e.currentTarget.dataset.key].multiIndex = e.detail.value;
         var multi = tmpnums[e.currentTarget.dataset.key].multiIndex;
@@ -44,7 +44,7 @@ Page({
             date_before: date_before
         })
     },
-    bindMultiPickerChange2: function (e) {
+    bindMultiPickerChange2: function(e) {
         var tmpnums = this.data.nums;
         tmpnums[e.currentTarget.dataset.key].multiIndex2 = e.detail.value;
         var multi2 = tmpnums[e.currentTarget.dataset.key].multiIndex2;
@@ -139,16 +139,14 @@ Page({
             success: (res) => {
                 var form_id = res.data.data.form_id;
                 if (res.data.status === 200) {
-                    console.log("1" + res.data.message);
                     wx.showLoading({
                         title: res.data.message,
                     })
                     wx.request({
                         url: app.globalData.config + "build?staff_id=" + this.data.storage_data[identity_index].staff_id + "&form_id=" + form_id + "&staff_level=" + this.data.storage_data[identity_index].staff_level + "&staff_room=" + this.data.storage_data[identity_index].staff_room + "&college=" + this.data.storage_data[identity_index].college,
                         success(res) {
-                            console.log("2" + res.data.message)
                             if (res.data.status === 200) {
-                                setTimeout(function () {
+                                setTimeout(function() {
                                     wx.hideLoading();
                                     wx.showLoading({
                                         title: res.data.message,
@@ -163,29 +161,25 @@ Page({
                                             from_userid: res.data.data.from_userid
                                         },
                                         success(res) {
-                                            console.log(res);
                                             if (res.data.status === 200) {
-
-                                                setTimeout(function () {
+                                                setTimeout(function() {
                                                     wx.hideLoading();
                                                     wx.showToast({
                                                         title: res.data.message,
                                                     })
-                                                    setTimeout(function () {
+                                                    setTimeout(function() {
                                                         wx.switchTab({
                                                             url: '../../index/index',
                                                         })
                                                     }, 1500);
 
                                                 }, 1500)
-                                            }
-                                            else if (res.data.status === 400) {
+                                            } else if (res.data.status === 400) {
                                                 wx.showToast({
                                                     title: res.data.message,
                                                     mask: true
                                                 })
-                                            }
-                                            else if (res.data.status === 401) {
+                                            } else if (res.data.status === 401) {
                                                 wx.showToast({
                                                     title: res.data.message,
                                                     mask: true,
@@ -262,7 +256,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         var staff_info = [];
         var staff_level = [];
         var storage_data = wx.getStorageSync("data");
@@ -299,55 +293,60 @@ Page({
             staff_info: staff_info,
             staff_level: staff_level
         })
+        if (storage_data.length === 1) {
+            this.setData({
+                identity_index: 0
+            })
+        }
         this.addchange();
     },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
 
     }
 })

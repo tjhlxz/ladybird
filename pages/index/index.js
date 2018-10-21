@@ -78,7 +78,6 @@ Page({
         url: app.globalData.config + 'onload' + '?staff_id=' + staff_id,
         success(res) {
           if(res.data.status == 200) {
-            console.log(res.data.data)
             _this.setData({ items: res.data.data })
           }
           var a = _this.data.items.approve_forms_deal ? _this.data.items.approve_forms_deal:[];

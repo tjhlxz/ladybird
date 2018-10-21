@@ -84,6 +84,6 @@
         <text class='remarks'>备注:</text>
         <text class="remarks_detail">1、申请表中，如仅有几次课的时间需调整，申请类型需选择"调串"选项；如因故需要调整整门课的上课时间或将课程转给其他老师，申请类型需选择"变更"选项。</text>
         <text class="remarks_detail"> 2、除极特殊原因外，不可随意调串课。凡因公出差、因病者，该教学单位必须在同时间、同地点安排代课教师。</text>
-        <text class="remarks_detail">3、有多重身份者，申请身份需选择当前申请所要使用的身份。</text>
+        <text class="remarks_detail" wx:if="{{storage_data.length!==1}}">3、有多重身份者，申请身份需选择当前申请所要使用的身份。</text>
     </view>
 </view>

@@ -33,7 +33,6 @@ Page({
             wx.request({
                 url: app.globalData.config + "login?staff_id=" + num,
                 success(res) {
-                  console.log(res.data)
                     if (res.data.status == 200) {
                         wx.setStorageSync('user', {
                             staff_id: _this.data.username,
