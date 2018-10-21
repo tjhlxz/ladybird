@@ -35,7 +35,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(options);
         var _this = this;
         //判断审批状态
         var data = _this.data.forms;
