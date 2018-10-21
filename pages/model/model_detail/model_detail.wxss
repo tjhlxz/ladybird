@@ -9,7 +9,14 @@
 text {
     color: #222;
 }
-
+.staff_info{
+    margin-top: 30rpx;
+    color: red;
+}
+.level_detail{
+    font-size: 30rpx;
+    color: #666;
+}
 .model_detail_head {
     background-color: #fff;
     display: flex;

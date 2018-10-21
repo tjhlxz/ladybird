@@ -10,29 +10,30 @@
                 <view class='model_column first'>
                     <text class='username'>申请人</text>
                     <view class='right'>
-                        <text class='usrname_text'>{{storage_data.staff_name}}</text>
+                        <text class='usrname_text'>{{storage_data[0].staff_name}}</text>
                     </view>
                 </view>
-                <view class='model_column'>
+                <view class='model_column' wx:if="{{storage_data.length!==1}}">
                     <text class='type'>申请身份</text>
-                    <view class='right'>
-                        <picker name="type" bindchange="bindIdentityPickerChange" value="{{identity_index}}" range="{{array_Identity}}">
-                            <text wx:if="{{identity_index==null}}">请选择</text>
-                            <text class='picker_value'>{{array_Identity[identity_index]}}</text>
+                    <text class='level_detail'>(学院-教研室-职位)</text>
+                    <view class='staff_info'>
+                        <picker name="staff_level" bindchange="bindIdentityPickerChange" value="{{identity_index}}" range="{{staff_info}}">
+                            <text wx:if="{{identity_index===''}}">请选择</text>
+                            <text class='picker_value'>{{staff_info[identity_index]}}</text>
                         </picker>
                     </view>
                 </view>
-                <view class=''>
+                <view class='' wx:else>
                 <view class='model_column'>
                     <text class='college'>所在学院</text>
                     <view class='right'>
-                        <text class='usrname_text'>{{storage_data.college}}</text>
+                        <text class='usrname_text'>{{storage_data[0].college}}</text>
                     </view>
                 </view>
                 <view class='model_column'>
                     <text class='college'>教研室</text>
                     <view class='right'>
-                        <text class='usrname_text'>{{storage_data.staff_room}}</text>
+                        <text class='usrname_text'>{{storage_data[0].staff_room}}</text>
                     </view>
                 </view>
                 </view>
