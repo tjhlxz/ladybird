@@ -1,4 +1,3 @@
-<import src="change-date-template/change-date-template.wxml" />
 <view class="model_detail_container">
     <view class='model_detail_head'>
         <view class='head_title'>
