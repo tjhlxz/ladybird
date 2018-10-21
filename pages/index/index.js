@@ -7,10 +7,11 @@ Page({
     items:{
       approve_forms_deal: [],
       sub_forms_deal: []
-    }
+    },
+    form_data: {}
   },
   //事件处理函数
-  myRequest: function() {
+  myRequest: function(e) {
     if (!wx.getStorageSync('user')) {
       wx.navigateTo({
         url: '../login/login',
@@ -19,12 +20,13 @@ Page({
         complete: function (res) { },
       })
     }else {
+      var form = JSON.stringify(e.currentTarget.dataset.form);
       wx.navigateTo({
-        url: './require/require',
+        url: './require/require?form=' + form,
       })
     }
   },
-  myApproval: function() {
+  myApproval: function(e) {
     if (!wx.getStorageSync('user')) {
       wx.navigateTo({
         url: '../login/login',
@@ -33,12 +35,14 @@ Page({
         complete: function (res) { },
       })
     }else {
+      var form = JSON.stringify(e.currentTarget.dataset.form);
+      // console.log(form)
       wx.navigateTo({
-        url: './approve/approve',
+        url: './approve/approve?form=' + form,
       })
     }
   },
-  demo: function() {
+  demo: function(e) {
     if (!wx.getStorageSync('user')) {
       wx.navigateTo({
         url: '../login/login',
@@ -47,14 +51,18 @@ Page({
         complete: function (res) { },
       })
     }else {
+      var form = JSON.stringify(e.currentTarget.dataset.form);
       wx.navigateTo({
-        url: './supervisor/supervisor',
+        url: './supervisor/supervisor?form=' + form,
       })
     }
   },
-  detail: function() {
+  detail: function(e) {
+    var index = e.currentTarget.dataset.index;
+    var form = JSON.stringify(e.currentTarget.dataset.form[index]);
+    
     wx.navigateTo({
-      url: './require/require_detail/require_detail',
+      url: './require/require_detail/require_detail?form='+form,
     })
   },
 
@@ -87,7 +95,7 @@ Page({
         }
       })
     }
-    var data = wx.getStorageSync('data')
+    // var data = wx.getStorageSync('data')
     
 
   }

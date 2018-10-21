@@ -1,8 +1,8 @@
 <view class='container'>
   <view class='main'>
     <view class='staff'>
-      <view class='staff_name'>{{staff_name}}的审批表</view>
-      <view class='staff_state'>{{staff_state}}</view>
+      <view class='staff_name'>{{form.form_proposer_name}}的审批表</view>
+      <view class='staff_state'>{{form.form_status}}</view>
     </view>
     <view class='table'>
       <view class='tr'>
@@ -13,21 +13,21 @@
         <view class='td title'>调整前</view>
         <view class='td title'>调整后</view>
       </view>
-      <view class='tr' wx:for='{{items}}' wx:key='staff_name'>
-        <view class='td'>{{item.xueyuan}}</view>
-        <view class='td'>{{item.staff_name}}</view>
-        <view class='td'>{{item.date}}</view>
-        <view class='td'>{{item.collage}}</view>
-        <view class='td dd'>{{item.before}}</view>
-        <view class='td dd'>{{item.after}}</view>
+      <view class='tr'>
+        <view class='td'>{{form.form_college}}</view>
+        <view class='td'>{{form.form_proposer_name}}</view>
+        <view class='td'>{{form.create_time}}</view>
+        <view class='td'>{{form.form_course}}</view>
+        <view class='td dd'>{{form.form_before_adjust}}</view>
+        <view class='td dd'>{{form.form_later_adjust}}</view>
       </view>
     </view>
   </view>
   <view class='footer'>
-    <view class='footer_contant table' wx:for='{{forms}}' wx:key='formname'>
-      <view class='form_name tr'>{{item.formname}}</view>
-      <view class='form_state tr'>{{item.formstate}}</view>
-      <view class='form_date tr'>{{item.formdate}}</view>
+    <view class='footer_contant table' wx:for='{{staff}}'>
+      <view class='form_name tr'>{{item.staff_name}}</view>
+      <view class='form_state tr'>{{item.staff_state}}</view>
+      <view class='form_date tr'>{{item.staff_update}}</view>
     </view>
   </view>
 </view>
