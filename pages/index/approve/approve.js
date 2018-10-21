@@ -20,11 +20,11 @@ Page({
     var len = data.length;
     for(var i=0;i<len;i++){
       if (data[i].form_status == 0) {
-        data[i].form_status = '审批完成'
+        data[i].form_status = '已同意'
       } else if (data[i].form_status == 1) {
-        data[i].form_status = '审批中'
+        data[i].form_status = '待审批'
       } else {
-        data[i].form_status = '审批失败'
+        data[i].form_status = '已拒绝'
       }
     }
     _this.setData({items: _this.data.items})
