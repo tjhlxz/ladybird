@@ -62,7 +62,7 @@ Page({
     var form = JSON.stringify(e.currentTarget.dataset.form[index]);
     
     wx.navigateTo({
-      url: './require/require_detail/require_detail?form='+form,
+      url: './require/require_detail/require_detail?form=' + form + '&id=1',
     })
   },
 

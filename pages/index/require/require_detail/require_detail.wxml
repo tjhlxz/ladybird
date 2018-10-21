@@ -24,7 +24,7 @@
     </view>
   </view>
   <view class='footer'>
-    <view class='footer_contant table' wx:for='{{staff}}'>
+    <view class='footer_contant table' wx:for='{{staff}}' wx:key=''>
       <view class='form_name tr'>{{item.staff_name}}</view>
       <view class='form_state tr'>{{item.staff_state}}</view>
       <view class='form_date tr'>{{item.staff_update}}</view>

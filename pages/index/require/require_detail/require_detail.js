@@ -14,18 +14,20 @@ Page({
      */
     onLoad: function(options) {
       var _form = JSON.parse(options.form)
-      // console.log(_form)
+      // console.log(options)
       var _this = this;
       _this.setData({ form: _form});
       var data = _this.data.form;
 
       //审批状态做文字处理(0,1) => '审批完成'
-      if (data.form_status == 0) {
-        data.form_status = '审批完成'
-      } else if (data.form_status == 1) {
-        data.form_status = '审批中'
-      } else {
-        data.form_status = '审批失败'
+      if(options.id == '1') {
+        if (data.form_status == 0) {
+          data.form_status = '审批完成'
+        } else if (data.form_status == 1) {
+          data.form_status = '审批中'
+        } else {
+          data.form_status = '审批失败'
+        }
       }
 
       //处理数据库数据
