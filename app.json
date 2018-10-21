@@ -1,6 +1,9 @@
 {
     "pages": [
         "pages/index/index",
+        "pages/index/approve/approve_detail/approve_detail",
+        "pages/index/approve/approve",
+        
         "pages/model/model_detail/model_detail",
         "pages/index/require/require_detail/require_detail",
         "pages/model/model",
@@ -8,7 +11,6 @@
         "pages/login/login",
         "pages/test/test",
         "pages/index/require/require",
-        "pages/index/approve/approve",
         "pages/index/supervisor/supervisor",
         "pages/user/help/help",
         "pages/user/about/about",

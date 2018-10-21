@@ -151,6 +151,7 @@ Page({
                                     wx.showLoading({
                                         title: res.data.message,
                                     })
+                                    console.log(res);
                                     wx.request({
                                         url: app.globalData.config + "relay",
                                         method: "POST",
@@ -158,7 +159,8 @@ Page({
                                             form_flow: res.data.data.form_flow,
                                             form_flow_sign: res.data.data.form_flow_sign,
                                             form_id: res.data.data.form_id,
-                                            from_userid: res.data.data.from_userid
+                                            from_userid: res.data.data.from_userid,
+                                            update_time: ''
                                         },
                                         success(res) {
                                             if (res.data.status === 200) {
@@ -171,15 +173,17 @@ Page({
                                                         wx.switchTab({
                                                             url: '../../index/index',
                                                         })
-                                                    }, 1500);
+                                                    }, 1000);
 
-                                                }, 1500)
+                                                }, 1000)
                                             } else if (res.data.status === 400) {
+                                                wx.hideLoading();
                                                 wx.showToast({
                                                     title: res.data.message,
                                                     mask: true
                                                 })
                                             } else if (res.data.status === 401) {
+                                                wx.hideLoading();
                                                 wx.showToast({
                                                     title: res.data.message,
                                                     mask: true,
@@ -188,7 +192,7 @@ Page({
                                             }
                                         }
                                     })
-                                }, 1500)
+                                }, 1000)
                             } else {
                                 wx.showToast({
                                     title: '提交失败',

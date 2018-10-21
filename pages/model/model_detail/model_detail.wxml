@@ -61,10 +61,8 @@
                     </view>
                     <block wx:for="{{nums}}" wx:for-item="item" wx:for-index="key" wx:key="item">
                         <template is="picker_date" data="{{...item}}" />
-                        <!-- <template is="picker_date" data='{{multiArray:multiArray,multiIndex:multiIndex,multiIndex2:multiIndex2}}' /> -->
                     </block>
                     <view class='image_picker'>
-                        <!--   -->
                         <text wx:if="{{length!==1}}" catchtap='deletechange'>删除</text>
                         <text wx:else catchtap='nodelete'>删除</text>
                         <view class='xian'></view>
