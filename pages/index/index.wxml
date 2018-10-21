@@ -5,21 +5,21 @@
     </view>
     <view class='nav'>
 
-        <view class='nav_item' bindtap='myRequest'>
+        <view class='nav_item' bindtap='myRequest' data-form='{{data}}'>
             <view class='logo'>
                 <image src='../../static/ico/send.png'></image>
             </view>
             <view class='nav_item_text'>我的申请</view>
         </view>
 
-        <view class='nav_item' bindtap='myApproval'>
+        <view class='nav_item' bindtap='myApproval' data-form='{{data}}'>
             <view class='logo'>
                 <image src='../../static/ico/approve.png'></image>
             </view>
             <view class='nav_item_text'>我审批的</view>
         </view>
 
-        <view class='nav_item' bindtap='demo'>
+        <view class='nav_item' bindtap='demo' data-form='{{data}}'>
             <view class='logo'>
                 <image src='../../static/ico/supervise.png'></image>
             </view>
@@ -39,7 +39,8 @@
                 <view class='contant_people_text'>当前审批人</view>
             </view>
         </view>
-        <view class='contant_list' wx:for='{{items}}' bindtap='detail' wx:key="detail">
+
+        <view class='contant_list' wx:for='{{data}}' data-index='{{index}}' wx:key='' bindtap='detail' data-form='{{data}}'>
             <view class='contant_name'>
                 <view class='contant_name_text'>课程表变更审批表</view>
             </view>

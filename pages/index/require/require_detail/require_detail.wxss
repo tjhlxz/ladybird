@@ -48,6 +48,7 @@
 }
 .container .footer .form_name {
   margin: 36rpx auto 30rpx 10rpx;
+  font-size: 34rpx;
 }
 .container .footer .form_state {
   margin: 36rpx auto 30rpx auto;
