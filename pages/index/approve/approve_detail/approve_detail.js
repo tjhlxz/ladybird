@@ -11,7 +11,6 @@ Page({
     },
     agree(e){
         var form=this.data.form;
-        console.log(form);
         wx.request({
             url: app.globalData.config + "relay",
             method: "POST",
@@ -52,6 +51,47 @@ Page({
                 }
             }
         })
+        var date=new Date();
+        // wx.request({
+        //     url: app.globalData.config + "relay",
+        //     method: "POST",
+        //     data: {
+        //         form_flow: form.form_flow,
+        //         form_flow_sign: form.form_flow_sign,
+        //         form_id: form.form_id,
+        //         from_userid: this.data.user.staff_id,
+        //         update_time: ''
+        //     },
+        //     success(res) {
+        //         if (res.data.status === 200) {
+        //             setTimeout(function () {
+        //                 wx.hideLoading();
+        //                 wx.showToast({
+        //                     title: res.data.message,
+        //                 })
+        //                 setTimeout(function () {
+        //                     wx.switchTab({
+        //                         url: '../../index',
+        //                     })
+        //                 }, 1000);
+
+        //             }, 1000)
+        //         } else if (res.data.status === 400) {
+        //             wx.hideLoading();
+        //             wx.showToast({
+        //                 title: res.data.message,
+        //                 mask: true
+        //             })
+        //         } else if (res.data.status === 401) {
+        //             wx.hideLoading();
+        //             wx.showToast({
+        //                 title: res.data.message,
+        //                 mask: true,
+        //                 image: '/static/ico/fail.png'
+        //             })
+        //         }
+        //     }
+        // })
     },
     refuse(e){
 
@@ -63,8 +103,10 @@ Page({
         var user=wx.getStorageSync("user");
         var form = JSON.parse(options.form)
         this.setData({
-            form: form
+            form: form,
+            user: user
         })
+        if (this.data.form.form_type === 2){
         var date_before = [];
         var date_after = [];
         var date_before = form.form_before_adjust.split(',');
@@ -78,8 +120,8 @@ Page({
         }
         this.setData({
             date:date,
-            user:user
         })
+        }
     },
 
     /**
