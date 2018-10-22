@@ -20,7 +20,7 @@ Page({
                 form_flow_sign: form.form_flow_sign,
                 form_id: form.form_id,
                 from_userid: this.data.user.staff_id,
-                update_time: ''
+                update_time: form.update_time
             },
             success(res) {
                 if (res.data.status === 200) {
@@ -31,7 +31,7 @@ Page({
                         })
                         setTimeout(function () {
                             wx.switchTab({
-                                url: '../../index',
+                                url: '../../index?',
                             })
                         }, 1000);
 

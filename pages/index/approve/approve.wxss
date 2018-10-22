@@ -27,3 +27,12 @@
     text-align: center;
     word-wrap: wrap;
 }
+.txt {
+  position: fixed;
+  font-size: 42rpx;
+  color: #62DAAA;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 100rpx;
+  border: 0rpx solid #62DAAA;
+}
