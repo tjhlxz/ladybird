@@ -5,17 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    items: [{
-      num: '',
-      name: '课程表变更审批表',
-      date: '2018-10-11',
-      state: '审批成功'
-    },{
-      num: '',
-      name: '课程表变更审批表',
-      date: '2018-10-16',
-      state: '审批中'
-    }]
+    items: []
   },
 
   myRequest: function() {
@@ -27,7 +17,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var _this = this;
+    var _form = JSON.parse(options.form);
+    _this.setData({ items: _form })
+    var data = _this.data.items
+
+    var len = data.length;
+    for (var i = 0; i < len; i++) {
+      if (data[i].form_status == 0) {
+        data[i].form_status = '审批完成'
+      } else if (data[i].form_status == 1) {
+        data[i].form_status = '审批中'
+      } else {
+        data[i].form_status = '审批失败'
+      }
+    }
+    _this.setData({ items: _this.data.items })
   },
 
   /**
