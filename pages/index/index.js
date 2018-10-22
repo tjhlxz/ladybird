@@ -94,11 +94,11 @@ Page({
         success(res) {
           if(res.data.status == 200) {
             _this.setData({ items: res.data.data });
-            console.log(res.data.data)
+            
           }
           var a = _this.data.items.approve_forms_deal ? _this.data.items.approve_forms_deal:[];
           var s = _this.data.items.sub_forms_deal ? _this.data.items.sub_forms_deal:[];
-          _this.setData({data: a.concat(s)})
+          _this.setData({a: a,s:s});
         }
       })
     }
