@@ -35,6 +35,12 @@ Page({
         complete: function (res) { },
       })
     }else {
+      var data = e.currentTarget.dataset.form;
+      var userId = wx.getStorageSync('user').staff_id;
+      var obj = {};
+      var len = data.length;
+      
+
       var form = JSON.stringify(e.currentTarget.dataset.form);
       // console.log(form)
       wx.navigateTo({
@@ -58,6 +64,7 @@ Page({
     }
   },
   detail: function(e) {
+
     var index = e.currentTarget.dataset.index;
     var form = JSON.stringify(e.currentTarget.dataset.form[index]);
     
@@ -86,7 +93,8 @@ Page({
         url: app.globalData.config + 'onload' + '?staff_id=' + staff_id,
         success(res) {
           if(res.data.status == 200) {
-            _this.setData({ items: res.data.data })
+            _this.setData({ items: res.data.data });
+            console.log(res.data.data)
           }
           var a = _this.data.items.approve_forms_deal ? _this.data.items.approve_forms_deal:[];
           var s = _this.data.items.sub_forms_deal ? _this.data.items.sub_forms_deal:[];

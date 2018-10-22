@@ -1,4 +1,3 @@
-// pages/index/require/require_detail/require_detail.js
 Page({
 
     /**
@@ -14,7 +13,6 @@ Page({
      */
     onLoad: function(options) {
       var _form = JSON.parse(options.form)
-      // console.log(options)
       var _this = this;
       _this.setData({ form: _form});
       var data = _this.data.form;
@@ -47,7 +45,8 @@ Page({
       for(;i<=form_flow_name.length;i++) {
         _this.data.staff.push({ staff_name: form_flow_name[i - 1], staff_state: '待审批', staff_update: form_flow_update[i - 1]});
       }
-
+      console.log(_this.data.form);
+      console.log(_this.data.staff);
       //更新页面
       _this.setData({ 
         form: _this.data.form,
