@@ -2,10 +2,12 @@
     <view class='model_detail_head'>
         <view class='head_title'>
             <image src='/static/ico/model.png'></image>
-            <view>刘阔的课程表变更审批表</view>
+            <view>{{form.form_proposer_name}}的课程表变更审批表</view>
         </view>
         <view class='head_status'>
-            <view class='ing'>待审批</view>
+            <view wx:if="{{form.form_status==='待审批'}}" class='ing'>{{form.form_status}}</view>
+            <view wx:if="{{form.form_status==='已同意'}}" class='ok'>{{form.form_status}}</view>
+            <view wx:if="{{form.form_status==='已拒绝'}}" class='fail'>{{form.form_status}}</view>
         </view>
     </view>
 
@@ -15,64 +17,63 @@
                 <view class='model_column first'>
                     <text class='username'>申请人</text>
                     <view class='right'>
-                        <text class='usrname_text'>刘阔</text>
+                        <text class='usrname_text'>{{form.form_proposer_name}}</text>
                     </view>
                 </view>
                 <view class='model_column'>
                     <text class='college'>申请日期</text>
                     <view class='right'>
-                        <text class='usrname_text'>2018-10-21</text>
+                        <text class='usrname_text'>{{form.create_time}}</text>
                     </view>
                 </view>
                 <view class='model_column'>
                     <text class='college'>所在学院</text>
                     <view class='right'>
-                        <text class='usrname_text'>计算机学院</text>
+                        <text class='usrname_text'>{{form.form_college}}</text>
                     </view>
                 </view>
-                
+
                 <view class='model_column'>
                     <text class='college'>教研室</text>
                     <view class='right'>
-                        <text class='usrname_text'>控制教研室</text>
+                        <text class='usrname_text'>{{form.form_staff_room}}</text>
                     </view>
                 </view>
                 <view class='model_column'>
                     <text class='type'>申请类型</text>
                     <view class='right'>
-                        <view>变更</view>
-                        <!-- <view>调串</view> -->
+                        <view wx:if="{{form.form_type===1}}">变更</view>
+                        <view wx:if="{{form.form_type===2}}">调串</view>
                     </view>
 
                 </view>
 
                 <view class='model_column class_input'>
                     <text class='classname'>课程</text>
-                    <text class="right">计算机组成原理</text>
+                    <text class="right">{{form.form_course}}</text>
                 </view>
 
-                <view class='model_column date'>
+                <view wx:if="{{form.form_type===2}}" class='model_column date'>
                     <text class='date'>调整课程时间</text>
                     <view class='date_text'>
                         <text class='date_before_text'>调整前</text>
                         <text class='date_after_text'>调整后</text>
                     </view>
-                    <view class="date_detail">
-                            <view class='date_before'>第10周 星期一 第9-10节</view>
+                    <view wx:for="{{date}}" wx:for-item="item" wx:for-index="i" class="date_detail" wx:key="i">
+                            <view class='date_before'>{{date[i][0]}}</view>
                             <image class="change_ico" src='../../../../static/ico/change.png'></image>
-                            <view class='date_after'>第10周 星期一 第9-10节</view>
+                            <view class='date_after'>{{date[i][1]}}</view>
                     </view>
                 </view>
-                <view class='model_column'>
+                <view class='model_column last'>
                     <text class='reason'>申请原因</text>
                     <view class="reason_input">
-                    <text>这里是刘阔的申请原因这里是刘阔的申请原因这里是刘阔的申请原因这里是刘阔的申请原因这里是刘阔的申请原因这里是刘阔的申请原因这里是刘阔的申请原因这里是刘阔的申请原因这里是刘阔的申请原因这里是刘阔的申请原因这里是刘阔的申请原因这里是刘阔的申请原因这里是刘阔的申请原因
-                    </text>
+                        <text>{{form.form_reason}}</text>
                     </view>
                 </view>
-                <view class='button'>
-                <button class='submit' form-type='submit'>同意</button>
-                <button class='refuse' form-type='submit'>拒绝</button>
+                <view wx:if="{{form.form_status==='待审批'}}" class='button'>
+                    <button class='submit' form-type='submit' catchtap='agree'>同意</button>
+                    <button class='refuse' form-type='submit' catchtap='refuse'>拒绝</button>
                 </view>
             </form>
         </view>

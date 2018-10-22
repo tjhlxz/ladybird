@@ -1,14 +1,14 @@
 {
     "pages": [
-        "pages/index/index",
-        "pages/index/approve/approve_detail/approve_detail",
-        "pages/index/approve/approve",
         
+        "pages/index/index",
+        "pages/index/approve/approve",
         "pages/model/model_detail/model_detail",
         "pages/index/require/require_detail/require_detail",
         "pages/model/model",
         "pages/user/user",
         "pages/login/login",
+        "pages/index/approve/approve_detail/approve_detail",
         "pages/test/test",
         "pages/index/require/require",
         "pages/index/supervisor/supervisor",
