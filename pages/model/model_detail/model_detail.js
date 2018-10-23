@@ -35,14 +35,6 @@ Page({
         this.setData({
             nums: tmpnums
         })
-        // var date_before;
-        // if (this.data.date_before !== "") {
-        //     date_before = this.data.date_before + "," + multiArray[0][multi[0]] + ' ' + multiArray[1][multi[1]] + ' ' + multiArray[2][multi[2]]
-        // } else date_before = "undefined" + multiArray[0][multi[0]] + ' ' + multiArray[1][multi[1]] + ' ' + multiArray[2][multi[2]]
-        // this.setData({
-        //     date_before: date_before
-        // })
-        // console.log(date_before);
     },
     bindMultiPickerChange2: function(e) {
         var tmpnums = this.data.nums
@@ -186,7 +178,6 @@ Page({
                             title: res.data.message,
                             mask: true
                         })
-                        setTimeout(function(){
                             wx.request({
                                 url: app.globalData.config + "build?staff_id=" + this.data.storage_data[identity_index].staff_id + "&form_id=" + form_id + "&staff_level=" + this.data.storage_data[identity_index].staff_level + "&staff_room=" + this.data.storage_data[identity_index].staff_room + "&college=" + this.data.storage_data[identity_index].college,
                                 success(res) {
@@ -248,7 +239,6 @@ Page({
                                     }
                                 }
                             })
-                        },1000)
                     } else {
                         wx.showToast({
                             title: '提交失败',
