@@ -72,7 +72,7 @@ Page({
         wx.showToast({
             title: '至少一条',
             image: '/static/ico/zhuyi.png',
-            mask:true
+            mask: true
         })
     },
     noadd(e) {
@@ -84,42 +84,36 @@ Page({
     },
     //表单提交
     formSubmit(e) {
-        console.log(this.data.nums)
-        var nums=this.data.nums;
-        console.log(nums)
+        var nums = this.data.nums;
+        var multiArray = this.data.multiArray;
         this.setData({
-            date_before:'',
-            date_after:''
-        })
-        var multiArray=this.data.multiArray;
-        for(var i=0;i<nums.length;i++){
+            date_before: '',
+            date_after: ''
+        });
+        for (var i = 0; i < nums.length; i++) {
             var date_before;
-            var multiIndex=nums[i].multiIndex;
-            if(this.data.date_before===''){
+            var multiIndex = nums[i].multiIndex;
+            if (this.data.date_before === '') {
                 date_before = nums[i].multiArray[0][multiIndex[0]] + ' ' + nums[i].multiArray[1][multiIndex[1]] + ' ' + nums[i].multiArray[2][multiIndex[2]];
+            } else {
+                date_before = this.data.date_before + ',' + nums[i].multiArray[0][multiIndex[0]] + ' ' + nums[i].multiArray[1][multiIndex[1]] + ' ' + nums[i].multiArray[2][multiIndex[2]];
             }
-            else{
-             date_before= this.data.date_before+','+nums[i].multiArray[0][multiIndex[0]] + ' ' + nums[i].multiArray[1][multiIndex[1]] + ' ' + nums[i].multiArray[2][multiIndex[2]];
-            }
-             this.setData({
-                 date_before:date_before
-             })
+            this.setData({
+                date_before: date_before
+            })
         }
         for (var i = 0; i < nums.length; i++) {
             var date_after;
             var multiIndex2 = nums[i].multiIndex2;
             if (this.data.date_after === '') {
                 date_after = nums[i].multiArray[0][multiIndex2[0]] + ' ' + nums[i].multiArray[1][multiIndex2[1]] + ' ' + nums[i].multiArray[2][multiIndex2[2]];
-            }
-            else {
+            } else {
                 date_after = this.data.date_after + ',' + nums[i].multiArray[0][multiIndex2[0]] + ' ' + nums[i].multiArray[1][multiIndex2[1]] + ' ' + nums[i].multiArray[2][multiIndex2[2]];
             }
             this.setData({
                 date_after: date_after
             })
         }
-        console.log(this.data.date_before);
-        console.log(this.data.date_after);
         var data = e.detail.value;
         //只有一种身份的情况下
         if (this.data.storage_data.length === 1) {
@@ -140,6 +134,7 @@ Page({
     add_form_base(e) {
         var data = e.detail.value;
         var identity_index = this.data.identity_index;
+        var that=this;
         if (this.data.storage_data[identity_index].staff_room === null) {
             wx.showToast({
                 title: '此身份不可提交',
@@ -147,107 +142,121 @@ Page({
                 mask: true
             })
         } else {
-            wx.showLoading({
-                title: '正在提交',
+            wx.showModal({
+                title: '提交确认',
+                content: '提交后不可修改，确定要提交吗？',
                 mask: true,
-                success: function(res) {},
-                fail: function(res) {},
-                complete: function(res) {},
-            })
-            wx.request({
-                url: app.globalData.config + "add_form_base",
-                method: "POST",
-                data: {
-                    form_proposer_id: this.data.storage_data[identity_index].staff_id,
-                    form_proposer_name: this.data.storage_data[identity_index].staff_name,
-                    form_college: this.data.storage_data[identity_index].college,
-                    form_staff_room: this.data.storage_data[identity_index].staff_room,
-                    form_type: +data.type + 1,
-                    form_course: data.classname,
-                    form_before_adjust: this.data.date_before,
-                    form_later_adjust: this.data.date_after,
-                    form_reason: data.reason_input
-                },
-                header: {
-                    'content-type': 'application/x-www-form-urlencoded'
-                },
-                success: (res) => {
-                    var form_id = res.data.data.form_id;
-                    if (res.data.status === 200) {
-                        wx.showLoading({
-                            title: res.data.message,
-                            mask: true
-                        })
-                            wx.request({
-                                url: app.globalData.config + "build?staff_id=" + this.data.storage_data[identity_index].staff_id + "&form_id=" + form_id + "&staff_level=" + this.data.storage_data[identity_index].staff_level + "&staff_room=" + this.data.storage_data[identity_index].staff_room + "&college=" + this.data.storage_data[identity_index].college,
-                                success(res) {
-                                    if (res.data.status === 200) {
-                                        setTimeout(function () {
-                                            wx.hideLoading();
-                                            wx.showLoading({
-                                                title: res.data.message,
-                                                mask: true
-                                            })
-                                            wx.request({
-                                                url: app.globalData.config + "relay",
-                                                method: "POST",
-                                                data: {
-                                                    form_flow: res.data.data.form_flow,
-                                                    form_flow_sign: res.data.data.form_flow_sign,
-                                                    form_id: res.data.data.form_id,
-                                                    from_userid: res.data.data.from_userid,
-                                                    update_time: ''
-                                                },
-                                                success(res) {
-                                                    if (res.data.status === 200) {
-                                                        setTimeout(function () {
+                confirmColor: '#0ab179',
+                success:function(res){
+                    if(res.confirm){
+                    wx.showLoading({
+                        title: '正在提交',
+                        mask: true,
+                        success: function (res) { },
+                        fail: function (res) { },
+                        complete: function (res) { },
+                    })
+                    console.log(data);
+                    wx.request({
+                        url: app.globalData.config + "add_form_base",
+                        method: "POST",
+                        data: {
+                            form_proposer_id: that.data.storage_data[identity_index].staff_id,
+                            form_proposer_name: that.data.storage_data[identity_index].staff_name,
+                            form_college: that.data.storage_data[identity_index].college,
+                            form_staff_room: that.data.storage_data[identity_index].staff_room,
+                            form_type: +data.type + 1,
+                            form_course: data.classname,
+                            form_before_adjust: that.data.date_before,
+                            form_later_adjust: that.data.date_after,
+                            form_reason: data.reason_input
+                        },
+                        header: {
+                            'content-type': 'application/x-www-form-urlencoded'
+                        },
+                        success: (res) => {
+                            var form_id = res.data.data.form_id;
+                            if (res.data.status === 200) {
+                                wx.showLoading({
+                                    title: res.data.message,
+                                    mask: true
+                                })
+                                wx.request({
+                                    url: app.globalData.config + "build?staff_id=" + that.data.storage_data[identity_index].staff_id + "&form_id=" + form_id + "&staff_level=" + that.data.storage_data[identity_index].staff_level + "&staff_room=" + that.data.storage_data[identity_index].staff_room + "&college=" + that.data.storage_data[identity_index].college,
+                                    success(res) {
+                                        if (res.data.status === 200) {
+                                            setTimeout(function () {
+                                                wx.hideLoading();
+                                                wx.showLoading({
+                                                    title: res.data.message,
+                                                    mask: true
+                                                })
+                                                wx.request({
+                                                    url: app.globalData.config + "relay",
+                                                    method: "POST",
+                                                    data: {
+                                                        form_flow: res.data.data.form_flow,
+                                                        form_flow_sign: res.data.data.form_flow_sign,
+                                                        form_id: res.data.data.form_id,
+                                                        from_userid: res.data.data.from_userid,
+                                                        update_time: ''
+                                                    },
+                                                    success(res) {
+                                                        if (res.data.status === 200) {
+                                                            setTimeout(function () {
+                                                                wx.hideLoading();
+                                                                wx.showToast({
+                                                                    title: res.data.message,
+                                                                    mask: true
+                                                                })
+                                                                setTimeout(function () {
+                                                                    wx.switchTab({
+                                                                        url: '../../index/index',
+                                                                    })
+                                                                }, 1000);
+
+                                                            }, 1000)
+                                                        } else if (res.data.status === 400) {
                                                             wx.hideLoading();
                                                             wx.showToast({
                                                                 title: res.data.message,
                                                                 mask: true
                                                             })
-                                                            setTimeout(function () {
-                                                                wx.switchTab({
-                                                                    url: '../../index/index',
-                                                                })
-                                                            }, 1000);
-
-                                                        }, 1000)
-                                                    } else if (res.data.status === 400) {
-                                                        wx.hideLoading();
-                                                        wx.showToast({
-                                                            title: res.data.message,
-                                                            mask: true
-                                                        })
-                                                    } else if (res.data.status === 401) {
-                                                        wx.hideLoading();
-                                                        wx.showToast({
-                                                            title: res.data.message,
-                                                            mask: true,
-                                                            image: '/static/ico/fail.png'
-                                                        })
+                                                        } else if (res.data.status === 401) {
+                                                            wx.hideLoading();
+                                                            wx.showToast({
+                                                                title: res.data.message,
+                                                                mask: true,
+                                                                image: '/static/ico/fail.png'
+                                                            })
+                                                        }
                                                     }
-                                                }
+                                                })
+                                            }, 1000)
+                                        } else {
+                                            wx.showToast({
+                                                title: '提交失败',
+                                                image: '/static/ico/fail.png',
+                                                mask: true
                                             })
-                                        }, 1000)
-                                    } else {
-                                        wx.showToast({
-                                            title: '提交失败',
-                                            image: '/static/ico/fail.png',
-                                            mask: true
-                                        })
+                                        }
                                     }
-                                }
-                            })
-                    } else {
-                        wx.showToast({
-                            title: '提交失败',
-                            image: '/static/ico/fail.png',
-                            mask: true
-                        })
+                                })
+                            } else {
+                                wx.showToast({
+                                    title: '提交失败',
+                                    image: '/static/ico/fail.png',
+                                    mask: true
+                                })
+                            }
+                        }
+                    })
                     }
                 }
             })
+            
+                
+            
         }
     },
     confirm(e) {
@@ -260,6 +269,10 @@ Page({
         else {
             //申请类型是变更
             if (data.type === "0") {
+                this.setData({
+                    date_before: '',
+                    date_after: ''
+                })
                 //课程名和申请原因有空
                 if (data.classname == '' || data.reason_input == '') {
                     this.submitFail(e);
