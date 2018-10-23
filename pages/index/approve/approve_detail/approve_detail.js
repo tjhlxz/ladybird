@@ -81,7 +81,8 @@ Page({
       var user = wx.getStorageSync("user");
       var form = JSON.parse(options.form)
       this.setData({
-        form: form
+        form: form,
+        user:user
       })
 
       
