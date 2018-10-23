@@ -13,7 +13,7 @@
 
     <view class='model_form_container'>
         <view class="form_border">
-            <form class='model_detail_form' catchsubmit="formSubmit" catchreset="formReset">
+            <form class='model_detail_form' catchreset="formReset">
                 <view class='model_column first'>
                     <text class='username'>申请人</text>
                     <view class='right'>
