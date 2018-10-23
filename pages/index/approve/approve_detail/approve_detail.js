@@ -20,7 +20,7 @@ Page({
                 form_flow: form.form_flow,
                 form_flow_sign: form.form_flow_sign,
                 form_id: form.form_id,
-                from_userid: this.data.user.staff_id,
+                from_userid: _this.data.user.staff_id,
                 update_time: form.update_time
             },
             success(res) {
@@ -28,11 +28,11 @@ Page({
 
                   var last_page_data = [];
                   last_page_data = getCurrentPages()[1].data.items;
-                  var length = last_page_data.length;
+                  var length = last_page_data.length ? last_page_data.length:0;
 
                   for (var del = 0; del < length-1; del++) {
-                    console.log(last_page_data[del]);
-                    console.log(length)
+                    // console.log(last_page_data[del]);
+                    // console.log(length)
                     // console.log(form.form_id)
                     if (last_page_data[del].form_id == _this.data.form.form_id) {
                       // console.log(del)
@@ -40,7 +40,7 @@ Page({
                       last_page_data.splice(del, 1);
                     }
                   }
-            //======================================      
+            //======================================
                     setTimeout(function () {
                         wx.hideLoading();
                         wx.showToast({
@@ -82,7 +82,7 @@ Page({
       var form = JSON.parse(options.form)
       this.setData({
         form: form,
-        user:user
+        user: user
       })
 
       
