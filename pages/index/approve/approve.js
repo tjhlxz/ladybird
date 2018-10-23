@@ -96,7 +96,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var _this = this;
+    var item = _this.data.items;
+    _this.setData({items: item})
   },
 
   /**

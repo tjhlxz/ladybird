@@ -96,11 +96,11 @@ Page({
 
             var a = _this.data.items.approve_forms_deal ? _this.data.items.approve_forms_deal : [];
             var s = _this.data.items.sub_forms_deal ? _this.data.items.sub_forms_deal : [];
-            _this.setData({ a: a, s: s });
+            // _this.setData({ a: a, s: s });
 
             //处理未读消息状态小红点
             var unreadNum = a.length;
-            _this.setData({ unreadNum: unreadNum });
+            _this.setData({ unreadNum: unreadNum, a: a, s: s });
 
             var arr = [];
             var num = 0;
@@ -117,7 +117,7 @@ Page({
   },
   onShow: function(options) {
     var _this = this;
-    console.log(options)
+    // console.log(options)
 
     // var a = _this.data.items.approve_forms_deal ? _this.data.items.approve_forms_deal : [];
     // var s = _this.data.items.sub_forms_deal ? _this.data.items.sub_forms_deal : [];
