@@ -13,6 +13,9 @@
         </view>
 
         <view class='nav_item' bindtap='myApproval' data-form='{{a}}'>
+          <view class='red_point_box'>
+            <view class='red_point' wx:if='{{unreadNum}}'>{{unreadNum}}</view>
+          </view>
             <view class='logo'>
                 <image src='../../static/ico/approve.png'></image>
             </view>
@@ -38,6 +41,9 @@
             <view class='contant_people'>
                 <view class='contant_people_text'>当前审批人</view>
             </view>
+            <view class='contant_date'>
+              <view class='contant_date_text'>当前状态</view>
+            </view>
         </view>
 
         <view class='contant_list' wx:for='{{s}}' data-index='{{index}}' wx:key='' bindtap='detail' data-form='{{s}}'>
@@ -46,6 +52,9 @@
             </view>
             <view class='contant_people'>
                 <view class='contant_people_text'>{{item.name[item.form_flow_sign-1]}}</view>
+            </view>
+            <view class='contant_date'>
+              <view class='contant_date_text'>{{item.form_status}}</view>
             </view>
         </view>
     </view>

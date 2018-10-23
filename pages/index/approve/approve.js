@@ -4,7 +4,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    items: []
+    items: [],
+    show: true
   },
 
   /**
@@ -41,6 +42,7 @@ Page({
 
   showMore: function() {
     var _this = this;
+    _this.setData({show: false})
     var staff_id = wx.getStorageSync('user').staff_id;
     wx.showLoading({
       title: '正在加载',
@@ -63,19 +65,11 @@ Page({
           var data = _this.data.items;
           _this.setData({items: data})
 
-
           wx.hideLoading();
           wx.showToast({
             title: res.data.message,
             duration: 1000
           })
-
-
-
-
-
-
-
         }
       }
     })

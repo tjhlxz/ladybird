@@ -23,21 +23,7 @@ Page({
   onLoad: function (options) {
     var _this = this;
     var _form = JSON.parse(options.form);
-    console.log(_form)
     _this.setData({ items: _form })
-    var data = _this.data.items
-
-    var len = data.length;
-    for (var i = 0; i < len; i++) {
-      if (data[i].form_status == 0) {
-        data[i].form_status = '审批中'
-      } else if (data[i].form_status == 1) {
-        data[i].form_status = '审批完成'
-      } else {
-        data[i].form_status = '审批失败'
-      }
-    }
-    _this.setData({ items: _this.data.items })
   },
 
   /**

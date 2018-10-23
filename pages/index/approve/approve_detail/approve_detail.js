@@ -41,13 +41,17 @@ Page({
 
                   //把和当前审批表id相同的表给干掉
                   for (var del = 0; del < last_length; del++) {
-                    if (last_page_data[del].form_id == this_page_id) {
-                      last_page_data.splice(del, 1);
+                    if(last_page_data[del]){
+                      if (last_page_data[del].form_id == this_page_id) {
+                        last_page_data.splice(del, 1);
+                      }
                     }
                   }
                   for (var home_del = 0; home_del < first_length; home_del++) {
-                    if (first_page_data[home_del].form_id == this_page_id) {
-                      first_page_data.splice(home_del, 1);
+                    if (first_page_data[home_del]) {
+                      if (first_page_data[home_del].form_id == this_page_id) {
+                        first_page_data.splice(home_del, 1);
+                      }
                     }
                   }
             //======================================

@@ -44,9 +44,10 @@ Page({
                             icon: 'none',
                             showCancel: false,
                             success: function() {
-                                wx.switchTab({
-                                    url: '../index/index'
-                                })
+                              wx.setStorageSync('homeShow', 'readyShow');
+                              wx.switchTab({
+                                  url: '../index/index'
+                              })
                             }
                         });
                     } else {

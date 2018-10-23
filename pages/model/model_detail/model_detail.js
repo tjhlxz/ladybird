@@ -156,7 +156,7 @@ Page({
                         fail: function (res) { },
                         complete: function (res) { },
                     })
-                    console.log(data);
+
                     wx.request({
                         url: app.globalData.config + "add_form_base",
                         method: "POST",
@@ -210,6 +210,7 @@ Page({
                                                                     mask: true
                                                                 })
                                                                 setTimeout(function () {
+                                                                  wx.setStorageSync('lock', '1');
                                                                     wx.switchTab({
                                                                         url: '../../index/index',
                                                                     })
