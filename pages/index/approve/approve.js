@@ -11,6 +11,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // console.log(options)
     var _this = this;
     var _form = JSON.parse(options.form);
     _this.setData({items: _form})
@@ -50,7 +51,7 @@ Page({
         if(res.data.status == 200) {
 
           var items = res.data.data.history_form;
-          var len = items.length;
+          var len = items.length ? items.length:0;
 
           for(var i = 0; i < len; i++) {
             //处理数据中的from_status
@@ -58,14 +59,9 @@ Page({
             _this.data.items.push(items[i]);
 
           }
+
           var data = _this.data.items;
-
           _this.setData({items: data})
-
-
-
-
-
 
 
           wx.hideLoading();
@@ -112,7 +108,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    
   },
 
   /**

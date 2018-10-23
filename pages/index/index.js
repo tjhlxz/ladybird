@@ -117,11 +117,10 @@ Page({
   },
   onShow: function(options) {
     var _this = this;
-    // console.log(options)
 
-    // var a = _this.data.items.approve_forms_deal ? _this.data.items.approve_forms_deal : [];
-    // var s = _this.data.items.sub_forms_deal ? _this.data.items.sub_forms_deal : [];
-    // _this.setData({ a: a, s: s });
+    var a = _this.data.a;
+    var s = _this.data.s;
+    _this.setData({ a: a, s: s });
 
     //处理未读消息状态小红点
     // var unreadNum = a.length;

@@ -84,9 +84,9 @@ Page({
     },
     //表单提交
     formSubmit(e) {
-        console.log(this.data.nums)
+
         var nums=this.data.nums;
-        console.log(nums)
+
         this.setData({
             date_before:'',
             date_after:''
@@ -118,8 +118,7 @@ Page({
                 date_after: date_after
             })
         }
-        console.log(this.data.date_before);
-        console.log(this.data.date_after);
+
         var data = e.detail.value;
         //只有一种身份的情况下
         if (this.data.storage_data.length === 1) {
