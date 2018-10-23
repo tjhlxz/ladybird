@@ -12,7 +12,6 @@ Page({
     agree(e){
       var _this = this;
         var form=_this.data.form;
-        // console.log(form);
         wx.request({
             url: app.globalData.config + "relay",
             method: "POST",
@@ -27,17 +26,28 @@ Page({
                 if (res.data.status === 200) {
 
                   var last_page_data = [];
-                  last_page_data = getCurrentPages()[1].data.items;
-                  var length = last_page_data.length ? last_page_data.length:0;
+                  var first_page_data = [];
 
-                  for (var del = 0; del < length-1; del++) {
-                    // console.log(last_page_data[del]);
-                    // console.log(length)
-                    // console.log(form.form_id)
-                    if (last_page_data[del].form_id == _this.data.form.form_id) {
-                      // console.log(del)
-                      // console.log(last_page_data)
+                  //上一个页面的数据
+                  last_page_data = getCurrentPages()[1].data.items;
+                  //首页数据
+                  first_page_data = getCurrentPages()[0].data.a;
+
+                  //当前审批的form id
+                  var this_page_id = _this.data.form.form_id;
+                  //或取历史页面的长度，没有则为0
+                  var last_length = last_page_data.length ? last_page_data.length:0;
+                  var first_length = first_page_data.length ? first_page_data.length:0;
+
+                  //把和当前审批表id相同的表给干掉
+                  for (var del = 0; del < last_length; del++) {
+                    if (last_page_data[del].form_id == this_page_id) {
                       last_page_data.splice(del, 1);
+                    }
+                  }
+                  for (var home_del = 0; home_del < first_length; home_del++) {
+                    if (first_page_data[home_del].form_id == this_page_id) {
+                      first_page_data.splice(home_del, 1);
                     }
                   }
             //======================================
@@ -120,14 +130,14 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function() {
-
+      
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function() {
-
+      
     },
 
     /**
