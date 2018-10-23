@@ -84,6 +84,7 @@ Page({
     },
     //表单提交
     formSubmit(e) {
+        //处理调整时间，拼接字符串
         var nums = this.data.nums;
         var multiArray = this.data.multiArray;
         this.setData({
@@ -117,7 +118,15 @@ Page({
         var data = e.detail.value;
         //只有一种身份的情况下
         if (this.data.storage_data.length === 1) {
-            this.confirm(e);
+            var level=this.data.storage_data[0].staff_level;
+            if (level === 2 || level === 3 || level === 4 || level === 5 || level === 6){
+                wx.showToast({
+                    title: '此身份不可提交',
+                    image: '/static/ico/fail.png',
+                    mask: true
+                })
+            }
+            else this.confirm(e);
         }
         //有多种身份的时候
         else {
@@ -274,12 +283,14 @@ Page({
                     date_before: '',
                     date_after: ''
                 })
+               
                 //课程名和申请原因有空
                 if (data.classname == '' || data.reason_input == '') {
                     this.submitFail(e);
                 }
                 //信息填写完整发起请求
                 else {
+                    
                     this.add_form_base(e)
                 }
             }

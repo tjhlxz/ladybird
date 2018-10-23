@@ -48,7 +48,7 @@
 
                 <view class='model_column class_input'>
                     <text class='classname'>课程</text>
-                    <text class="right">{{form.form_course}}</text>
+                    <view class="form_course">{{form.form_course}}</view> 
                 </view>
 
                 <view class='model_column date' wx:if="{{form.form_type===2}}" >
@@ -66,7 +66,7 @@
                 <view class='model_column'>
                     <text class='reason'>申请原因</text>
                     <view class="reason_input">
-                    <text>{{form.form_reason}}</text>
+                    {{form.form_reason}}
                     </view>
                 </view>
             </form>
