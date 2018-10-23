@@ -79,13 +79,15 @@ Page({
     nodelete(e) {
         wx.showToast({
             title: '至少一条',
-            image: '/static/ico/zhuyi.png'
+            image: '/static/ico/zhuyi.png',
+            mask:true
         })
     },
     noadd(e) {
         wx.showToast({
             title: '已到上限',
-            image: '/static/ico/zhuyi.png'
+            image: '/static/ico/zhuyi.png',
+            mask: true
         })
     },
     //表单提交
@@ -184,67 +186,69 @@ Page({
                             title: res.data.message,
                             mask: true
                         })
-                        wx.request({
-                            url: app.globalData.config + "build?staff_id=" + this.data.storage_data[identity_index].staff_id + "&form_id=" + form_id + "&staff_level=" + this.data.storage_data[identity_index].staff_level + "&staff_room=" + this.data.storage_data[identity_index].staff_room + "&college=" + this.data.storage_data[identity_index].college,
-                            success(res) {
-                                if (res.data.status === 200) {
-                                    setTimeout(function() {
-                                        wx.hideLoading();
-                                        wx.showLoading({
-                                            title: res.data.message,
-                                            mask: true
-                                        })
-                                        wx.request({
-                                            url: app.globalData.config + "relay",
-                                            method: "POST",
-                                            data: {
-                                                form_flow: res.data.data.form_flow,
-                                                form_flow_sign: res.data.data.form_flow_sign,
-                                                form_id: res.data.data.form_id,
-                                                from_userid: res.data.data.from_userid,
-                                                update_time: ''
-                                            },
-                                            success(res) {
-                                                if (res.data.status === 200) {
-                                                    setTimeout(function() {
+                        setTimeout(function(){
+                            wx.request({
+                                url: app.globalData.config + "build?staff_id=" + this.data.storage_data[identity_index].staff_id + "&form_id=" + form_id + "&staff_level=" + this.data.storage_data[identity_index].staff_level + "&staff_room=" + this.data.storage_data[identity_index].staff_room + "&college=" + this.data.storage_data[identity_index].college,
+                                success(res) {
+                                    if (res.data.status === 200) {
+                                        setTimeout(function () {
+                                            wx.hideLoading();
+                                            wx.showLoading({
+                                                title: res.data.message,
+                                                mask: true
+                                            })
+                                            wx.request({
+                                                url: app.globalData.config + "relay",
+                                                method: "POST",
+                                                data: {
+                                                    form_flow: res.data.data.form_flow,
+                                                    form_flow_sign: res.data.data.form_flow_sign,
+                                                    form_id: res.data.data.form_id,
+                                                    from_userid: res.data.data.from_userid,
+                                                    update_time: ''
+                                                },
+                                                success(res) {
+                                                    if (res.data.status === 200) {
+                                                        setTimeout(function () {
+                                                            wx.hideLoading();
+                                                            wx.showToast({
+                                                                title: res.data.message,
+                                                                mask: true
+                                                            })
+                                                            setTimeout(function () {
+                                                                wx.switchTab({
+                                                                    url: '../../index/index',
+                                                                })
+                                                            }, 1000);
+
+                                                        }, 1000)
+                                                    } else if (res.data.status === 400) {
                                                         wx.hideLoading();
                                                         wx.showToast({
                                                             title: res.data.message,
                                                             mask: true
                                                         })
-                                                        setTimeout(function() {
-                                                            wx.switchTab({
-                                                                url: '../../index/index',
-                                                            })
-                                                        }, 1000);
-
-                                                    }, 1000)
-                                                } else if (res.data.status === 400) {
-                                                    wx.hideLoading();
-                                                    wx.showToast({
-                                                        title: res.data.message,
-                                                        mask: true
-                                                    })
-                                                } else if (res.data.status === 401) {
-                                                    wx.hideLoading();
-                                                    wx.showToast({
-                                                        title: res.data.message,
-                                                        mask: true,
-                                                        image: '/static/ico/fail.png'
-                                                    })
+                                                    } else if (res.data.status === 401) {
+                                                        wx.hideLoading();
+                                                        wx.showToast({
+                                                            title: res.data.message,
+                                                            mask: true,
+                                                            image: '/static/ico/fail.png'
+                                                        })
+                                                    }
                                                 }
-                                            }
+                                            })
+                                        }, 1000)
+                                    } else {
+                                        wx.showToast({
+                                            title: '提交失败',
+                                            image: '/static/ico/fail.png',
+                                            mask: true
                                         })
-                                    }, 1000)
-                                } else {
-                                    wx.showToast({
-                                        title: '提交失败',
-                                        image: '/static/ico/fail.png',
-                                        mask: true
-                                    })
+                                    }
                                 }
-                            }
-                        })
+                            })
+                        },1000)
                     } else {
                         wx.showToast({
                             title: '提交失败',

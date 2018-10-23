@@ -10,7 +10,6 @@ Page({
         user:{}
     },
     agree(e){
-
       var _this = this;
         var form=_this.data.form;
         // console.log(form);
