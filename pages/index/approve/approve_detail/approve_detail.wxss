@@ -115,7 +115,15 @@ radio {
 .class_input {
     flex-direction: column;
 }
-
+.form_course{
+    margin-top: 20rpx;
+    font-size: 35rpx;
+    height: 100%;
+    width: 100%;
+    word-break: break-all;
+    color: #666;
+    font-family: MicroSoft Yahei;
+}
 .input {
     width: 600rpx;
     color: #222;
@@ -148,6 +156,7 @@ radio {
     font-size: 35rpx;
     height: 100%;
     width: 100%;
+    word-break: break-all;
     color: #666;
     font-family: MicroSoft Yahei;
 }

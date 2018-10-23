@@ -50,7 +50,7 @@
 
                 <view class='model_column class_input'>
                     <text class='classname'>课程</text>
-                    <text class="right">{{form.form_course}}</text>
+                    <view class="form_course">{{form.form_course}}</view>
                 </view>
 
                 <view wx:if="{{form.form_type===2}}" class='model_column date'>
@@ -68,7 +68,7 @@
                 <view class='model_column last'>
                     <text class='reason'>申请原因</text>
                     <view class="reason_input">
-                        <text>{{form.form_reason}}</text>
+                    {{form.form_reason}}
                     </view>
                 </view>
                 <view wx:if="{{form.form_status==='待审批'}}" class='button'>

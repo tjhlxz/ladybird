@@ -4,22 +4,27 @@
         <text class='title_header'>黑龙江科技大学审批系统</text>
     </view>
     <view class='nav'>
-
-        <view class='nav_item' bindtap='myRequest' data-form='{{s}}'>
+        <view class='nav_item' wx:if="{{pgzx==='1'}}" bindtap='myRequest' data-form='{{s}}'>
+            <view class='logo'>
+                <image src='../../static/ico/send.png'></image>
+            </view>
+            <view class='nav_item_text'>评估中心</view>
+        </view>
+        <view class='nav_item' wx:if="{{ptzg==='1'||jyszr==='1'}}" bindtap='myRequest' data-form='{{s}}'>
             <view class='logo'>
                 <image src='../../static/ico/send.png'></image>
             </view>
             <view class='nav_item_text'>我的申请</view>
         </view>
 
-        <view class='nav_item' bindtap='myApproval' data-form='{{a}}'>
+        <view class='nav_item' wx:if="{{jyszr==='1'||jxyz==='1'||jwccz==='1'||jwk==='1'}}" bindtap='myApproval' data-form='{{a}}'>
             <view class='logo'>
                 <image src='../../static/ico/approve.png'></image>
             </view>
             <view class='nav_item_text'>我审批的</view>
         </view>
 
-        <view class='nav_item' bindtap='demo' data-form='{{items}}'>
+        <view class='nav_item' wx:if="{{dd==='1'}}" bindtap='demo' data-form='{{items}}'>
             <view class='logo'>
                 <image src='../../static/ico/supervise.png'></image>
             </view>
