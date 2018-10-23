@@ -1,6 +1,5 @@
 .wrapper {
   width: 100%;
-  /* color: rgb(105, 105, 105); */
   font-size: 14px;
 }
 .title {

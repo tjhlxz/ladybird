@@ -1,5 +1,3 @@
-//index.js
-//获取应用实例
 const app = getApp()
 
 Page({
@@ -50,11 +48,11 @@ Page({
       })
     }
   },
-  detail: function(e) {
-    var form = JSON.stringify(e.currentTarget.dataset.form);
-    // console.log(form)
+  detail: function (e) {
+    var index = e.currentTarget.dataset.index;
+    var form = JSON.stringify(e.currentTarget.dataset.form[index]);
     wx.navigateTo({
-      url: './approve/approve?form=' + form,
+      url: './require/require_detail/require_detail?form=' + form + '&id=1',
     })
   },
   demo: function(e) {

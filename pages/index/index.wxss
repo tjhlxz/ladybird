@@ -30,11 +30,13 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     margin-bottom: 40rpx;
 }
 
 .nav_item {
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
 }
@@ -108,14 +110,14 @@
 }
 .red_point {
   position: absolute;
-  width: 30rpx;
-  height: 30rpx;
-  font-size: 30rpx;
+  width: 40rpx;
+  height: 40rpx;
+  font-size: 25rpx;
   font-weight: bold;
   background-color: red;
   color: #fff;
-  border-radius: 100rpx;
-  right: 20%;
+  border-radius: 50%;
+  right: 25%;
   top: 0;
-  line-height: 30rpx;
+  line-height: 40rpx;
 }

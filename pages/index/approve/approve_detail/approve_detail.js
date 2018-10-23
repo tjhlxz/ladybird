@@ -12,6 +12,10 @@ Page({
     agree(e){
       var _this = this;
         var form=_this.data.form;
+        wx.showLoading({
+          title: '正在审批',
+          mask: true
+        })
         wx.request({
             url: app.globalData.config + "relay",
             method: "POST",
@@ -62,10 +66,8 @@ Page({
                         })
                         setTimeout(function () {
                             wx.navigateBack({
-                              
                             })
                         }, 1000);
-
                     }, 1000)
                 } else if (res.data.status === 400) {
                     wx.hideLoading();
