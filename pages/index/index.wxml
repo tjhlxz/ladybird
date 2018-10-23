@@ -45,7 +45,7 @@
                 <view class='contant_name_text'>课程表变更审批表</view>
             </view>
             <view class='contant_people'>
-                <view class='contant_people_text'>{{item.form_proposer_name}}</view>
+                <view class='contant_people_text'>{{item.name[item.form_flow_sign-1]}}</view>
             </view>
         </view>
     </view>

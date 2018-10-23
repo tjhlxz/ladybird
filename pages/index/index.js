@@ -4,11 +4,12 @@ const app = getApp()
 
 Page({
   data: {
+    unreadNum: 0,
     items:{
       approve_forms_deal: [],
-      sub_forms_deal: []
+      sub_forms_deal: [],
     },
-    form_data: {}
+    form_data: {},
   },
   //事件处理函数
   myRequest: function(e) {
@@ -77,33 +78,63 @@ Page({
   },
   
   onLoad: function () {
+    var _this = this;
     if (!wx.getStorageSync('userInfo')) {
       wx.redirectTo({
         url: '../test/test',
       })
     }
-  },
-  onShow: function() {
-    var _this = this;
-    //用户登录了
+    //如果用户登录了
     if (wx.getStorageSync('user')) {
+
       var staff_id = wx.getStorageSync('user').staff_id;
-      
       wx.request({
         url: app.globalData.config + 'onload' + '?staff_id=' + staff_id,
         success(res) {
-          if(res.data.status == 200) {
+          if (res.data.status == 200) {
             _this.setData({ items: res.data.data });
-            
+
+            var a = _this.data.items.approve_forms_deal ? _this.data.items.approve_forms_deal : [];
+            var s = _this.data.items.sub_forms_deal ? _this.data.items.sub_forms_deal : [];
+            // _this.setData({ a: a, s: s });
+
+            //处理未读消息状态小红点
+            var unreadNum = a.length;
+            _this.setData({ unreadNum: unreadNum, a: a, s: s });
+
+            var arr = [];
+            var num = 0;
+            for (var d of _this.data.s) {
+              var name = d.form_flow_name.split(',');
+              s[num].name = name;
+              _this.setData({ s: s });
+              num++;
+            }
           }
-          var a = _this.data.items.approve_forms_deal ? _this.data.items.approve_forms_deal:[];
-          var s = _this.data.items.sub_forms_deal ? _this.data.items.sub_forms_deal:[];
-          _this.setData({a: a,s:s});
         }
       })
     }
-    // var data = wx.getStorageSync('data')
-    
+  },
+  onShow: function(options) {
+    var _this = this;
+    // console.log(options)
 
+    // var a = _this.data.items.approve_forms_deal ? _this.data.items.approve_forms_deal : [];
+    // var s = _this.data.items.sub_forms_deal ? _this.data.items.sub_forms_deal : [];
+    // _this.setData({ a: a, s: s });
+
+    //处理未读消息状态小红点
+    // var unreadNum = a.length;
+    // _this.setData({ unreadNum: unreadNum });
+
+    // var arr = [];
+    // var num = 0;
+    // for (var d of _this.data.s) {
+    //   var name = d.form_flow_name.split(',');
+    //   s[num].name = name;
+    //   _this.setData({ s: s });
+    //   num++;
+    // }
+    
   }
 })

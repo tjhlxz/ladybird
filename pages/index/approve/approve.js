@@ -1,6 +1,5 @@
-// pages/index/approve/approve.js
+var app = getApp();
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -39,6 +38,53 @@ Page({
     })
   },
 
+  showMore: function() {
+    var _this = this;
+    var staff_id = wx.getStorageSync('user').staff_id;
+    wx.showLoading({
+      title: '正在加载',
+    })
+    wx.request({
+      url: app.globalData.config + 'history' + '?staff_id=' + staff_id,
+      success(res) {
+        if(res.data.status == 200) {
+
+          var items = res.data.data.history_form;
+          var len = items.length;
+
+          for(var i = 0; i < len; i++) {
+            //处理数据中的from_status
+            items[i].form_status = '已审批'
+            _this.data.items.push(items[i]);
+
+          }
+          var data = _this.data.items;
+
+          _this.setData({items: data})
+
+
+
+
+
+
+
+          wx.hideLoading();
+          wx.showToast({
+            title: res.data.message,
+            duration: 1000
+          })
+
+
+
+
+
+
+
+        }
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -50,7 +96,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var _this = this;
+    var item = _this.data.items;
+    _this.setData({items: item})
   },
 
   /**

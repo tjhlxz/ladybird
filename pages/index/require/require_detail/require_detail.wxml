@@ -1,37 +1,3 @@
-<!-- <view class='container'>
-  <view class='main'>
-    <view class='staff'>
-      <view class='staff_name'>{{form.form_proposer_name}}的审批表</view>
-      <view class='staff_state'>{{form.form_status}}</view>
-    </view>
-    <view class='table'>
-      <view class='tr'>
-        <view class='td title'>所在学院</view>
-        <view class='td title'>申请人</view>
-        <view class='td title'>申请日期</view>
-        <view class='td title'>申请课程</view>
-        <view class='td title'>调整前</view>
-        <view class='td title'>调整后</view>
-      </view>
-      <view class='tr'>
-        <view class='td'>{{form.form_college}}</view>
-        <view class='td'>{{form.form_proposer_name}}</view>
-        <view class='td'>{{form.create_time}}</view>
-        <view class='td'>{{form.form_course}}</view>
-        <view class='td dd'>{{form.form_before_adjust}}</view>
-        <view class='td dd'>{{form.form_later_adjust}}</view>
-      </view>
-    </view>
-  </view>
-  <view class='footer'>
-    <view class='footer_contant table' wx:for='{{staff}}' wx:key=''>
-      <view class='form_name tr'>{{item.staff_name}}</view>
-      <view class='form_state tr'>{{item.staff_state}}</view>
-      <view class='form_date tr'>{{item.staff_update}}</view>
-    </view>
-  </view>
-</view> -->
-
 <view class="model_detail_container">
     <view class='model_detail_head'>
         <view class='head_title'>
@@ -68,14 +34,14 @@
                 <view class='model_column'>
                     <text class='college'>教研室</text>
                     <view class='right'>
-                        <text class='usrname_text'>?</text>
+                        <text class='usrname_text'>{{form.form_staff_room}}</text>
                     </view>
                 </view>
                 <view class='model_column'>
                     <text class='type'>申请类型</text>
                     <view class='right'>
-                        <view>?</view>
-                        <!-- <view>调串</view> -->
+                        <view wx:if="{{form.form_type===1}}">变更</view>
+                        <view wx:if="{{form.form_type===2}}">调串</view>
                     </view>
 
                 </view>
@@ -85,23 +51,22 @@
                     <text class="right">{{form.form_course}}</text>
                 </view>
 
-                <view class='model_column date'>
+                <view class='model_column date' wx:if="{{form.form_type===2}}" >
                     <text class='date'>调整课程时间</text>
                     <view class='date_text'>
                         <text class='date_before_text'>调整前</text>
                         <text class='date_after_text'>调整后</text>
                     </view>
-                    <view class="date_detail">
-                            <view class='date_before'>{{form.form_before_adjust}}</view>
+                    <view class="date_detail" wx:for='{{date}}' wx:for-index='index' wx:key=''>
+                            <view class='date_before'>{{date[index][0]}}</view>
                             <image class="change_ico" src='../../../../static/ico/change.png'></image>
-                            <view class='date_after'>{{form.form_later_adjust}}</view>
+                            <view class='date_after'>{{date[index][1]}}</view>
                     </view>
                 </view>
                 <view class='model_column'>
                     <text class='reason'>申请原因</text>
                     <view class="reason_input">
-                    <text>?
-                    </text>
+                    <text>{{form.form_reason}}</text>
                     </view>
                 </view>
             </form>

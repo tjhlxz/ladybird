@@ -5,7 +5,8 @@ Page({
      */
     data: {
       form: {},
-      staff: []
+      staff: [],
+      date: []
     },
 
     /**
@@ -15,14 +16,15 @@ Page({
       var _form = JSON.parse(options.form)
       var _this = this;
       _this.setData({ form: _form});
+      
       var data = _this.data.form;
 
       //审批状态做文字处理(0,1) => '审批完成'
       if(options.id == '1') {
         if (data.form_status == 0) {
-          data.form_status = '审批完成'
-        } else if (data.form_status == 1) {
           data.form_status = '审批中'
+        } else if (data.form_status == 1) {
+          data.form_status = '审批完成'
         } else {
           data.form_status = '审批失败'
         }
@@ -32,6 +34,8 @@ Page({
       var form_flow_num = data.form_flow.split(',');
       var form_flow_name = data.form_flow_name.split(',');
       var form_flow_update = data.update_time.split(',');
+
+     
 
       //找出所有审批成功的表单
       for(var i=1; i<data.form_flow_sign; i++) {
@@ -45,12 +49,25 @@ Page({
       for(;i<=form_flow_name.length;i++) {
         _this.data.staff.push({ staff_name: form_flow_name[i - 1], staff_state: '待审批', staff_update: form_flow_update[i - 1]});
       }
-      console.log(_this.data.form);
-      console.log(_this.data.staff);
+      
+      var date_before = _this.data.form.form_before_adjust.split(',');
+      var date_after = _this.data.form.form_later_adjust.split(',');
+      var date = [];
+
+      if(_this.data.form.form_type == 2) {
+        for (var i = 0; i < date_before.length; i++) {
+          var arr = [];
+          arr[0] = date_before[i];
+          arr[1] = date_after[i];
+          date.push(arr);
+        }
+      }
+
       //更新页面
       _this.setData({ 
         form: _this.data.form,
-        staff: _this.data.staff
+        staff: _this.data.staff,
+        date: date
        })
     },
 
