@@ -77,7 +77,6 @@
                     <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="-1" placeholder="请在此处填写申请原因"></textarea>
                 </view>
                 <button class='submit'  form-type='submit'>提交</button>
-                <button class='submit' catchtap='nosubmit'>提交</button>
             </form>
         </view>
     </view>
