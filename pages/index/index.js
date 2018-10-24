@@ -78,18 +78,19 @@ Page({
                 url: '../test/test',
             })
         }
-        this.setData({
-            first: 1,
-            ptzg: '0',
-            jyszr: '0',
-            jxyz: '0',
-            jwccz: '0',
-            jwk: '0',
-            pgzx: '0',
-            dd: '0'
-        })
+        
         //如果用户登录了
         if (wx.getStorageSync('user')) {
+            this.setData({
+                first: 1,
+                ptzg: '0',
+                jyszr: '0',
+                jxyz: '0',
+                jwccz: '0',
+                jwk: '0',
+                pgzx: '0',
+                dd: '0'
+            })
             //小仙女写的判断身份函数
             this.showlevel();
             //===================
