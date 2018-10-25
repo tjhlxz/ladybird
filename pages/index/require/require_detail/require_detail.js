@@ -26,13 +26,21 @@ Page({
 
      
 
+      console.log(data.form_status)
       //找出所有审批成功的表单
-      for(var i=1; i<data.form_flow_sign; i++) {
-        _this.data.staff.push({ staff_name: form_flow_name[i - 1], staff_state: '审批成功',staff_update:form_flow_update[i - 1]});
+      
+        for(var i=1; i<data.form_flow_sign; i++) {
+          _this.data.staff.push({ staff_name: form_flow_name[i - 1], staff_state: '审批成功',staff_update:form_flow_update[i - 1]});
       };
 
       //找出正在审批中的表单
+      if (data.form_status == '审批失败') {
+        if (i <= form_flow_name.length) { 
+          _this.data.staff.push({ staff_name: form_flow_name[i - 1], staff_state: '审批被拒绝', staff_update: form_flow_update[i - 1] }); i++ 
+          };
+      }else {
       if (i <= form_flow_name.length) { _this.data.staff.push({ staff_name: form_flow_name[i - 1], staff_state: '审批中', staff_update: form_flow_update[i - 1] });i++ };
+      }
 
       //剩下的只需要静态资源
       for(;i<=form_flow_name.length;i++) {
