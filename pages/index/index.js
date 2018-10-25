@@ -65,9 +65,8 @@ Page({
                 complete: function(res) {},
             })
         } else {
-            var form = JSON.stringify(e.currentTarget.dataset.form);
             wx.navigateTo({
-                url: './supervisor/supervisor?form=' + form,
+                url: './supervisor/supervisor?pgzx=' + this.data.pgzx + '&dd=' + this.data.dd,
             })
         }
     },
@@ -78,7 +77,7 @@ Page({
                 url: '../test/test',
             })
         }
-        
+
         //如果用户登录了
         if (wx.getStorageSync('user')) {
             this.setData({
@@ -125,11 +124,11 @@ Page({
                         var len = data.length ? data.length : 0;
                         for (var i = 0; i < len; i++) {
                             if (data[i].form_status == 0) {
-                                data[i].form_status = '审批中'
+                                data[i].form_status = '待审批'
                             } else if (data[i].form_status == 1) {
-                                data[i].form_status = '审批完成'
+                                data[i].form_status = '已同意'
                             } else {
-                                data[i].form_status = '审批失败'
+                                data[i].form_status = '已拒绝'
                             }
                         }
 
@@ -203,17 +202,28 @@ Page({
     onShow: function() {
         if (this.data.first === 0) {
             this.setData({
-                ptzg: '0',
-                jyszr: '0',
-                jxyz: '0',
-                jwccz: '0',
-                jwk: '0',
-                pgzx: '0',
-                dd: '0'
+                ptzg: '1',
+                jyszr: '1',
+                jxyz: '1',
+                jwccz: '1',
+                jwk: '1',
+                pgzx: '1',
+                dd: '1'
             })
-            if (wx.getStorageSync('user'))
+            if (wx.getStorageSync('user')) {
+                this.setData({
+                    first: 1,
+                    ptzg: '0',
+                    jyszr: '0',
+                    jxyz: '0',
+                    jwccz: '0',
+                    jwk: '0',
+                    pgzx: '0',
+                    dd: '0'
+                })
                 //小仙女写的判断身份函数
                 this.showlevel();
+            }
         } else {
             this.showlevel();
         }
@@ -254,11 +264,11 @@ Page({
                         var len = data.length ? data.length : 0;
                         for (var i = 0; i < len; i++) {
                             if (data[i].form_status == 0) {
-                                data[i].form_status = '审批中'
+                                data[i].form_status = '待审批'
                             } else if (data[i].form_status == 1) {
-                                data[i].form_status = '审批完成'
+                                data[i].form_status = '已同意'
                             } else {
-                                data[i].form_status = '审批失败'
+                                data[i].form_status = '已拒绝'
                             }
                         }
 
@@ -304,11 +314,11 @@ Page({
                         var len = data.length ? data.length : 0;
                         for (var i = 0; i < len; i++) {
                             if (data[i].form_status == 0) {
-                                data[i].form_status = '审批中'
+                                data[i].form_status = '待审批'
                             } else if (data[i].form_status == 1) {
-                                data[i].form_status = '审批完成'
+                                data[i].form_status = '已同意'
                             } else {
-                                data[i].form_status = '审批失败'
+                                data[i].form_status = '已拒绝'
                             }
                         }
 

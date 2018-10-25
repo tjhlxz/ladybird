@@ -12,7 +12,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options)
     var _this = this;
     var _form = JSON.parse(options.form);
     _this.setData({items: _form})
@@ -24,7 +23,7 @@ Page({
         data[i].form_status = '待审批'
       } else if (data[i].form_status == 1) {
         data[i].form_status = '已同意'
-      } else {
+      } else if(data[i].form_status==-1){
         data[i].form_status = '已拒绝'
       }
     }
@@ -57,9 +56,8 @@ Page({
 
           for(var i = 0; i < len; i++) {
             //处理数据中的from_status
-            items[i].form_status = '已审批'
+            items[i].form_status = '已同意';
             _this.data.items.push(items[i]);
-
           }
 
           var data = _this.data.items;

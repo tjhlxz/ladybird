@@ -1,18 +1,41 @@
-<view class='contant'>
-  <view class='table'>
-    <view class='tr title' data-num='{{}}'>
-      <view class='td'>审批表名称</view>
-      <view class='td'>发起时间</view>
-      <view class='td'>审批状态</view>
-    </view>
-
-    <block wx:for="{{items}}" wx:key=''>
-      <view class='tr' bindtap='myRequest' data-index='{{index}}' data-form='{{items}}'>
-        <view class='td'>{{item.form_proposer_name}}</view>
-        <view class='td'>{{item.create_time}}</view>
-        <view class='td'>{{item.form_status}}</view>
-      </view>
-    </block>
-
-  </view>
+<view class='table'>
+    <!-- <view class='title' data-num='{{}}'>
+        <view class='title_td'>审批表名称</view>
+        <view class='title_td'>发起时间</view>
+        <view class='title_td'>审批状态</view>
+    </view> -->
+    <view wx:if="{{items.length===0}}" class='empty'>
+        <image class='empty_ico' src='/static/ico/empty.png'></image>
+        <view class='empty_text'>暂无数据</view>
+    </view>
+    <view wx:else class='block'>
+        <block wx:for="{{items}}" wx:key=''>
+            <!-- <view class='tr' bindtap='myRequest' data-index='{{index}}' data-form='{{items}}'>
+                <view class='tr_tr'>
+                    <view class='tr_td'>课程表变更</view>
+                    <view class='tr_td'>{{item.create_time}}</view>
+                    <view class='tr_td time'>2018-10-25 10:10</view>
+                    <view wx:if="{{item.form_status==='待审批'}}" class='tr_td ing'>待审批</view>
+                    <view wx:if="{{item.form_status==='已同意'}}" class='tr_td ok'>已通过</view>
+                    <view wx:if="{{item.form_status==='已拒绝'}}" class='tr_td fail'>未通过</view>
+                </view>
+                <view class='xian'></view>
+            </view> -->
+            <view class='form_detail' bindtap='myRequest' data-index='{{index}}' data-form='{{items}}'>
+                <view class='left'>
+                    <view class='head'>
+                        <image class="model_icon" src='/static/ico/model.png'></image>
+                        <view class='title'>课程表变更审批表</view>
+                    </view>
+                <view class='time'>{{item.create_time}}</view>
+                </view>
+                <view class='right'>
+                <view wx:if="{{item.form_status==='待审批'}}" class='tr_td ing'>审批中</view>
+                <view wx:if="{{item.form_status==='已同意'}}" class='tr_td ok'><image src='/static/ico/ok.png'></image></view>
+                <view wx:if="{{item.form_status==='已拒绝'}}" class='tr_td fail'><image src='/static/ico/fail1.png'></image></view>
+                </view>
+            </view>
+        </block>
+    </view>
 </view>
+<view class='model' catchtap='modelUseTap'>添加申请</view>

@@ -8,13 +8,13 @@
     display: flex;
     align-items: center;
     width: 100%;
-    height: 300rpx;
+    height: 250rpx;
     flex-direction: column;
 }
 
 .header image {
-    width: 100rpx;
-    height: 100rpx;
+    width: 100%;
+
 }
 
 .title_header {
@@ -32,7 +32,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-bottom: 40rpx;
+    margin-bottom: 20rpx;
+    margin-top: 20rpx;
 }
 
 .nav_item {
@@ -45,6 +46,7 @@
 
 .main .nav .nav_item {
     margin: auto 64rpx;
+    padding-top: 40rpx;
 }
 
 .red_point_box {
@@ -89,14 +91,16 @@
     margin: 0 auto;
     border-bottom: 1rpx solid #ccc;
 }
-
+.first{
+    color: #0ab179;
+}
 .main .contant .contant_list {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-content: center;
-    font-size: 28rpx;
+    font-size: 32rpx;
 }
 
 .main .contant .contant_list .contant_name {

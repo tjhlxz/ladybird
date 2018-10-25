@@ -2,17 +2,12 @@
   <view class='table'>
     <view class='tr title'>
       <view class='td'>审批表名称</view>
-      <view class='td'>发起时间</view>
-      <view class='td'>审批状态</view>
+      <view class='td'>时间</view>
     </view>
 
-    <block wx:for="{{items}}">
-      <view class='tr'>
-        <view class='td'>{{item.name}}</view>
-        <view class='td'>{{item.date}}</view>
-        <view class='td'>{{item.state}}</view>
+      <view class='tr'  wx:for="{{form}}" wx:key="item" data-index='{{index}}' bindtap='detail_info'>
+        <view class='td'>课程表变更审批表</view>
+        <view class='td'>{{item.update_time}}</view>
       </view>
-    </block>
-
   </view>
 </view>

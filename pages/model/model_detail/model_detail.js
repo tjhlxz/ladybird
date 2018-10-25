@@ -144,7 +144,7 @@ Page({
         var data = e.detail.value;
         var identity_index = this.data.identity_index;
         var that=this;
-        if (this.data.storage_data[identity_index].staff_room === null) {
+        if (this.data.storage_data[identity_index].staff_room === "无") {
             wx.showToast({
                 title: '此身份不可提交',
                 image: '/static/ico/fail.png',

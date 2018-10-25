@@ -12,6 +12,7 @@
         "pages/test/test",
         "pages/index/require/require",
         "pages/index/supervisor/supervisor",
+        "pages/index/supervisor/supervisor_detail/supervisor_detail",
         "pages/user/help/help",
         "pages/user/about/about",
         "pages/user/updatepwd/updatepwd"
