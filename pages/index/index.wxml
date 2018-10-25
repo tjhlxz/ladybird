@@ -1,6 +1,6 @@
 <view class='main'>
     <view class='header'>
-        <!-- <image src='../../static/ico/logo1.jpg' mode='aspectFill'></image> -->
+        <!-- <image src='../../static/img/index_bg.jpg' mode='aspectFill'></image> -->
         <text class='title_header'>黑龙江科技大学审批系统</text>
     </view>
     <view class='nav'>
@@ -17,7 +17,7 @@
               </view>
                 <image src='../../static/ico/approve.png'></image>
             </view>
-            <view class='nav_item_text'>我审批的</view>
+            <view class='nav_item_text'>我的审批</view>
         </view>
 
         <view class='nav_item' wx:if="{{dd==='1'||pgzx==='1'}}" bindtap='demo' data-form='{{items}}'>
@@ -32,7 +32,7 @@
         <view class='title'>
             <view class='title_text'>当前审批进度</view>
         </view>
-        <view class='contant_list'>
+        <view class='contant_list first'>
             <view class='contant_name'>
                 <view class='contant_name_text'>审批表名称</view>
             </view>
@@ -42,11 +42,14 @@
             <view class='contant_date'>
               <view class='contant_date_text'>当前状态</view>
             </view>
+            <!-- <view class='contant_date'>
+              <view class='contant_date_text'>申请时间</view>
+            </view> -->
         </view>
 
         <view class='contant_list' wx:for='{{s}}' data-index='{{index}}' wx:key='' bindtap='detail' data-form='{{s}}'>
             <view class='contant_name'>
-                <view class='contant_name_text'>课程表变更审批表</view>
+                <view class='contant_name_text'>课程表变更表</view>
             </view>
             <view class='contant_people'>
                 <view class='contant_people_text'>{{item.name[item.form_flow_sign-1]}}</view>
@@ -54,6 +57,9 @@
             <view class='contant_date'>
               <view class='contant_date_text'>{{item.form_status}}</view>
             </view>
+            <!-- <view class='contant_date'>
+              <view class='contant_date_text'>{{item.create_time}}</view>
+            </view> -->
         </view>
     </view>
 </view>

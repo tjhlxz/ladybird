@@ -24,18 +24,18 @@
                     </view>
                 </view>
                 <view class='' wx:else>
-                <view class='model_column'>
-                    <text class='college'>所在学院</text>
-                    <view class='right'>
-                        <text class='usrname_text'>{{storage_data[0].college}}</text>
+                    <view class='model_column'>
+                        <text class='college'>所在学院</text>
+                        <view class='right'>
+                            <text class='usrname_text'>{{storage_data[0].college}}</text>
+                        </view>
                     </view>
-                </view>
-                <view class='model_column'>
-                    <text class='college'>教研室</text>
-                    <view class='right'>
-                        <text class='usrname_text'>{{storage_data[0].staff_room}}</text>
+                    <view class='model_column'>
+                        <text class='college'>教研室</text>
+                        <view class='right'>
+                            <text class='usrname_text'>{{storage_data[0].staff_room}}</text>
+                        </view>
                     </view>
-                </view>
                 </view>
                 <view class='model_column'>
                     <text class='type'>申请类型</text>
@@ -45,14 +45,19 @@
                             <text class='picker_value'>{{array[index]}}</text>
                         </picker>
                     </view>
-
                 </view>
-
                 <view class='model_column class_input'>
                     <text class='classname'>课程</text>
-                    <textarea name="classname" maxlength="80" placeholder='请在此处填写课程名'></textarea> 
+                    <textarea name="classname" maxlength="80" placeholder='请在此处填写课程名'></textarea>
                 </view>
-
+                <view wx:if="{{index==0}}" class='model_column'>
+                    <text class='teacher'>代课老师</text>
+                    <input name="right" placeholder='请在此处填写代课老师姓名'></input>
+                </view>
+                <view wx:if="{{index==1}}" class='model_column'>
+                    <text class='teacher'>代课老师</text>
+                    <input name="right" placeholder='请根据需要填写（非必需）'></input>
+                </view>
                 <view wx:if="{{index==1}}" class='model_column date'>
                     <text class='date'>调整课程时间</text>
                     <view class='date_text'>
@@ -76,7 +81,7 @@
                     <text class='reason'>申请原因</text>
                     <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因"></textarea>
                 </view>
-                <button class='submit'  form-type='submit'>提交</button>
+                <button class='submit' form-type='submit'>提交</button>
             </form>
         </view>
     </view>

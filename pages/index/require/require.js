@@ -17,6 +17,20 @@ Page({
       url: './require_detail/require_detail?form=' + form + '&id=2',
     })
   },
+    modelUseTap(event) {
+        if (!wx.getStorageSync('user')) {
+            wx.navigateTo({
+                url: '../login/login',
+                success: function (res) { },
+                fail: function (res) { },
+                complete: function (res) { },
+            })
+        } else {
+            wx.navigateTo({
+                url: '../../model/model_detail/model_detail',
+            })
+        }
+    },
   /**
    * 生命周期函数--监听页面加载
    */

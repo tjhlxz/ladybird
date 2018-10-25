@@ -3,7 +3,7 @@ App({
     globalData:{
         userInfo: null,
         openid: 0,
-        config:"http://www.flowhandsome.cn/ladybird/public/"
+        config:"https://www.flowhandsome.cn/ladybird/public/"
     },
   onLaunch: function () {
     if(wx.getStorageSync('user')) {

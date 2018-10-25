@@ -1,10 +1,11 @@
-// pages/index/supervisor/supervisor.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+      form:[],
     items: [{
       name: '课程表变更审批表',
       date: '2018-10-11',
@@ -20,7 +21,47 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+      var that=this;
+      if (options.pgzx === '1') {
+          wx.request({
+              url: app.globalData.config + "assessment_center",
+              success(res) {
+                  wx.showLoading({
+                      title: '正在加载',
+                      mask: true
+                  })
+                  if (res.data.status === 200) {
+                      wx.hideLoading();
+                      var form=[];
+                      for(var i=0;i<res.data.data.length;i++){
+                          form[i]=res.data.data[i];
+                      }
+                      that.setData({
+                          form:form
+                      })
+                  }
+                  else if (res.data.status === 400) {
+                      wx.showToast({
+                          title: res.data.msg,
+                      })
+                  }
+              }
+          })
+      }
+      else if (options.dd=== '1') {
+          wx.showToast({
+              title: '督导的请求没写呢',
+          })
+      }
+  },
+  detail_info(e){
+      var detail = JSON.stringify(this.data.form[e.currentTarget.dataset.index]);
+      wx.navigateTo({
+          url: './supervisor_detail/supervisor_detail?detail='+detail,
+          success: function(res) {},
+          fail: function(res) {},
+          complete: function(res) {},
+      })
   },
 
   /**
