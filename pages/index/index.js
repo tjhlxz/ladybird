@@ -116,9 +116,10 @@ Page({
                         for (var d of _this.data.s) {
                             var name = d.form_flow_name.split(',');
                             s[num].name = name;
-                            _this.data.s = s;
+                            s[num].name.push('无');
                             num++;
                         }
+                        _this.data.s = s;
 
                         var data = _this.data.s
                         var len = data.length ? data.length : 0;
