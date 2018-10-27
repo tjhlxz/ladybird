@@ -225,44 +225,41 @@ radio {
 .button{
     background-color: #fff;
 }
-
-.container {
-  width: 100%;
-  height: 100%;
-  font-size: 36rpx;
+.table{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30rpx;
+    padding-bottom: 20rpx;
+    font-size: 35rpx;
 }
-.container .table {
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-content: center;
+.form_name{
+    width: 25%;
 }
-.container .table .tr {
-  flex: 1;
+.form_state{
+    width: 160rpx;
 }
-.container .table .td {
-  flex: 1;
-  padding: 16rpx 0;
+.ok{
+    color: #0ab179;
 }
-.container .table .tr .dd {
-  font-size: 34rpx;
+.ing{
+    color:#1090ff;
 }
-.container .footer {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  background-color: #fff;
+.fail{
+    color: red;
 }
-.container .footer .form_name {
-  margin: 36rpx auto 30rpx 10rpx;
-  font-size: 34rpx;
+.form_refuse1{
+    color: red;
+    margin-top: 20rpx;
 }
-.container .footer .form_state {
-  margin: 36rpx auto 30rpx auto;
+.form_refuse_column{
+    border-top: 15rpx solid #f2f2f2;
 }
-.container .footer .form_date {
-  margin: 40rpx auto 34rpx auto;
-  font-size: 34rpx;
-  color: #B6B6B6;
+.form_attachment{
+    border-bottom: 1rpx solid #0ab179;
+    width: 100%;
+}
+.excel_icon{
+    width: 90rpx;
+    height: 90rpx;
+    margin-top: 30rpx;
 }

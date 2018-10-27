@@ -5,10 +5,11 @@
             <view>{{form.form_proposer_name}}的课程表变更审批表</view>
         </view>
         <view class='head_status'>
-            <view class='ing'>{{form.form_status}}</view>
+            <view wx:if="{{form.form_status==='待审批'}}" class='ing'>审批中</view>
+            <view wx:if="{{form.form_status==='已同意'}}" class='ok'>已通过</view>
+            <view wx:if="{{form.form_status==='已拒绝'}}" class='fail'>未通过</view>
         </view>
     </view>
-
     <view class='model_form_container'>
         <view class="form_border">
             <form class='model_detail_form' catchsubmit="formSubmit" catchreset="formReset">
@@ -30,7 +31,7 @@
                         <text class='usrname_text'>{{form.form_college}}</text>
                     </view>
                 </view>
-                
+
                 <view class='model_column'>
                     <text class='college'>教研室</text>
                     <view class='right'>
@@ -48,36 +49,56 @@
 
                 <view class='model_column class_input'>
                     <text class='classname'>课程</text>
-                    <view class="form_course">{{form.form_course}}</view> 
+                    <view class="form_course">{{form.form_course}}</view>
                 </view>
-
-                <view class='model_column date' wx:if="{{form.form_type===2}}" >
+                <view wx:if="{{form.form_teacher!==''}}" class='model_column'>
+                    <text class='reason'>代课老师</text>
+                    <view class="reason_input">
+                        {{form.form_teacher}}
+                    </view>
+                </view>
+                <view class='model_column date' wx:if="{{form.form_type===2}}">
                     <text class='date'>调整课程时间</text>
                     <view class='date_text'>
                         <text class='date_before_text'>调整前</text>
                         <text class='date_after_text'>调整后</text>
                     </view>
                     <view class="date_detail" wx:for='{{date}}' wx:for-index='index' wx:key=''>
-                            <view class='date_before'>{{date[index][0]}}</view>
-                            <image class="change_ico" src='../../../../static/ico/change.png'></image>
-                            <view class='date_after'>{{date[index][1]}}</view>
+                        <view class='date_before'>{{date[index][0]}}</view>
+                        <image class="change_ico" src='../../../../static/ico/change.png'></image>
+                        <view class='date_after'>{{date[index][1]}}</view>
                     </view>
                 </view>
                 <view class='model_column'>
                     <text class='reason'>申请原因</text>
                     <view class="reason_input">
-                    {{form.form_reason}}
+                        {{form.form_reason}}
                     </view>
                 </view>
             </form>
-            <view class='container'>
-              <view class='footer'>
-                <view class='footer_contant table' wx:for='{{staff}}' wx:key=''>
-                  <view class='form_name tr'>{{item.staff_name}}</view>
-                  <view class='form_state tr'>{{item.staff_state}}</view>
-                  <view class='form_date tr'>{{item.staff_update}}</view>
+            <view class='model_column last'>
+                <view class='liucheng'>审批流程</view>
+                <view class='footer_content table' wx:for='{{staff}}' wx:key=''>
+                    <view class='form_name'>{{item.staff_name}}</view>
+                    <view wx:if="{{item.staff_state==='审批成功'}}" class='form_state ok'>审批成功</view>
+                    <view wx:if="{{item.staff_state==='审批中'}}" class='form_state ing'>审批中</view>
+                    <view wx:if="{{item.staff_state==='审批被拒绝'}}" class='form_state fail'>未通过</view>
+                    <view wx:if="{{item.staff_state==='待审批'}}" class='form_state wait'>待审批</view>
+                    <view class='form_date tr'>{{item.staff_update}}</view>
                 </view>
-              </view>
+            </view>
+            <view wx:if="{{form.form_attachment!==null}}" class='model_column last form_refuse_column' >
+                <text class='reason'>附件</text>
+                <view catchtap='download'>
+                    <image src='/static/ico/excel.png' class='excel_icon'></image>
+                    <view>新课表.xls</view>
+                </view>
+            </view>
+            <view class='model_column last form_refuse_column' wx:if="{{form.form_status==='已拒绝'}}">
+                <text class='form_refuse'>未通过原因</text>
+                <view class="form_refuse1">
+                    {{form.form_refuse}}
+                </view>
             </view>
         </view>
     </view>

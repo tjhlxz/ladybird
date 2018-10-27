@@ -249,86 +249,79 @@ radio {
     padding-top: 50rpx;
 }
 
-.refuse_modal {
-    position: absolute;
-    margin-top: 30%;
-    margin-left: 4%;
-    width: 90%;
-    height: 650rpx;
-    background-color: #fff;
-    border-radius: 20rpx;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.form_refuse1 {
+    color: red;
 }
 
-.modal_reason {
-    margin-top: 20rpx;
-    border: 1rpx solid #f2f2f2;
-    width: 92%;
-    height: 460rpx;
-    border-radius: 20rpx;
+.form_refuse_column {
+    border-top: 15rpx solid #f2f2f2;
 }
 
-.modal_button {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 10rpx;
-}
-
-.overflow {
-    height: 100%;
-    width: 100%;
+/* 弹窗效果 */
+.true{
+    position: fixed;
     overflow: hidden;
 }
-
-.mask {
+.refuse_modal_mask {
     position: fixed;
     width: 100%;
     height: 100%;
     top: 0px;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.2);
     overflow: hidden;
 }
-
-.reason-input {
-    width: 100%;
-    height: 100%;
+.refuse_modal_container{
+    position: fixed;
+    width: 90%;
+    top: 20%;
+    left: 5%;
+    overflow: hidden;
+    border-radius: 20rpx;
+    background-color: #fff;
+    border: 1rpx solid #f2f2f2;
 }
-
-.modal_text {
-    margin-top: 20rpx;
-    font-size: 40rpx;
-    color: #0ab179;
-}
-.refuse_confirm{
+.refuse_modal_form{
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20rpx 20rpx;
 }
-.modal_button button {
-    height: 70rpx;
-    width: 160rpx;
-    font-size: 30rpx;
-    margin-left: 50rpx;
-    margin-right: 50rpx;
+.refuse_modal_text{
+    font-weight: 700;
+    color: #0ab179;
+    font-size: 38rpx;
+    margin-bottom: 10rpx;
 }
-
-.confirm {
+.refuse_modal_reason{
+    width: 96%;
+    padding: 10rpx 10rpx;
+    height: 100%;
+    border: 1rpx solid #f2f2f2;
+    border-radius: 20rpx;
+}
+.reason_input{
+    width: 100%;
+    height: 100%;
+}
+.refuse_modal_button{
+    display: flex;
+    width: 100%;
+}
+.refuse_modal_button button{
+    margin-top: 30rpx;
+    height: 80rpx;
+    width: 150rpx;
+    margin-left: 15%;
+    margin-right: 5%;
+    font-size: 36rpx;
+    line-height: 80rpx;
+    text-align: center;
+}
+.refuse_modal_confirm{
     background-color: #0ab179;
     color: #fff;
 }
-
-.refuse_modal {
-    width: 90%;
-    height: 650rpx;
-    overflow: hidden;
-    position: fixed;
-    top: 40%;
-    left: 0;
-    z-index: 1001;
-    background: #fafafa;
-    margin: -150px 50rpx 0 50rpx;
-    border-radius: 8px;
+.refuse_modal_cancel{
+    background-color: #fff;
+    color: #666;
 }

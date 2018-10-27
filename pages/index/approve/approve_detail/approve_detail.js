@@ -8,8 +8,8 @@ Page({
         form: {},
         date: [],
         user: {},
-        overflow:'',
-        refuse_modal: 0
+        overflow: '',
+        refuse_modal: 'false'
     },
     agree(e) {
         var _this = this;
@@ -97,8 +97,13 @@ Page({
                 mask: true
             })
         } else {
+            wx.showLoading({
+                title: '审批中',
+                mask: true,
+            })
             var _this = this;
             var form = _this.data.form;
+            var user_storage=wx.getStorageSync('user')
             wx.request({
                 url: app.globalData.config + "refuse",
                 method: "POST",
@@ -106,7 +111,8 @@ Page({
                     form_id: form.form_id,
                     refuse_reason: e.detail.value.reason_input,
                     form_sign: form.form_flow_sign,
-                    update_time: form.update_time
+                    update_time: form.update_time,
+                    to_userId: user_storage.staff_id
                 },
                 success(res) {
                     if (res.data.status === 200) {
@@ -138,18 +144,18 @@ Page({
                             }
                         }
                         //======================================
-                        setTimeout(function() {
+                        setTimeout(function () {
                             wx.hideLoading();
                             wx.showToast({
                                 title: res.data.message,
+                                mask:true
                             })
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 wx.navigateBack({})
                             }, 1000);
                         }, 1000)
                     } else if (res.data.status === 400) {
                         wx.hideLoading();
-
                         wx.showToast({
                             title: res.data.message,
                             mask: true
@@ -168,21 +174,26 @@ Page({
     },
     refuse(e) {
         this.setData({
-            refuse_modal: 1,
-            overflow:'overflow'
+            refuse_modal: 'true'
         })
     },
     cancle(e) {
         this.setData({
-            refuse_modal: 0,
-            overflow: ''
+            refuse_modal: 'false'
         })
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-
+        wx.showLoading({
+            title: '正在加载',
+            duration: 500,
+            mask: true
+        })
+        setTimeout(function(){
+            wx.hideLoading();
+        },1000)
         var user = wx.getStorageSync("user");
         var form = JSON.parse(options.form)
         this.setData({

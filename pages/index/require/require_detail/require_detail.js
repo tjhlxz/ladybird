@@ -8,7 +8,41 @@ Page({
       staff: [],
       date: []
     },
-
+    download(e){
+        wx.showLoading({
+            title: '正在打开',
+            mask:'true'
+        })
+        wx.downloadFile({
+            // 示例 url，并非真实存在
+            url: this.data.form.form_attachment,
+            success: function (res) {
+                wx.hideLoading();
+                const filePath = res.tempFilePath
+                wx.openDocument({
+                    filePath: filePath,
+                    success: function (res) {
+                    },
+                    fail:function(res){
+                        console.log("打开失败")
+                        wx.showToast({
+                            title: '文件打开失败',
+                            image: '/static/ico/fail.png',
+                            mask: true,
+                        })
+                    }
+                })
+            },
+            fail:function(res){
+                wx.hideLoading();
+                wx.showToast({
+                    title: '文件打开失败',
+                    image: '/static/ico/fail.png',
+                    mask: true,
+                })
+            }
+        })
+    },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -23,20 +57,16 @@ Page({
       var form_flow_num = data.form_flow.split(',');
       var form_flow_name = data.form_flow_name.split(',');
       var form_flow_update = data.update_time.split(',');
-
-     
-
-      console.log(data.form_status)
       //找出所有审批成功的表单
-      
         for(var i=1; i<data.form_flow_sign; i++) {
           _this.data.staff.push({ staff_name: form_flow_name[i - 1], staff_state: '审批成功',staff_update:form_flow_update[i - 1]});
       };
 
       //找出正在审批中的表单
-      if (data.form_status == '审批失败') {
+      if (data.form_status == '已拒绝') {
         if (i <= form_flow_name.length) { 
-          _this.data.staff.push({ staff_name: form_flow_name[i - 1], staff_state: '审批被拒绝', staff_update: form_flow_update[i - 1] }); i++ 
+          _this.data.staff.push({ staff_name: form_flow_name[i - 1], staff_state: '审批被拒绝', staff_update: form_flow_update[i - 1] }); 
+          i++ 
           };
       }else {
       if (i <= form_flow_name.length) { _this.data.staff.push({ staff_name: form_flow_name[i - 1], staff_state: '审批中', staff_update: form_flow_update[i - 1] });i++ };

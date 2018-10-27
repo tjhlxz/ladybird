@@ -84,6 +84,7 @@ Page({
     },
     //表单提交
     formSubmit(e) {
+        var identity_index = this.data.identity_index;
         //处理调整时间，拼接字符串
         var nums = this.data.nums;
         var multiArray = this.data.multiArray;
@@ -118,52 +119,54 @@ Page({
         var data = e.detail.value;
         //只有一种身份的情况下
         if (this.data.storage_data.length === 1) {
-            var level=this.data.storage_data[0].staff_level;
-            if (level === 2 || level === 3 || level === 4 || level === 5 || level === 6){
+            var level = this.data.storage_data[0].staff_level;
+            if (level === 2 || level === 3 || level === 4 || level === 5 || level === 6) {
                 wx.showToast({
                     title: '此身份不可提交',
                     image: '/static/ico/fail.png',
                     mask: true
                 })
-            }
-            else this.confirm(e);
+            } else this.confirm(e);
         }
         //有多种身份的时候
         else {
             //如果未选择身份
             if (data.staff_level === '') {
-                this.submitFail(e);
+                wx.showToast({
+                    title: '请选择申请身份',
+                    image: '/static/ico/zhuyi.png',
+                    mask: true
+                })
             }
             //如果选择了身份
             else {
-                this.confirm(e);
+                if (this.data.storage_data[identity_index].staff_room === "无") {
+                    wx.showToast({
+                        title: '此身份不可提交',
+                        image: '/static/ico/fail.png',
+                        mask: true
+                    })
+                } else this.confirm(e);
             }
         }
     },
     add_form_base(e) {
         var data = e.detail.value;
         var identity_index = this.data.identity_index;
-        var that=this;
-        if (this.data.storage_data[identity_index].staff_room === "无") {
-            wx.showToast({
-                title: '此身份不可提交',
-                image: '/static/ico/fail.png',
-                mask: true
-            })
-        } else {
-            wx.showModal({
-                title: '提交确认',
-                content: '提交后不可修改，确定要提交吗？',
-                mask: true,
-                confirmColor: '#0ab179',
-                success:function(res){
-                    if(res.confirm){
+        var that = this;
+        wx.showModal({
+            title: '提交确认',
+            content: '提交后不可修改，确定要提交吗？',
+            mask: true,
+            confirmColor: '#0ab179',
+            success: function(res) {
+                if (res.confirm) {
                     wx.showLoading({
                         title: '正在提交',
                         mask: true,
-                        success: function (res) { },
-                        fail: function (res) { },
-                        complete: function (res) { },
+                        success: function(res) {},
+                        fail: function(res) {},
+                        complete: function(res) {},
                     })
 
                     wx.request({
@@ -178,7 +181,8 @@ Page({
                             form_course: data.classname,
                             form_before_adjust: that.data.date_before,
                             form_later_adjust: that.data.date_after,
-                            form_reason: data.reason_input
+                            form_reason: data.reason_input,
+                            form_teacher: data.teacher
                         },
                         header: {
                             'content-type': 'application/x-www-form-urlencoded'
@@ -194,7 +198,7 @@ Page({
                                     url: app.globalData.config + "build?staff_id=" + that.data.storage_data[identity_index].staff_id + "&form_id=" + form_id + "&staff_level=" + that.data.storage_data[identity_index].staff_level + "&staff_room=" + that.data.storage_data[identity_index].staff_room + "&college=" + that.data.storage_data[identity_index].college,
                                     success(res) {
                                         if (res.data.status === 200) {
-                                            setTimeout(function () {
+                                            setTimeout(function() {
                                                 wx.hideLoading();
                                                 wx.showLoading({
                                                     title: res.data.message,
@@ -212,14 +216,14 @@ Page({
                                                     },
                                                     success(res) {
                                                         if (res.data.status === 200) {
-                                                            setTimeout(function () {
+                                                            setTimeout(function() {
                                                                 wx.hideLoading();
                                                                 wx.showToast({
                                                                     title: res.data.message,
                                                                     mask: true
                                                                 })
-                                                                setTimeout(function () {
-                                                                  wx.setStorageSync('lock', '1');
+                                                                setTimeout(function() {
+                                                                    wx.setStorageSync('lock', '1');
                                                                     wx.switchTab({
                                                                         url: '../../index/index',
                                                                     })
@@ -261,19 +265,20 @@ Page({
                             }
                         }
                     })
-                    }
                 }
-            })
-            
-                
-            
-        }
+            }
+        })
     },
     confirm(e) {
         var data = e.detail.value;
         //申请类型为空
         if (!data.type) {
-            this.submitFail(e);
+            wx.showToast({
+                title: '请选择申请类型',
+                image: '/static/ico/zhuyi.png',
+                duration: 1000,
+                mask: true,
+            })
         }
         //申请类型不为空
         else {
@@ -283,15 +288,31 @@ Page({
                     date_before: '',
                     date_after: ''
                 })
-               
-                //课程名和申请原因有空
-                if (data.classname == '' || data.reason_input == '') {
-                    this.submitFail(e);
-                }
-                //信息填写完整发起请求
-                else {
-                    
-                    this.add_form_base(e)
+                if (data.teacher == '') {
+                    wx.showToast({
+                        title: '请填写代课老师',
+                        image: '/static/ico/zhuyi.png',
+                        duration: 1000,
+                        mask: true,
+                    })
+                } else {
+                    if (data.classname == '') {
+                        wx.showToast({
+                            title: '请填写课程名',
+                            image: '/static/ico/zhuyi.png',
+                            duration: 1000,
+                            mask: true,
+                        })
+                    } else {
+                        if (data.reason_input == '') {
+                            wx.showToast({
+                                title: '请填写申请原因',
+                                image: '/static/ico/zhuyi.png',
+                                duration: 1000,
+                                mask: true,
+                            })
+                        } else this.add_form_base(e);
+                    }
                 }
             }
             //申请类型是调串
@@ -301,13 +322,31 @@ Page({
                 var patt1 = /undefined/;
                 var date1 = str.match(patt1);
                 var date2 = str1.match(patt1);
-                //填写信息不完整
-                if (data.classname == '' || data.reason_input == '' || date2 !== null || date1 !== null) {
-                    this.submitFail(e)
-                }
-                //填写信息完整
-                else {
-                    this.add_form_base(e)
+                if (data.classname == '') {
+                    wx.showToast({
+                        title: '请填写课程名',
+                        image: '/static/ico/zhuyi.png',
+                        duration: 1000,
+                        mask: true,
+                    })
+                } else {
+                    if (date2 !== null || date1 !== null) {
+                        wx.showToast({
+                            title: '请填写调整时间',
+                            image: '/static/ico/zhuyi.png',
+                            duration: 1000,
+                            mask: true,
+                        })
+                    } else {
+                        if (data.reason_input == '') {
+                            wx.showToast({
+                                title: '请填写申请原因',
+                                image: '/static/ico/zhuyi.png',
+                                duration: 1000,
+                                mask: true,
+                            })
+                        } else this.add_form_base(e);
+                    }
                 }
             }
         }

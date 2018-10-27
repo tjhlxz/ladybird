@@ -2,6 +2,7 @@ const app = getApp()
 
 Page({
     data: {
+        just_teacher: 1,
         unreadNum: 0,
         items: {
             approve_forms_deal: [],
@@ -18,6 +19,11 @@ Page({
         pgzx: '0',
         dd: '0',
         //上面是小仙女的代码不要乱动喔！
+    },
+    onPullDownRefresh(event) {
+        // wx.startPullDownRefresh();
+        this.onLoad();
+
     },
     //事件处理函数
     myRequest: function(e) {
@@ -54,6 +60,41 @@ Page({
         var form = JSON.stringify(e.currentTarget.dataset.form[index]);
         wx.navigateTo({
             url: './require/require_detail/require_detail?form=' + form + '&id=1',
+        })
+    },
+    detail1(e) {
+        var data = this.data.a;
+        console.log(data);
+        console.log("---------------------------")
+        var len = data.length;
+        for (var i = 0; i < len; i++) {
+            if (data[i].form_status == 0) {
+                data[i].form_status = '待审批'
+            } else if (data[i].form_status == 1) {
+                data[i].form_status = '已同意'
+            } else if (data[i].form_status == -1) {
+                data[i].form_status = '已拒绝'
+            }
+        }
+        this.setData({
+            a: data
+        })
+        var index = e.currentTarget.dataset.index;
+        var form_before = e.currentTarget.dataset.form[index]
+        switch (form_before.form_status) {
+            case 0:
+                form_before.form_status = '待审批'
+                break;
+            case 1:
+                form_before.form_status = '已同意'
+                break;
+            case -1:
+                form_before.form_status = '已拒绝'
+                break;
+        }
+        var form = JSON.stringify(form_before);
+        wx.navigateTo({
+            url: './approve/approve_detail/approve_detail?form=' + form,
         })
     },
     demo: function(e) {
@@ -101,6 +142,7 @@ Page({
                 url: app.globalData.config + 'onload' + '?staff_id=' + staff_id,
                 success(res) {
                     if (res.data.status == 200) {
+                        wx.stopPullDownRefresh();
                         _this.setData({
                             items: res.data.data
                         });
@@ -108,7 +150,6 @@ Page({
                         var s = res.data.data.sub_forms_deal ? _this.data.items.sub_forms_deal : [];
                         _this.data.s = s;
                         _this.data.a = a;
-
                         // 对数据进行处理
                         var arr = [];
                         var num = 0;
@@ -197,6 +238,11 @@ Page({
                     })
                     break;
             }
+        }
+        if (this.data.jyszr === '1' || this.data.jxyz === '1' || this.data.jwccz === '1' || this.data.jwk === '1') {
+            this.setData({
+                just_teacher: 0
+            })
         }
     },
     onShow: function() {
@@ -343,10 +389,10 @@ Page({
         var s = _this.data.s ? _this.data.s : [];
         var unreadNum = a.length;
 
-    _this.setData({
-      a: a,
-      s: s,
-      unreadNum: unreadNum
-    });
-  }
+        _this.setData({
+            a: a,
+            s: s,
+            unreadNum: unreadNum
+        });
+    }
 })

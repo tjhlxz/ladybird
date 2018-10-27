@@ -19,5 +19,10 @@
             <text class='list_text'>关于我们</text>
             <image class='nextstep' src='../../static/ico/nextstep.png'></image>
         </view>
+        <view class='list' catchtap='logout'>
+            <image class='list_icon' src='../../static/ico/addressbook.png'></image>
+            <text class='list_text'>注销账户</text>
+            <image class='nextstep' src='../../static/ico/nextstep.png'></image>
+        </view>
     </view>
 </view>

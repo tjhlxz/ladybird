@@ -1,4 +1,4 @@
-<view class="model_detail_container">
+<view class="model_detail_container {{refuse_modal}}">
     <view class='model_detail_head'>
         <view class='head_title'>
             <image src='/static/ico/model.png'></image>
@@ -70,23 +70,29 @@
                     {{form.form_reason}}
                 </view>
             </view>
+            <view class='model_column last form_refuse_column' wx:if="{{form.form_status==='已拒绝'}}">
+                <text class='form_refuse'>拒绝原因</text>
+                <view class="form_refuse1">
+                    {{form.form_refuse}}
+                </view>
+            </view>
             <view wx:if="{{form.form_status==='待审批'}}" class='button'>
                 <button class='submit' catchtap='agree'>同意</button>
                 <button class='refuse' catchtap='refuse'>拒绝</button>
             </view>
         </view>
     </view>
-    <view wx:if="{{refuse_modal===1}}" class='mask'></view>
-    <view wx:if="{{refuse_modal===1}}" class='refuse_modal'>
+    <view wx:if="{{refuse_modal==='true'}}" class='refuse_modal_mask'></view>
+    <view wx:if="{{refuse_modal==='true'}}" class='refuse_modal_container'>
         <form  bindsubmit="refuse_confirm">
-        <view  class='refuse_confirm'>
-            <view class='modal_text'>拒绝原因</view>
-            <view class='modal_reason'>
-                <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写拒绝原因"></textarea>
+        <view class="refuse_modal_form">
+            <view class='refuse_modal_text'>拒绝原因</view>
+            <view class='refuse_modal_reason'>
+                <textarea class="reason-input" name="reason_input" maxlength="255" placeholder="请在此处填写拒绝原因"></textarea>
             </view>
-            <view class='modal_button'>
-                <button bindtap='cancle'>取消</button>
-                <button class="confirm" form-type='submit'>确定</button>
+            <view class='refuse_modal_button'>
+                <button class="refuse_modal_cancle" bindtap='cancle'>取消</button>
+                <button class="refuse_modal_confirm" form-type='submit'>确定</button>
             </view>
             </view>
         </form>

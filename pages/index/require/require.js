@@ -34,7 +34,12 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+    onLoad: function (options) {
+        wx.showLoading({
+            title: '正在加载',
+            mask: "true"
+        })
+        
     var _this = this;
     var _form = JSON.parse(options.form);
     _this.setData({ items: _form })
@@ -51,7 +56,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+      setTimeout(function (res) {
+          wx.hideLoading();
+      }, 1000)
   },
 
   /**

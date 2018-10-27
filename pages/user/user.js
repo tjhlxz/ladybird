@@ -39,6 +39,27 @@ Page({
             url: 'help/help',
         })
     },
+    logout(event){
+        wx.showModal({
+            title: '注销',
+            content: '确定要注销当前账户吗？',
+            showCancel: 'true',
+            cancelText: '取消',
+            cancelColor: '#666',
+            confirmText: '确定',
+            confirmColor: '#0ab179',
+            success: function (res) {
+                if (res.confirm) {
+                    wx.clearStorageSync();
+                    wx.navigateTo({
+                        url: '../test/test',
+                    })
+                }
+            },
+            fail: function (res) { },
+            complete: function (res) { },
+        })
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
