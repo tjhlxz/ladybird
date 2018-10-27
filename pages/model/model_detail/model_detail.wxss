@@ -1,11 +1,12 @@
 @import "change-date-template/change-date-template.wxss";
-
+.first{
+    display: none;
+}
 .model_detail_container {
     display: flex;
     flex-direction: column;
     background-color: #f4f4f4;
 }
-
 text {
     color: #222;
 }
@@ -174,4 +175,49 @@ radio {
     font-size: 30rpx;
     margin-top: 30rpx;
     line-height: 40rpx;
+}
+
+
+/* 第一次填写申请，弹窗 */
+.first_request_mask{
+    position: fixed;
+    background-color: #fff;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.first_title{
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    font-size: 40rpx;
+    font-weight: 700;
+    color: #0ab179;
+}
+.first_detail{
+    padding: 0 30rpx;
+    color: #666;
+    margin-top: 20rpx;
+    font-size: 35rpx;
+}
+.first_button{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50rpx;
+    width: 100%;
+}
+.first_nofirst{
+    height: 100rpx;
+    color: #0ab179;
+    font-size: 35rpx;
+}
+
+.first_cancel{
+    margin-left: 350rpx;
+    margin-right: 80rpx;
+    height: 100rpx;
+    color: #666;
+    font-size: 35rpx;
 }

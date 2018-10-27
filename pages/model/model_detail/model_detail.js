@@ -4,6 +4,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        first_request:'',
         length: 0,
         nums: [],
         array: ['变更', '调串'],
@@ -361,10 +362,25 @@ Page({
     submitSuccess(e) {
         var data = e.detail.value;
     },
+    first_cancel(e){
+        this.setData({
+            first_request: 'nofirst'
+        })
+    },
+    nofirst(e){
+        this.setData({
+            first_request:'nofirst'
+        })
+        wx.setStorageSync('first_request', 'nofirst');
+    },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        var first_request=wx.getStorageSync('first_request');
+        this.setData({
+            first_request:first_request
+        })
         var staff_info = [];
         var staff_level = [];
         var storage_data = wx.getStorageSync("data");
@@ -425,7 +441,10 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-
+        var first_request = wx.getStorageSync('first_request');
+        this.setData({
+            first_request: first_request
+        })
     },
 
     /**

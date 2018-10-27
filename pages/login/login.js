@@ -38,7 +38,8 @@ Page({
                             staff_id: _this.data.username,
                             password: _this.data.password
                         });
-                        wx.setStorageSync('data', res.data.data)
+                        wx.setStorageSync('first_request', 'first');
+                        wx.setStorageSync('data', res.data.data);
                         wx.showModal({
                             title: res.data.message,
                             icon: 'none',
