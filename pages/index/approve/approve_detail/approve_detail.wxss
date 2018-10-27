@@ -261,6 +261,7 @@ radio {
 .true{
     position: fixed;
     overflow: hidden;
+    width: 100%;
 }
 .refuse_modal_mask {
     position: fixed;
