@@ -298,7 +298,7 @@ if(!_this.data.pgzx) {
                     break;
             }
         }
-        if (this.data.jyszr === '1' || this.data.jxyz === '1' || this.data.jwccz === '1' || this.data.jwk === '1' || this.data.pgzx === '1') {
+        if (this.data.jyszr === '1' || this.data.jxyz === '1' || this.data.jwccz === '1' || this.data.jwk === '1') {
             this.setData({
                 just_teacher: 0
             })
