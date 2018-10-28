@@ -5,7 +5,7 @@
             <view>{{detail.form_proposer_name}}的课程表变更审批表</view>
         </view>
         <view class='head_status'>
-            <view class='ing'>{{form.form_status}}</view>
+            <view class='ing'>{{detail.form_status}}</view>
         </view>
     </view>
 
@@ -68,6 +68,13 @@
                     <view class="reason_input">
                     {{detail.form_reason}}
                     </view>
+                </view>
+                <view wx:if="{{detail.form_attachment!==null}}" class='model_column last form_refuse_column' >
+                  <text class='reason'>附件</text>
+                  <view catchtap='download'>
+                      <image src='/static/ico/excel.png' class='excel_icon'></image>
+                      <view>新课表.xls</view>
+                  </view>
                 </view>
             </form>
         </view>

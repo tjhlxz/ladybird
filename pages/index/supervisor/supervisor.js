@@ -5,63 +5,37 @@ Page({
    * 页面的初始数据
    */
   data: {
-      form:[],
-    items: [{
-      name: '课程表变更审批表',
-      date: '2018-10-11',
-      state: '审批成功'
-    }, {
-      name: '课程表变更审批表',
-      date: '2018-10-16',
-      state: '审批中'
-    }]
+    items: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      var that=this;
-      if (options.pgzx === '1') {
-          wx.request({
-              url: app.globalData.config + "assessment_center",
-              success(res) {
-                  wx.showLoading({
-                      title: '正在加载',
-                      mask: true
-                  })
-                  if (res.data.status === 200) {
-                      wx.hideLoading();
-                      var form=[];
-                      for(var i=0;i<res.data.data.length;i++){
-                          form[i]=res.data.data[i];
-                      }
-                      that.setData({
-                          form:form
-                      })
-                  }
-                  else if (res.data.status === 400) {
-                      wx.showToast({
-                          title: res.data.msg,
-                      })
-                  }
-              }
-          })
-      }
-      else if (options.dd=== '1') {
-          wx.showToast({
-              title: '督导的请求没写呢',
-          })
-      }
+      var _this = this;
+      var items = JSON.parse(options.Form);
+      // console.log(items)
+      _this.setData({items: items});
+      
   },
-  detail_info(e){
-      var detail = JSON.stringify(this.data.form[e.currentTarget.dataset.index]);
-      wx.navigateTo({
-          url: './supervisor_detail/supervisor_detail?detail='+detail,
-          success: function(res) {},
-          fail: function(res) {},
-          complete: function(res) {},
+  detail(e){
+    var _this = this;
+    var form_id = _this.data.items[e.currentTarget.dataset.index].form_id;
+    var detail = JSON.stringify(_this.data.items[e.currentTarget.dataset.index]);
+    
+    if (_this.data.items[e.currentTarget.dataset.index].status == 1) {
+      wx.request({
+        url: app.globalData.config + 'edu_read_msg' + '?form_id=' + form_id,
+        success() {
+          //将这条表单置位已读
+          _this.data.items[e.currentTarget.dataset.index].status = 0;
+          getCurrentPages()[0].data.f[e.currentTarget.dataset.index].status = 0;
+        }
       })
+    }
+    wx.navigateTo({
+        url: './supervisor_detail/supervisor_detail?detail='+detail
+    })
   },
 
   /**
@@ -75,7 +49,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var _this = this;
+    var items = _this.data.items;
+    _this.setData({items: items})
   },
 
   /**

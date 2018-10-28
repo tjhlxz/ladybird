@@ -4,13 +4,13 @@
         <text class='title_header'>黑龙江科技大学审批系统</text>
     </view>
     <view class='nav'>
-        <view class='nav_item' wx:if="{{ptzg==='1'||jyszr==='1'}}" bindtap='myRequest' data-form='{{s}}'>
+        <view class='nav_item' wx:if="{{ptzg==='1'||jyszr==='1'||dd==='1'}}" bindtap='myRequest' data-form='{{s}}'>
             <view class='logo'>
                 <image src='../../static/ico/send.png'></image>
             </view>
             <view class='nav_item_text'>我的申请</view>
         </view>
-        <view class='nav_item shenpi' wx:if="{{jyszr==='1'||jxyz==='1'||jwccz==='1'||jwk==='1'}}" bindtap='myApproval' data-form='{{a}}'>
+        <view class='nav_item shenpi' wx:if="{{jyszr==='1'||jxyz==='1'||jwccz==='1'||jwk==='1'||dd==='1'}}" bindtap='myApproval' data-form='{{a}}'>
             <view class='logo'>
                 <view class='red_point_box'>
                     <view class='red_point' wx:if='{{unreadNum}}'>{{unreadNum}}</view>
@@ -20,8 +20,11 @@
             <view class='nav_item_text'>我的审批</view>
         </view>
 
-        <view class='nav_item' wx:if="{{dd==='1'||pgzx==='1'}}" bindtap='demo' data-form='{{items}}'>
+        <view class='nav_item' wx:if="{{dd==='1'}}" bindtap='demo' data-form='{{items}}'>
             <view class='logo'>
+              <view class='red_point_box'>
+                    <view class='red_point' wx:if='{{unreadForm}}'>{{unreadForm}}</view>
+                </view>
                 <image src='../../static/ico/supervise.png'></image>
             </view>
             <view class='nav_item_text'>变更通知</view>
@@ -40,9 +43,9 @@
                         <image class="model_icon" src='/static/ico/model.png'></image>
                         <view class='title'>课程表变更审批表</view>
                     </view>
-                    <view class='time'>当前审批人：{{item.name[item.form_flow_sign-1]}}</view>
+                    <view wx-if='{{!pgzx}}' class='time'>当前审批人：{{item.name[item.form_flow_sign-1]}}</view>
                 </view>
-                <view class='right'>
+                <view wx-if='{{!pgzx}}' class='right'>
                     <view wx:if="{{item.form_status==='待审批'}}" class='tr_td ing'>审批中</view>
                     <view wx:if="{{item.form_status==='已同意'}}" class='tr_td ok'>已通过</view>
                     <view wx:if="{{item.form_status==='已拒绝'}}" class='tr_td fail'>未通过</view>
@@ -58,10 +61,11 @@
     <view class='content' wx:else>
         <view class='xian'></view>
         <view class='content_top'>
-            <view class='content_title'>待审批</view>
+            <view wx:if="{{pgzx == 0}}" class='content_title'>待审批</view>
+            <view wx:else class='content_title'>督导消息</view>
         </view>
         <view wx:if="{{a.length!==0}}">
-            <view class='tr' wx:if="{{index<4}}" wx:for="{{a}}" wx:key="" bindtap='detail1' data-form='{{a}}' data-index='{{index}}'>
+            <view class='tr' wx:if="{{index<4 && pgzx == 0}}" wx:for="{{a}}" wx:key="" bindtap='detail1' data-form='{{a}}' data-index='{{index}}'>
                 <view class='left1'>
                     <view class='head1'>
                         <image class="model_icon1" src='/static/ico/model.png'></image>
@@ -73,7 +77,22 @@
                     <view class='tr_td1 ing'>待审批</view>
                 </view>
             </view>
-            <view class='more' wx:if="{{a.length>4}}">"我的审批"中查看更多</view>
+            <view class='tr' wx:if="{{pgzx == 1}}" wx:for="{{a}}" wx:key="" bindtap='detail1' data-form='{{a}}' data-index='{{index}}'>
+              <view class='left1'>
+                    <view class='head1'>
+                        <image class="model_icon1" src='/static/ico/model.png'></image>
+                        <view class='form_proposer_name'>所属督导：{{item.staff_name}}</view>
+                    </view>
+                    <view class='time1'>{{item.create_time}}</view>
+                </view>
+                <view class='right'>
+                    <view wx:if='{{item.status == 0}}' class='tr_td1 ok'>已读</view>
+                    <view wx:if='{{item.status == 1}}' class='tr_td1 ing'>未读</view>
+                    <view wx:if='{{item.status == -1}}' class='tr_td1 fail'>错误</view>
+                </view>
+            </view>
+            
+            <view class='more' wx:if="{{a.length>4 && pgzx == 0}}">"我的审批"中查看更多</view>
         </view>
         <view wx:else class='empty'>
             <image class='empty_ico' src='/static/ico/empty.png'></image>

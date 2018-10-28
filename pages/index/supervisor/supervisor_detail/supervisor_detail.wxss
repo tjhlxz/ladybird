@@ -266,3 +266,8 @@ radio {
   font-size: 34rpx;
   color: #B6B6B6;
 }
+.excel_icon{
+    width: 90rpx;
+    height: 90rpx;
+    margin-top: 30rpx;
+}

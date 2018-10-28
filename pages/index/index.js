@@ -4,6 +4,7 @@ Page({
     data: {
         just_teacher: 1,
         unreadNum: 0,
+        unreadForm: 0,
         items: {
             approve_forms_deal: [],
             sub_forms_deal: [],
@@ -20,11 +21,6 @@ Page({
         dd: '0',
         //上面是小仙女的代码不要乱动喔！
     },
-    onPullDownRefresh(event) {
-        // wx.startPullDownRefresh();
-        this.onLoad();
-
-    },
     //事件处理函数
     myRequest: function(e) {
         if (!wx.getStorageSync('user')) {
@@ -39,6 +35,7 @@ Page({
         }
     },
     myApproval: function(e) {
+      var _this = this;
         if (!wx.getStorageSync('user')) {
             wx.navigateTo({
                 url: '../login/login'
@@ -51,11 +48,12 @@ Page({
 
             var form = JSON.stringify(e.currentTarget.dataset.form);
             wx.navigateTo({
-                url: './approve/approve?form=' + form,
+                url: './approve/approve?form=' + form + '&jwk=' + _this.data.jwk,
             })
         }
     },
     detail: function(e) {
+        var _this = this;
         var index = e.currentTarget.dataset.index;
         var form = JSON.stringify(e.currentTarget.dataset.form[index]);
         wx.navigateTo({
@@ -63,19 +61,19 @@ Page({
         })
     },
     detail1(e) {
+        var _this = this;
         var data = this.data.a;
-        console.log(data);
-        console.log("---------------------------")
         var len = data.length;
-        for (var i = 0; i < len; i++) {
-            if (data[i].form_status == 0) {
-                data[i].form_status = '待审批'
-            } else if (data[i].form_status == 1) {
-                data[i].form_status = '已同意'
-            } else if (data[i].form_status == -1) {
-                data[i].form_status = '已拒绝'
-            }
-        }
+if(!_this.data.pgzx) {
+          for (var i = 0; i < len; i++) {
+              if (data[i].form_status == 0) {
+                  data[i].form_status = '待审批'
+              } else if (data[i].form_status == 1) {
+                  data[i].form_status = '已同意'
+              } else if (data[i].form_status == -1) {
+                  data[i].form_status = '已拒绝'
+              }
+          }
         this.setData({
             a: data
         })
@@ -94,10 +92,19 @@ Page({
         }
         var form = JSON.stringify(form_before);
         wx.navigateTo({
-            url: './approve/approve_detail/approve_detail?form=' + form,
+          url: './approve/approve_detail/approve_detail?form=' + form +'&jwk='+ _this.data.jwk
         })
+    }else {
+      var index = e.currentTarget.dataset.index;
+      var form_before = e.currentTarget.dataset.form[index];
+      var form = JSON.stringify(form_before);
+      wx.navigateTo({
+        url: './approve/approve_detail/approve_detail?form=' + form + '&pgzx=' + _this.data.pgzx
+  })
+      }
     },
     demo: function(e) {
+      var _this = this;
         if (!wx.getStorageSync('user')) {
             wx.navigateTo({
                 url: '../login/login',
@@ -105,9 +112,16 @@ Page({
                 fail: function(res) {},
                 complete: function(res) {},
             })
-        } else {
+        } 
+        if(_this.data.pgzx == 0) {
+          var Form = JSON.stringify(_this.data.f);
             wx.navigateTo({
-                url: './supervisor/supervisor?pgzx=' + this.data.pgzx + '&dd=' + this.data.dd,
+                url: './supervisor/supervisor?Form=' + Form,
+            })
+        } else {
+          var Form = _this.data._send;
+            wx.navigateTo({
+              url: './supervisor/supervisor?Send=' + Form + '&pgzx=' + _this.data.pgzx,
             })
         }
     },
@@ -117,6 +131,11 @@ Page({
             wx.redirectTo({
                 url: '../test/test',
             })
+        }
+        if (!wx.getStorageSync('user')) {
+          wx.redirectTo({
+            url: '../login/login'
+          })
         }
 
         //如果用户登录了
@@ -133,58 +152,79 @@ Page({
             })
             //小仙女写的判断身份函数
             this.showlevel();
-            //===================
+            //==================
             var staff_id = wx.getStorageSync('user').staff_id;
             wx.showLoading({
                 title: '正在加载',
             })
-            wx.request({
-                url: app.globalData.config + 'onload' + '?staff_id=' + staff_id,
+            if(_this.data.pgzx == '0') {
+              wx.request({
+                  url: app.globalData.config + 'onload' + '?staff_id=' + staff_id,
+                  success(res) {
+                      if (res.data.status == 200) {
+                          wx.stopPullDownRefresh();
+                          _this.setData({
+                              items: res.data.data
+                          });
+                          var a = res.data.data.approve_forms_deal ? _this.data.items.approve_forms_deal : [];
+                          var s = res.data.data.sub_forms_deal ? _this.data.items.sub_forms_deal : [];
+                          _this.data.s = s;
+                          _this.data.a = a;
+                          // 对数据进行处理
+                          var arr = [];
+                          var num = 0;
+                          for (var d of _this.data.s) {
+                              var name = d.form_flow_name.split(',');
+                              s[num].name = name;
+                              s[num].name.push('无');
+                              num++;
+                          }
+                          _this.data.s = s;
+
+                          var data = _this.data.s
+                          var len = data.length ? data.length : 0;
+                          for (var i = 0; i < len; i++) {
+                              if (data[i].form_status == 0) {
+                                  data[i].form_status = '待审批'
+                              } else if (data[i].form_status == 1) {
+                                  data[i].form_status = '已同意'
+                              } else {
+                                  data[i].form_status = '已拒绝'
+                              }
+                          }
+
+                          //处理未读消息状态小红点
+                          var unreadNum = _this.data.a.length ? _this.data.a.length : 0;
+                          _this.setData({
+                              unreadNum: unreadNum,
+                              a: a,
+                              s: data
+                          });
+
+                          wx.hideLoading();
+                      }
+                  }
+              })
+            }else {
+              wx.request({
+                url: app.globalData.config + 'edu_center_list',
                 success(res) {
-                    if (res.data.status == 200) {
-                        wx.stopPullDownRefresh();
-                        _this.setData({
-                            items: res.data.data
-                        });
-                        var a = res.data.data.approve_forms_deal ? _this.data.items.approve_forms_deal : [];
-                        var s = res.data.data.sub_forms_deal ? _this.data.items.sub_forms_deal : [];
-                        _this.data.s = s;
-                        _this.data.a = a;
-                        // 对数据进行处理
-                        var arr = [];
-                        var num = 0;
-                        for (var d of _this.data.s) {
-                            var name = d.form_flow_name.split(',');
-                            s[num].name = name;
-                            s[num].name.push('无');
-                            num++;
-                        }
-                        _this.data.s = s;
+                  // console.log(res.data.data);
+                  var _send = res.data.data.already_send;
+                  var no_send = res.data.data.no_send;
+                  var len = no_send.length;
+                  for(var no = 0;no<len;no++) {
+                    no_send[no].staff_name = '未定义';
+                    no_send[no].status = -1;
+                  }
 
-                        var data = _this.data.s
-                        var len = data.length ? data.length : 0;
-                        for (var i = 0; i < len; i++) {
-                            if (data[i].form_status == 0) {
-                                data[i].form_status = '待审批'
-                            } else if (data[i].form_status == 1) {
-                                data[i].form_status = '已同意'
-                            } else {
-                                data[i].form_status = '已拒绝'
-                            }
-                        }
-
-                        //处理未读消息状态小红点
-                        var unreadNum = _this.data.a.length ? _this.data.a.length : 0;
-                        _this.setData({
-                            unreadNum: unreadNum,
-                            a: a,
-                            s: data
-                        });
-
-                        wx.hideLoading();
-                    }
+                  var data = no_send.concat(_send);
+                  // console.log(data)
+                  _this.setData({a: data});
+                  wx.hideLoading();
                 }
-            })
+              })
+            }
         } else {
             this.setData({
                 ptzg: '1',
@@ -195,6 +235,25 @@ Page({
                 pgzx: '1',
                 dd: '1'
             })
+        }
+
+        if(_this.data.dd == '1') {
+          wx.request({
+            url: app.globalData.config + 'edu_stu_list' + '?edu_id=' + staff_id,
+            success(res) {
+              _this.data.f = res.data.data ? res.data.data : [];
+
+              //循环算出unreadForm值
+              var unreadform = 0;
+              var fLen = _this.data.f.length;
+              for(var num = 0; num < fLen; num++) {
+                if(_this.data.f[num].status == 1) {
+                  unreadform++;
+                }
+              }
+              _this.setData({ unreadForm: unreadform})
+            }
+          })
         }
     },
     //下面是小仙女的代码，实现不同身份的渲染，不要乱动喔！
@@ -239,13 +298,24 @@ Page({
                     break;
             }
         }
-        if (this.data.jyszr === '1' || this.data.jxyz === '1' || this.data.jwccz === '1' || this.data.jwk === '1') {
+        if (this.data.jyszr === '1' || this.data.jxyz === '1' || this.data.jwccz === '1' || this.data.jwk === '1' || this.data.pgzx === '1') {
             this.setData({
                 just_teacher: 0
             })
         }
     },
     onShow: function() {
+      var _this = this;
+      if (!wx.getStorageSync('userInfo')) {
+        wx.redirectTo({
+          url: '../test/test',
+        })
+      }
+      if (!wx.getStorageSync('user')) {
+        wx.redirectTo({
+          url: '../login/login'
+        })
+      }
         if (this.data.first === 0) {
             this.setData({
                 ptzg: '1',
@@ -388,11 +458,35 @@ Page({
         var a = _this.data.a ? _this.data.a : [];
         var s = _this.data.s ? _this.data.s : [];
         var unreadNum = a.length;
+        
+        if (_this.data.dd == '1') {
+          wx.request({
+            url: app.globalData.config + 'edu_stu_list' + '?edu_id=' + staff_id,
+            success(res) {
+              _this.data.f = res.data.data ? res.data.data : [];
+
+              //循环算出unreadForm值
+              var unreadform = 0;
+              var fLen = _this.data.f.length;
+              for (var num = 0; num < fLen; num++) {
+                if (_this.data.f[num].status == 1) {
+                  unreadform++;
+                }
+              }
+              _this.setData({ unreadForm: unreadform })
+            }
+          })
+        }
+
 
         _this.setData({
             a: a,
             s: s,
             unreadNum: unreadNum
         });
-    }
+  },
+  onPullDownRefresh() {
+    this.onLoad();
+
+  },
 })

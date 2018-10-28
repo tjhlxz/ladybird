@@ -1,29 +1,122 @@
-.contant {
+.table {
   width: 100%;
   height: 100%;
-  font-size: 26rpx;
+  padding-bottom: 100rpx;
+  font-size: 35rpx;
 }
-
-.table {
-  border: 0px solid darkgray;
-  font-size: 26rpx;
-  width: 100%;
-  margin: 0 auto;
+.empty{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+.empty_ico{
+    margin-top: 50%;
+    width: 160rpx;
+    height: 160rpx;
+}
+.empty_text{
+    font-size: 35rpx;
+    margin-top: 40rpx;
+    color: #666;
+}
+.items-container{
+    position: relative;
+    padding-top:10rpx;
+    padding-bottom: 140rpx;
+}
+.red {
+  position: absolute;
+  width: 30rpx;
+  height: 30rpx;
+  font-size: 25rpx;
+  background-color: red;
+  color: #fff;
+  border-radius: 50%;
+  right: 0;
+  /* top: -25%; */
+  line-height: 40rpx;
 }
 .tr {
-  display: flex;
-  width: 100%;
-  justify-content: centers;
-  height: 2rem;
-  align-items: center;
+   display: flex;
+    height: 120rpx;
+    flex-direction: row;
+    background-color: #fff;
+    border-bottom:1rpx solid #f2f2f2;
 }
 .title {
   border-bottom: 1rpx solid #ccc;
 }
-.td {
-    flex: 1;
-    width:50%;
-    justify-content: center;
+.txt {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    font-size: 38rpx;
+    width: 100%;
+    height: 120rpx;
+    overflow: hidden;
+    background-color: #0ab179;
     text-align: center;
-    word-wrap: wrap;
+    line-height: 120rpx;
+    color: #fff;
+}
+.left{
+    width: 60%;
+    display: flex;
+    padding: 0rpx 30rpx 10rpx 30rpx;
+    flex-direction: column;
+}
+.right{
+    margin-left: 30rpx;    
+}
+.head{
+    display: flex;
+    flex-direction: row;
+    height: 70rpx;
+    line-height: 70rpx;
+    text-align: center;
+}
+.form_proposer_name{
+    margin-left: 38rpx;
+}
+.model_icon{
+    margin-top: 20rpx;
+    width: 85rpx;
+    height: 85rpx;
+}
+.model {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120rpx;
+    overflow: hidden;
+    background-color: #0ab179;
+    text-align: center;
+    line-height: 120rpx;
+    color: #fff;
+}
+.time{
+    margin-left: 120rpx;
+    font-size: 30rpx;
+    color: #666;
+}
+.tr_td{
+    width: 120rpx;
+    height: 120rpx;
+    line-height: 120rpx;
+    text-align: center;
+    font-size: 35rpx;
+}
+.ing {
+    color: #1090ff;
+}
+
+.ok {
+    color: #0ab179;
+}
+.fail {
+    color: red;
 }

@@ -9,6 +9,11 @@
             <view wx:if="{{form.form_status==='已同意'}}" class='ok'>{{form.form_status}}</view>
             <view wx:if="{{form.form_status==='已拒绝'}}" class='fail'>{{form.form_status}}</view>
         </view>
+        <view wx:if="{{pgzx}}" class='head_status'>
+          <view wx:if="{{form.status=='0'}}" class='ok'>已读</view>
+          <view wx:if="{{form.status=='1'}}" class='ing'>未读</view>
+          <view wx:if="{{form.status=='-1'}}" class='fail'>错误</view>
+        </view>
     </view>
     <view class='model_form_container'>
         <view class="form_border">
@@ -79,6 +84,9 @@
             <view wx:if="{{form.form_status==='待审批'}}" class='button'>
                 <button class='submit' catchtap='agree'>同意</button>
                 <button class='refuse' catchtap='refuse'>拒绝</button>
+            </view>
+            <view wx:if="{{pgzx == 1}}" class='button'>
+              <button wx:if="{{form.status == 1||form.status == 0}}" class='submit' open-type="share">分享</button>
             </view>
         </view>
     </view>

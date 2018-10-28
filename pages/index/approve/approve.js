@@ -14,8 +14,10 @@ Page({
     onLoad: function(options) {
         var _this = this;
         var _form = JSON.parse(options.form);
+        var jwk = options.jwk;
         _this.setData({
-            items: _form
+            items: _form,
+            jwk: jwk
         })
         var data = _this.data.items
 
@@ -35,11 +37,11 @@ Page({
 
     },
     detail: function(e) {
+        var _this = this;
         var index = e.currentTarget.dataset.index;
         var form = JSON.stringify(e.currentTarget.dataset.form[index]);
-        console.log(form);
         wx.navigateTo({
-            url: './approve_detail/approve_detail?form=' + form,
+            url: './approve_detail/approve_detail?form=' + form + '&jwk='+_this.data.jwk,
         })
     },
 

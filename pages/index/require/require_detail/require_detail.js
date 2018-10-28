@@ -47,6 +47,14 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+      wx.showLoading({
+        title: '正在加载',
+        duration: 500,
+        mask: true
+      })
+      setTimeout(function () {
+        wx.hideLoading();
+      }, 1000)
       var _form = JSON.parse(options.form)
       var _this = this;
       _this.setData({ form: _form});
@@ -70,11 +78,12 @@ Page({
           };
       }else {
       if (i <= form_flow_name.length) { _this.data.staff.push({ staff_name: form_flow_name[i - 1], staff_state: '审批中', staff_update: form_flow_update[i - 1] });i++ };
-      }
+      
 
       //剩下的只需要静态资源
       for(;i<=form_flow_name.length;i++) {
         _this.data.staff.push({ staff_name: form_flow_name[i - 1], staff_state: '待审批', staff_update: form_flow_update[i - 1]});
+      }
       }
       
       var date_before = _this.data.form.form_before_adjust.split(',');
@@ -91,7 +100,7 @@ Page({
       }
 
       //更新页面
-      _this.setData({ 
+      _this.setData({
         form: _this.data.form,
         staff: _this.data.staff,
         date: date

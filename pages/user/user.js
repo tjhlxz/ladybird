@@ -51,8 +51,8 @@ Page({
             success: function (res) {
                 if (res.confirm) {
                     wx.clearStorageSync();
-                    wx.navigateTo({
-                        url: '../test/test',
+                    wx.switchTab({
+                        url: '../index/index',
                     })
                 }
             },

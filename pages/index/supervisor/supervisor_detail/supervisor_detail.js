@@ -8,15 +8,65 @@ Page({
         detail: {},
         date: []
     },
-
+  download(e) {
+    var _this = this;
+    wx.showLoading({
+      title: '正在打开',
+      mask: 'true'
+    })
+    wx.downloadFile({
+      // 示例 url，并非真实存在
+      url: _this.data.detail.form_attachment,
+      success: function (res) {
+        wx.hideLoading();
+        const filePath = res.tempFilePath
+        wx.openDocument({
+          filePath: filePath,
+          success: function (res) {
+          },
+          fail: function (res) {
+            wx.showToast({
+              title: '文件打开失败',
+              image: '/static/ico/fail.png',
+              mask: true,
+            })
+          }
+        })
+      },
+      fail: function (res) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '文件打开失败',
+          image: '/static/ico/fail.png',
+          mask: true,
+        })
+      }
+    })
+  },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        var detail = JSON.parse(options.detail);
-        this.setData({
-            detail: detail
-        })
+      var _this = this;
+      var detail = JSON.parse(options.detail);
+      _this.setData({
+        detail: detail
+      })
+      var data = _this.data.detail
+
+      if (data.form_status == 0) {
+        data.form_status = '待审批'
+      } else if (data.form_status == 1) {
+        data.form_status = '已同意'
+      } else if (data.form_status == -1) {
+        data.form_status = '已拒绝'
+      }
+
+      _this.setData({
+        detail: data
+      })
+
+
         var date_before = [];
         var date_after = [];
         var date_before = detail.form_before_adjust.split(',');
@@ -30,7 +80,8 @@ Page({
         }
         this.setData({
             date: date,
-        })
+        });
+
     },
 
     /**

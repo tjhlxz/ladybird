@@ -19,7 +19,7 @@
     <view class='model_form_container'>
         <view class="form_border">
             <form class='model_detail_form' catchsubmit="formSubmit" catchreset="formReset">
-                <view class='model_column first'>
+                <view class='model_column'>
                     <text class='username'>申请人</text>
                     <view class='right'>
                         <text class='usrname_text'>{{storage_data[0].staff_name}}</text>
