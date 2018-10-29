@@ -180,8 +180,9 @@ Page({
                 }, 1000)
               } else {
                 wx.hideLoading();
-                wx.showToast({
-                  title: res.data.message,
+                wx.showModal({
+                  content: res.data.message,
+                  showCancel: false,
                   mask: true
                 })
               }

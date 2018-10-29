@@ -64,7 +64,7 @@ Page({
         var _this = this;
         var data = this.data.a;
         var len = data.length;
-if(!_this.data.pgzx) {
+if(_this.data.pgzx == 0) {
           for (var i = 0; i < len; i++) {
               if (data[i].form_status == 0) {
                   data[i].form_status = '待审批'
@@ -96,7 +96,18 @@ if(!_this.data.pgzx) {
         })
     }else {
       var index = e.currentTarget.dataset.index;
-      var form_before = e.currentTarget.dataset.form[index];
+      var form_before = e.currentTarget.dataset.form[index]
+      switch (form_before.form_status) {
+        case 0:
+          form_before.form_status = '待审批'
+          break;
+        case 1:
+          form_before.form_status = '已同意'
+          break;
+        case -1:
+          form_before.form_status = '已拒绝'
+          break;
+      }
       var form = JSON.stringify(form_before);
       wx.navigateTo({
         url: './approve/approve_detail/approve_detail?form=' + form + '&pgzx=' + _this.data.pgzx
@@ -298,7 +309,7 @@ if(!_this.data.pgzx) {
                     break;
             }
         }
-        if (this.data.jyszr === '1' || this.data.jxyz === '1' || this.data.jwccz === '1' || this.data.jwk === '1') {
+        if (this.data.jyszr === '1' || this.data.jxyz === '1' || this.data.jwccz === '1' || this.data.jwk === '1' || this.data.pgzx === '1') {
             this.setData({
                 just_teacher: 0
             })

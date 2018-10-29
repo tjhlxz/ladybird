@@ -4,7 +4,7 @@
             <image src='/static/ico/model.png'></image>
             <view>{{form.form_proposer_name}}的课程表变更审批表</view>
         </view>
-        <view class='head_status'>
+        <view class='head_status' wx:if="{{!pgzx}}">
             <view wx:if="{{form.form_status==='待审批'}}" class='ing'>{{form.form_status}}</view>
             <view wx:if="{{form.form_status==='已同意'}}" class='ok'>{{form.form_status}}</view>
             <view wx:if="{{form.form_status==='已拒绝'}}" class='fail'>{{form.form_status}}</view>

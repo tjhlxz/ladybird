@@ -43,9 +43,9 @@
                         <image class="model_icon" src='/static/ico/model.png'></image>
                         <view class='title'>课程表变更审批表</view>
                     </view>
-                    <view wx-if='{{!pgzx}}' class='time'>当前审批人：{{item.name[item.form_flow_sign-1]}}</view>
+                    <view class='time'>当前审批人：{{item.name[item.form_flow_sign-1]}}</view>
                 </view>
-                <view wx-if='{{!pgzx}}' class='right'>
+                <view class='right'>
                     <view wx:if="{{item.form_status==='待审批'}}" class='tr_td ing'>审批中</view>
                     <view wx:if="{{item.form_status==='已同意'}}" class='tr_td ok'>已通过</view>
                     <view wx:if="{{item.form_status==='已拒绝'}}" class='tr_td fail'>未通过</view>
