@@ -30,7 +30,7 @@ Page({
             },
             success(res) {
               if (res.data.status === 200) {
-
+                wx.setStorageSync('lock_a', '1');
                 //用户是从approve.js跳转过来的
                 if (getCurrentPages().length == 3) {
 
@@ -115,6 +115,7 @@ Page({
             url: app.globalData.config + "last_relayForChangeCourse" + '?form_id=' + form.form_id,
             success(res) {
               if (res.data.status === 200) {
+                wx.setStorageSync('lock_a', '1');
                 //用户是从approve.js跳转过来的
                 if (getCurrentPages().length == 3) {
 
@@ -206,7 +207,8 @@ Page({
             })
             var _this = this;
             var form = _this.data.form;
-            var user_storage=wx.getStorageSync('user')
+            var user_storage=wx.getStorageSync('user');
+            
             wx.request({
                 url: app.globalData.config + "refuse",
                 method: "POST",
@@ -215,11 +217,13 @@ Page({
                     refuse_reason: e.detail.value.reason_input,
                     form_sign: form.form_flow_sign,
                     update_time: form.update_time,
-                    to_userId: user_storage.staff_id
+                    to_userId: user_storage.staff_id,
+                    form_proposer_id: form.form_proposer_id,
+                    form_course: form.form_course
                 },
                 success(res) {
                     if (res.data.status === 200) {
-
+                      wx.setStorageSync('lock_a', '1');
                       //用户是从approve.js跳转过来的
                       if (getCurrentPages().length == 3) {
                         var last_page_data = [];

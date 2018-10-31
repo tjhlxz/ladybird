@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-      storage_userInfo:{}
+      storage_data:{}
   },
 
   /**
@@ -18,9 +18,9 @@ Page({
       })
     }
     
-      var storage_userInfo=wx.getStorageSync("userInfo");
+      var storage_data = wx.getStorageSync("data");
         this.setData({
-            storage_userInfo:storage_userInfo
+            storage_data:storage_data
         })
     
   },

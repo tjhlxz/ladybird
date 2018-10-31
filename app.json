@@ -9,7 +9,6 @@
         "pages/user/user",
         "pages/login/login",
         "pages/index/approve/approve_detail/approve_detail",
-        "pages/test/test",
         "pages/index/require/require",
         "pages/index/supervisor/supervisor",
         "pages/index/supervisor/supervisor_detail/supervisor_detail",
@@ -18,10 +17,11 @@
         "pages/user/updatepwd/updatepwd"
     ],
     "window": {
-        "backgroundTextStyle": "light",
+        "backgroundTextStyle": "dark",
         "navigationBarBackgroundColor": "#fff",
         "navigationBarTitleText": "校园审批系统",
-        "navigationBarTextStyle": "black"
+        "navigationBarTextStyle": "black",
+        "onReachBottomDistance": 50
     },
     "tabBar": {
         "list": [
