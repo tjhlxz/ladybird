@@ -1,9 +1,14 @@
 <view class='main'>
     <view class='header'>
         <!-- <image src='../../static/img/index_bg.jpg' mode='aspectFill'></image> -->
-        <text class='title_header'>黑龙江科技大学审批系统</text>
+        <text class='title_header'>教务掌上审批系统</text>
     </view>
     <view class='nav'>
+
+        <view class='nav_item' wx:if="{{pgzx==1}}">
+            <view style='border:0rpx solid #000;color:#0AB179;font-size: 50rpx;font-weight:bold;'>评估中心</view>
+        </view>
+
         <view class='nav_item' wx:if="{{ptzg==='1'||jyszr==='1'}}" bindtap='myRequest' data-form='{{s}}'>
             <view class='logo'>
                 <image src='../../static/ico/send.png'></image>

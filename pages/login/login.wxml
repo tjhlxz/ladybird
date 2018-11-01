@@ -5,11 +5,11 @@
   <view class='content'>
     <view class='username'>
       <label for='username' class='username_label'>教工号</label>
-      <input name='username' class='user_inp' bindinput='usernameInput'></input>
+      <input name='username' class='user_inp' bindinput='usernameInput' style='height: 80rpx'></input>
     </view>
     <view class='password'>
-      <label for='password' class='password_label'>密码</label>
-      <input name='password' class='pass_inp' bindinput='passwordInput'></input>
+      <label for='password' class='password_label' style='width: 100%'>密码</label>
+      <input type='password' name='password' class='pass_inp' bindinput='passwordInput' style='height: 80rpx'></input>
     </view>
     <button class='btn' bindtap='click'>登录</button>
   </view>

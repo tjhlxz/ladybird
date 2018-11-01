@@ -29,14 +29,19 @@ Page({
             })
         } else {
             var num = this.data.username;
+            var pas = this.data.password;
             //向服务器发送请求 由此用户则登录
+            wx.showLoading({
+              title: '正在登陆',
+              mask: true
+            }),
             wx.request({
-                url: app.globalData.config + "login?staff_id=" + num,
+                url: app.globalData.config + "login?staff_id=" + num + '&pwd=' + pas,
                 success(res) {
                     if (res.data.status == 200) {
+                      wx.hideLoading();
                         wx.setStorageSync('user', {
-                            staff_id: _this.data.username,
-                            password: _this.data.password
+                            staff_id: _this.data.username
                         });
                         wx.setStorageSync('first_request', 'first');
                         wx.setStorageSync('data', res.data.data);
