@@ -259,7 +259,20 @@ Page({
               });
 
               wx.hideLoading();
+            }else{
+                wx.hideLoading();
+                wx.showToast({
+                    title: res.data.message
+                })
             }
+          },
+          fail(){
+              wx.hideLoading();
+              wx.showToast({
+                  title: '网络中断',
+                  mask: true,
+                  image: '/static/ico/fail.png'
+              })
           }
         })
       } else {
@@ -277,7 +290,15 @@ Page({
             var data = no_send.concat(_send);
             _this.setData({ a: data });
             wx.hideLoading();
-          }
+          },
+          fail() {
+                wx.hideLoading();
+                wx.showToast({
+                    title: '网络中断',
+                    mask: true,
+                    image: '/static/ico/fail.png'
+                })
+            }
         })
       }
       if (_this.data.dd == '1') {
@@ -295,7 +316,15 @@ Page({
               }
             }
             _this.setData({ unreadForm: unreadform })
-          }
+          },
+            fail() {
+                wx.hideLoading();
+                wx.showToast({
+                    title: '网络中断',
+                    mask: true,
+                    image: '/static/ico/fail.png'
+                })
+            }
         })
       }
     } else {

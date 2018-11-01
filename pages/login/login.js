@@ -58,6 +58,14 @@ Page({
                             duration: 2000
                         })
                     }
+                },
+                fail() {
+                    wx.hideLoading();
+                    wx.showToast({
+                        title: '网络中断',
+                        mask: true,
+                        image: '/static/ico/fail.png'
+                    })
                 }
             })
         }
