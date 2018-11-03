@@ -9,7 +9,7 @@
 
 .person-container {
     margin-top: 50rpx;
-    margin-bottom: 50rpx;
+    margin-bottom: 100rpx;
     background-color: #fff;
     width: 100%;
     display: flex;
@@ -40,6 +40,7 @@
     padding-bottom:25rpx;
     display: flex;
     flex-direction: raw;
+    border-top: 1rpx solid #fafafa;
 }
 
 .list_icon {
@@ -62,4 +63,7 @@
     width: 45rpx;
     height: 45rpx;
     opacity: 0.7;
+}
+.last{
+    border-bottom: 1rpx solid #fafafa;
 }

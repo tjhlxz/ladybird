@@ -13,12 +13,75 @@ Page({
     date_before: "",
     date_after: "",
     identity_index: '',
+    storage_data_new:[],
     multiArray: [
       ['第1周', '第2周', '第3周', '第4周', '第5周', '第6周', '第7周', '第8周', '第9周', '第10周', '第11周', '第12周', '第13周', '第14周', '第15周', '第16周', '第17周', '第18周', '第19周', '第20周'],
       ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
       ['第1-2节', '第3-4节', '第5-6节', '第7-8节', '第9-10节']
     ]
   },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        var first_request = wx.getStorageSync('first_request');
+        this.setData({
+            first_request: first_request
+        })
+        var staff_info = [];
+        var staff_level = [];
+        var storage_data = wx.getStorageSync("data");
+        var storage_data_new = []
+        for (var i = 0; i < storage_data.length; i++) {
+            if (storage_data[i].staff_level === 0) {
+                storage_data_new.push(storage_data[i]);
+            }
+        }
+        for (var j = 0; j < storage_data_new.length; j++) {
+            switch (storage_data_new[j].staff_level) {
+                case 0:
+                    staff_level[j] = "普通职工";
+                    break;
+                case 1:
+                    staff_level[j] = "教研室主任";
+                    break;
+                case 2:
+                    staff_level[j] = "教学院长";
+                    break;
+                case 3:
+                    staff_level[j] = "教务处处长";
+                    break;
+                case 4:
+                    staff_level[j] = "教务科";
+                    break;
+                case 5:
+                    staff_level[j] = "评估中心";
+                    break;
+                case 6:
+                    staff_level[j] = "督导";
+                    break;
+            }
+        }
+        
+
+        for (var i = 0; i < storage_data_new.length; i++) {
+            staff_info[i] = storage_data_new[i].college + '-' + storage_data_new[i].staff_room + '-' + staff_level[i];
+        }
+        this.setData({
+            storage_data: storage_data,
+            staff_info: staff_info,
+            staff_level: staff_level,
+            storage_data_new: storage_data_new
+        })
+        console.log(this.data.storage_data_new);
+        console.log(this.data.staff_info)
+        if (storage_data.length === 1) {
+            this.setData({
+                identity_index: 0
+            })
+        }
+        this.addchange();
+    },
   bindPickerChange: function(event) {
     this.setData({
       index: event.detail.value
@@ -119,9 +182,9 @@ Page({
     }
     var data = e.detail.value;
     //只有一种身份的情况下
-    if (this.data.storage_data.length === 1) {
-      var level = this.data.storage_data[0].staff_level;
-      if (level === 2 || level === 3 || level === 4 || level === 5 || level === 6) {
+      if (this.data.storage_data.length === 1) {
+          var level = this.data.storage_data[0].staff_level;
+      if (level ===1||level === 2 || level === 3 || level === 4 || level === 5 || level === 6) {
         wx.showToast({
           title: '此身份不可提交',
           image: '/static/ico/fail.png',
@@ -131,24 +194,20 @@ Page({
     }
     //有多种身份的时候
     else {
-      //如果未选择身份
-      if (data.staff_level === '') {
-        wx.showToast({
-          title: '请选择申请身份',
-          image: '/static/ico/zhuyi.png',
-          mask: true
-        })
-      }
-      //如果选择了身份
-      else {
-        if (this.data.storage_data[identity_index].staff_room === "无") {
-          wx.showToast({
-            title: '此身份不可提交',
-            image: '/static/ico/fail.png',
-            mask: true
-          })
-        } else this.confirm(e);
-      }
+        //有效身份不止一个
+          if (this.data.storage_data_new.length > 1){
+              //如果未选择身份
+              if (data.staff_level === '') {
+                  wx.showToast({
+                      title: '请选择申请身份',
+                      image: '/static/ico/zhuyi.png',
+                      mask: true
+                  })
+              }
+              //如果选择了身份
+              else this.confirm(e);
+          }
+          else this.confirm(e);
     }
   },
   add_form_base(e) {
@@ -373,62 +432,7 @@ Page({
     })
     wx.setStorageSync('first_request', 'nofirst');
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-    var first_request = wx.getStorageSync('first_request');
-    this.setData({
-      first_request: first_request
-    })
-    var staff_info = [];
-    var staff_level = [];
-    var storage_data = wx.getStorageSync("data");
-    for (var j = 0; j < storage_data.length; j++) {
-      switch (storage_data[j].staff_level) {
-        case 0:
-          staff_level[j] = "普通职工";
-          break;
-        case 1:
-          staff_level[j] = "教研室主任";
-          break;
-        case 2:
-          staff_level[j] = "教学院长";
-          break;
-        case 3:
-          staff_level[j] = "教务处处长";
-          break;
-        case 4:
-          staff_level[j] = "教务科";
-          break;
-        case 5:
-          staff_level[j] = "评估中心";
-          break;
-        case 6:
-          staff_level[j] = "督导";
-          break;
-      }
-    }
-    for (var i = 0; i < storage_data.length; i++) {
-      if (storage_data[i].staff_level === 0 || storage_data[i].staff_level === 1) {
-        staff_info[i] = storage_data[i].college + '-' + storage_data[i].staff_room + '-' + staff_level[i];
-      } else if (storage_data[i].staff_level === 2) {
-        staff_info[i] = storage_data[i].college + '-' + staff_level[i]
-      } else
-        staff_info[i] = staff_level[i];
-    }
-    this.setData({
-      storage_data: storage_data,
-      staff_info: staff_info,
-      staff_level: staff_level
-    })
-    if (storage_data.length === 1) {
-      this.setData({
-        identity_index: 0
-      })
-    }
-    this.addchange();
-  },
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成

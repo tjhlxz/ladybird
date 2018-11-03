@@ -1,8 +1,8 @@
 <view class='container'>
     <view class='person-container'>
-        <!-- <image class='avatar' src='{{storage_userInfo.avatarUrl}}'></image> -->
-        <text class='username' style='margin-bottom: 40rpx; font-size:56rpx;font-weight: bold;'>{{storage_data[0].staff_name}}</text>
-        <text class='username' style='color: #666;'>{{storage_data[0].college}}</text>
+        <image class='avatar' src='/static/ico/logo1.jpg'></image>
+        <text class='username' style='margin-bottom: 20rpx; font-size:60rpx;color:#0ab179;font-weight:bold;'>教务掌上审批系统</text>
+        <!-- <text class='username' style='color: #0ab179;'>{{storage_data[0].college}}</text> -->
     </view> 
     <view class='list-container'>
         <view class='list' catchtap='updateTap'>
@@ -20,7 +20,7 @@
             <text class='list_text'>关于我们</text>
             <image class='nextstep' src='../../static/ico/nextstep.png'></image>
         </view>
-        <view class='list' catchtap='logout'>
+        <view class='list last' catchtap='logout'>
             <image class='list_icon' src='../../static/ico/addressbook.png'></image>
             <text class='list_text'>注销账户</text>
             <image class='nextstep' src='../../static/ico/nextstep.png'></image>
