@@ -4,17 +4,9 @@
     align-items: center;
     font-size: 35rpx;
     font-family: Mricrosoft Yahei;
-    color: #222;
+    color: #444;
 }
-
-.list_container {
-    margin-left: 40rpx;
-    height: 110rpx;
-    display: flex;
-    flex-direction: row;
-}
-
-.name {
+.name { 
     margin-top: 30rpx;
     color: #0ab179;
     font-size: 55rpx;
@@ -24,39 +16,51 @@ form {
     margin-top: 80rpx;
 }
 
-.title {
-    width: 200rpx;
-}
-
-input {
-    width: 450rpx;
-    padding-left: 20rpx;
-    font-size: 35rpx;
-    border-bottom: 2rpx solid #f2f2f2;
-}
-
-input:hover {
-    height: 30rpx;
-    width: 450rpx;
-    padding-left: 20rpx;
-    font-size: 35rpx;
-    border-bottom: 2rpx solid #0ab179;
-}
-
 button {
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 40rpx;
     background-color: #0ab179;
     color: #fff;
     border-radius: 0;
     margin-top: 40rpx;
+    width: 700rpx;
 }
 
 .desc {
-    margin-top: 0rpx;
+    margin-top: 150rpx;
     padding: 0 30rpx;
-    line-height: 20px;
+    line-height: 35rpx;
 }
 
 .desc text {
     font-size: 32rpx;
     color: #797676;
+}
+.list_container{
+    margin-left: 5%;
+    height: 40rpx;
+    width: 90%;
+    margin-bottom: 80rpx;
+    line-height: 40rpx;
+    font-size: 38rpx;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.title{
+    width: 200rpx;
+}
+input{
+    width: 400rpx;
+    border-bottom: 2rpx solid #f2f2f2;
+    text-align: left;
+    padding: 0 20rpx;
+}
+input:hover{
+    width: 400rpx;
+    border-bottom: 2rpx solid #0ab179;
+    text-align: left;
+    padding: 0 20rpx;
 }

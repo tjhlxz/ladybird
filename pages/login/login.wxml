@@ -4,13 +4,13 @@
     <view class='welcome'>欢迎您!</view>
   </view>
   <view class='content'>
-    <view class='username'>
-      <label for='username' class='username_label' >教工号：</label>
-      <input name='username' class='user_inp' placeholder="请输入教工号" bindinput='usernameInput'></input>
+    <view class='block'>
+      <label>教工号：</label>
+      <input name='username' placeholder="请输入教工号" bindinput='usernameInput'></input>
     </view>
-    <view class='password'>
-      <label for='password' class='password_label'>密   码：</label>
-      <input type='password' name='password' placeholder="请输入密码" class='pass_inp' bindinput='passwordInput'></input>
+    <view class='block'>
+      <label>密   码：</label>
+      <input type='password' name='password' placeholder="请输入密码" bindinput='passwordInput'></input>
     </view>
     <button class='btn' bindtap='click'>登录</button>
   </view>

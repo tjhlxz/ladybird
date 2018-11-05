@@ -1,6 +1,7 @@
 .wrapper {
   width: 100%;
   font-size: 38rpx;
+  padding-top: 30rpx;
 }
 .title {
   text-align: center;
@@ -19,84 +20,42 @@
     margin-top: 60rpx;
 }
 .content {
-  width: 80%;
+  width: 100%;
   margin:150rpx auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #444;
 }
-.content .username {
-  width: 90%;
-  height: 100rpx;
-  line-height: 100rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.block{
+    display: flex;
+    flex-direction: row;
+    width: 600rpx;
+    align-items: center;
+    margin-bottom: 100rpx;
 }
-.username_label{
-    width: 190rpx;
-}
-.content .user_inp {
-  border: 0px solid #000;
-  border-bottom: 1px solid #ccc;
-  padding:0 12rpx;
-}
-.user_inp:hover{
-    border-bottom: 1px solid #0ab179;
-}
-.content .password {
-  width: 90%;
-  height: 100rpx;
-  line-height: 100rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.password_label{
-    width: 190rpx;
-}
-.content .pass_inp {
-  border: 0px solid #000;
-  border-bottom: 1px solid #ccc;
-  padding:0 12rpx;
-}
-.pass_inp:hover{
-    border-bottom: 1px solid #0ab179;
-}
-.content .btn {
-  width: 100%;
-  height: 36px;
-  margin-top: 90px;
-  background-color: rgb(10,177,121);
-  color: #fff;
-  text-align: center;
-  line-height: 36px;
-  font-size: 16px;
-  font-weight: bold;
-}
-.footer {
-  width: 100%;
-  height: 60px;
-  margin: 30px auto;
-  text-align: center;
-}
-.footer .footer_label {
-  border: 1px solid #fff;
-  width: 80%;
-  height: 75rpx;
-  margin: 0 auto;
-  padding-top: 25rpx;
-  color: #444;
-  font-size: 12px;
-  font-weight: bold;
-  display: block;
-}
-.footer image {
-  width:54px;
-  height: 52px;
-  margin-top: 30px;
+label{
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+    width:170rpx;
+    font-size: 40rpx;
 }
 input{
-    width: 400rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: left;
+    padding: 0 10px;
+    width: 410rpx;
+    border-bottom: 1rpx solid #f2f2f2;
+    font-size: 35rpx;
+}
+input:hover{
+    border-bottom: 1px solid #0ab179;
+}
+button{
+    margin-top: 100rpx;
+    width: 600rpx;
+    color: #fff;
+    background-color: #0ab179;
 }

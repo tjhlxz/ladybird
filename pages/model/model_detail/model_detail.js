@@ -75,7 +75,7 @@ Page({
         })
         console.log(this.data.storage_data_new);
         console.log(this.data.staff_info)
-        if (storage_data.length === 1) {
+        if (storage_data_new.length === 1) {
             this.setData({
                 identity_index: 0
             })
@@ -148,72 +148,85 @@ Page({
   },
   //表单提交
   formSubmit(e) {
-    var identity_index = this.data.identity_index;
-    //处理调整时间，拼接字符串
-    var nums = this.data.nums;
-    var multiArray = this.data.multiArray;
-    this.setData({
-      date_before: '',
-      date_after: ''
-    });
-    for (var i = 0; i < nums.length; i++) {
-      var date_before;
-      var multiIndex = nums[i].multiIndex;
-      if (this.data.date_before === '') {
-        date_before = nums[i].multiArray[0][multiIndex[0]] + ' ' + nums[i].multiArray[1][multiIndex[1]] + ' ' + nums[i].multiArray[2][multiIndex[2]];
-      } else {
-        date_before = this.data.date_before + ',' + nums[i].multiArray[0][multiIndex[0]] + ' ' + nums[i].multiArray[1][multiIndex[1]] + ' ' + nums[i].multiArray[2][multiIndex[2]];
-      }
-      this.setData({
-        date_before: date_before
-      })
-    }
-    for (var i = 0; i < nums.length; i++) {
-      var date_after;
-      var multiIndex2 = nums[i].multiIndex2;
-      if (this.data.date_after === '') {
-        date_after = nums[i].multiArray[0][multiIndex2[0]] + ' ' + nums[i].multiArray[1][multiIndex2[1]] + ' ' + nums[i].multiArray[2][multiIndex2[2]];
-      } else {
-        date_after = this.data.date_after + ',' + nums[i].multiArray[0][multiIndex2[0]] + ' ' + nums[i].multiArray[1][multiIndex2[1]] + ' ' + nums[i].multiArray[2][multiIndex2[2]];
-      }
-      this.setData({
-        date_after: date_after
-      })
-    }
-    var data = e.detail.value;
-    //只有一种身份的情况下
-      if (this.data.storage_data.length === 1) {
-          var level = this.data.storage_data[0].staff_level;
-      if (level ===1||level === 2 || level === 3 || level === 4 || level === 5 || level === 6) {
-        wx.showToast({
-          title: '此身份不可提交',
-          image: '/static/ico/fail.png',
-          mask: true
-        })
-      } else this.confirm(e);
-    }
-    //有多种身份的时候
-    else {
-        //有效身份不止一个
-          if (this.data.storage_data_new.length > 1){
-              //如果未选择身份
-              if (data.staff_level === '') {
+      var data = e.detail.value;
+      var regRule = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g;
+      if (data.classname.match(regRule) || data.reason_input.match(regRule) || data.teacher.match(regRule)) {
+          wx.showToast({
+              title: '禁止输入表情',
+              image: '/static/ico/fail.png',
+              mask: true
+          })
+      }else{
+          var identity_index = this.data.identity_index;
+          //处理调整时间，拼接字符串
+          var nums = this.data.nums;
+          var multiArray = this.data.multiArray;
+          this.setData({
+              date_before: '',
+              date_after: ''
+          });
+          for (var i = 0; i < nums.length; i++) {
+              var date_before;
+              var multiIndex = nums[i].multiIndex;
+              if (this.data.date_before === '') {
+                  date_before = nums[i].multiArray[0][multiIndex[0]] + ' ' + nums[i].multiArray[1][multiIndex[1]] + ' ' + nums[i].multiArray[2][multiIndex[2]];
+              } else {
+                  date_before = this.data.date_before + ',' + nums[i].multiArray[0][multiIndex[0]] + ' ' + nums[i].multiArray[1][multiIndex[1]] + ' ' + nums[i].multiArray[2][multiIndex[2]];
+              }
+              this.setData({
+                  date_before: date_before
+              })
+          }
+          for (var i = 0; i < nums.length; i++) {
+              var date_after;
+              var multiIndex2 = nums[i].multiIndex2;
+              if (this.data.date_after === '') {
+                  date_after = nums[i].multiArray[0][multiIndex2[0]] + ' ' + nums[i].multiArray[1][multiIndex2[1]] + ' ' + nums[i].multiArray[2][multiIndex2[2]];
+              } else {
+                  date_after = this.data.date_after + ',' + nums[i].multiArray[0][multiIndex2[0]] + ' ' + nums[i].multiArray[1][multiIndex2[1]] + ' ' + nums[i].multiArray[2][multiIndex2[2]];
+              }
+              this.setData({
+                  date_after: date_after
+              })
+          }
+          var data = e.detail.value;
+          //只有一种身份的情况下
+          if (this.data.storage_data.length === 1) {
+              var level = this.data.storage_data[0].staff_level;
+              if (level === 1 || level === 2 || level === 3 || level === 4 || level === 5 || level === 6) {
                   wx.showToast({
-                      title: '请选择申请身份',
-                      image: '/static/ico/zhuyi.png',
+                      title: '此身份不可提交',
+                      image: '/static/ico/fail.png',
                       mask: true
                   })
+              } else this.confirm(e);
+          }
+          //有多种身份的时候
+          else {
+              //有效身份不止一个
+              if (this.data.storage_data_new.length > 1) {
+                  //如果未选择身份
+                  if (data.staff_level === '') {
+                      wx.showToast({
+                          title: '请选择申请身份',
+                          image: '/static/ico/zhuyi.png',
+                          mask: true
+                      })
+                  }
+                  //如果选择了身份
+                  else this.confirm(e);
               }
-              //如果选择了身份
               else this.confirm(e);
           }
-          else this.confirm(e);
-    }
+      }
+    
   },
   add_form_base(e) {
     var data = e.detail.value;
     var identity_index = this.data.identity_index;
     var that = this;
+      console.log(identity_index);
+      console.log(that.data.storage_data_new);
     wx.showModal({
       title: '提交确认',
       content: '提交后不可修改，确定要提交吗？',
@@ -233,10 +246,10 @@ Page({
             url: app.globalData.config + "add_form_base",
             method: "POST",
             data: {
-              form_proposer_id: that.data.storage_data[identity_index].staff_id,
-              form_proposer_name: that.data.storage_data[identity_index].staff_name,
-              form_college: that.data.storage_data[identity_index].college,
-              form_staff_room: that.data.storage_data[identity_index].staff_room,
+                form_proposer_id: that.data.storage_data_new[identity_index].staff_id,
+                form_proposer_name: that.data.storage_data_new[identity_index].staff_name,
+                form_college: that.data.storage_data_new[identity_index].college,
+                form_staff_room: that.data.storage_data_new[identity_index].staff_room,
               form_type: +data.type + 1,
               form_course: data.classname,
               form_before_adjust: that.data.date_before,
@@ -255,7 +268,7 @@ Page({
                   mask: true
                 })
                 wx.request({
-                  url: app.globalData.config + "build?staff_id=" + that.data.storage_data[identity_index].staff_id + "&form_id=" + form_id + "&staff_level=" + that.data.storage_data[identity_index].staff_level + "&staff_room=" + that.data.storage_data[identity_index].staff_room + "&college=" + that.data.storage_data[identity_index].college,
+                    url: app.globalData.config + "build?staff_id=" + that.data.storage_data_new[identity_index].staff_id + "&form_id=" + form_id + "&staff_level=" + that.data.storage_data_new[identity_index].staff_level + "&staff_room=" + that.data.storage_data_new[identity_index].staff_room + "&college=" + that.data.storage_data_new[identity_index].college,
                   success(res) {
                     if (res.data.status === 200) {
                       setTimeout(function() {
@@ -323,6 +336,13 @@ Page({
                   mask: true
                 })
               }
+            },
+            fail(res){
+                wx.showToast({
+                    title: '提交失败',
+                    image: '/static/ico/fail.png',
+                    mask: true
+                })
             }
           })
         }
@@ -348,14 +368,14 @@ Page({
           date_before: '',
           date_after: ''
         })
-        if (data.teacher == '') {
-          wx.showToast({
-            title: '请填写代课老师',
-            image: '/static/ico/zhuyi.png',
-            duration: 1000,
-            mask: true,
-          })
-        } else {
+        // if (data.teacher == '') {
+        //   wx.showToast({
+        //     title: '请填写代课老师',
+        //     image: '/static/ico/zhuyi.png',
+        //     duration: 1000,
+        //     mask: true,
+        //   })
+        // } else {
           if (data.classname == '') {
             wx.showToast({
               title: '请填写课程名',
@@ -374,7 +394,7 @@ Page({
             } else this.add_form_base(e);
           }
         }
-      }
+    //   }
       //申请类型是调串
       else {
         var str = this.data.date_before;

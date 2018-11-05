@@ -201,6 +201,14 @@ Page({
                 mask: true
             })
         } else {
+            var regRule = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g;
+            if (oldpwd.match(regRule) || newpwdagin.match(regRule) || newpwd.match(regRule)) {
+                wx.showToast({
+                    title: '禁止输入表情',
+                    image: '/static/ico/fail.png',
+                    mask: true
+                })
+            } else {
             wx.showLoading({
                 title: '审批中',
                 mask: true,
@@ -301,7 +309,7 @@ Page({
                     }
                 }
             })
-        }
+        }}
     },
     refuse(e) {
         this.setData({

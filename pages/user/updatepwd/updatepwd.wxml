@@ -1,7 +1,6 @@
 <view class='pwd_container'>
 <text class='name'>修改密码</text>
     <form catchsubmit="formSubmit">
-    
         <view class='list_container'>
             <text class='title'>原密码</text>
             <input placeholder="请输入原密码" auto-focus="true" name="oldpwd" password='true'></input>

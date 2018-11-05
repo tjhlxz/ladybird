@@ -20,6 +20,14 @@ Page({
         var oldpwd = detail.oldpwd;
         var newpwd = detail.newpwd;
         var newpwdagin = detail.newpwdagin;
+        var regRule = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g;
+        if (oldpwd.match(regRule) || newpwdagin.match(regRule) || newpwd.match(regRule)) {
+            wx.showToast({
+                title: '禁止输入表情',
+                image: '/static/ico/fail.png',
+                mask: true
+            })
+        } else{
         var re_n = /[^\d]/g;
         var re_t = /[^a-zA-z]/g;
         var n_result = re_n.test(newpwd);
@@ -104,6 +112,7 @@ Page({
                     })
                 }
             }
+        }
         }
     },
     /**

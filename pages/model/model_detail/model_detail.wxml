@@ -1,11 +1,12 @@
 <import src="change-date-template/change-date-template.wxml" />
 <view wx:if="{{first_request==='first'}}" class='first_request_mask'>
     <view class='first_title'>申请须知</view>
-    <view class="first_detail">1、申请表中，如仅有几次课的时间需调整，申请类型需选择"调串"选项；如因故需要调整整门课的上课时间或将课程转给其他老师，申请类型需选择"变更"选项。</view>
-    <view class="first_detail"> 2、申请类型为"变更"时必须填写代课老师姓名。申请类型为"调串"时，根据需求填写代课老师(非必填)。</view>
-    <view class="first_detail"> 3、除极特殊原因外，不可随意调串课。凡因公出差、因病者，该教学单位必须在同时间、同地点安排代课教师。</view>
-    <view class="first_detail">4、只能以普通职工身份提交申请。以下身份不能进行提交：教研室主任、教学院长、教务处处长、教务科、评估中心、督导。</view>
-    <view class="first_detail">5、若信息有误，请联系管理员。管理员电话：123456789</view>
+    <view class="first_detail">1、申请表中，如因故需要调整整门课，申请类型需选择"变更"选项，其余所有情况都选择"调串"选项。</view>
+    <view class="first_detail"> 2、申请类型为"调串"时，如果课程时间不变，'调整前'和'调整后'请选择相同时间（必填）。</view>
+    <view class="first_detail"> 3、代课老师根据需求填写(非必填)。</view>
+    <view class="first_detail"> 4、除极特殊原因外，不可随意调串课。</view>
+    <view class="first_detail">5、只能以普通职工身份提交申请。以下身份不能进行提交：教研室主任、教学院长、教务处处长、教务科、评估中心、督导。</view>
+    <view class="first_detail">6、若信息有误，请联系管理员。管理员电话：123456789</view>
     <view class='first_button'>
     <view class='first_cancel' catchtap='first_cancel'>取消</view>
     <view class="first_nofirst" catchtap='nofirst'>不再提示</view>
@@ -58,13 +59,13 @@
                         </picker>
                     </view>
                 </view>
-                <view class='model_column'>
-                    <text class='teacher'>代课老师</text>
-                    <input name="teacher" placeholder='请在此处填写代课老师姓名'></input>
-                </view>
                 <view class='model_column class_input'>
                     <text class='classname'>课程</text>
                     <textarea name="classname" maxlength="80" placeholder='请在此处填写课程名'></textarea>
+                </view>
+                <view class='model_column'>
+                    <text class='teacher'>代课老师</text>
+                    <input name="teacher" placeholder='请在此处填写代课老师姓名'></input>
                 </view>
                 <view wx:if="{{index==1}}" class='model_column date'>
                     <text class='date'>调整课程时间</text>
@@ -95,11 +96,11 @@
     </view>
     <view class='remarks_container'>
         <text class='remarks'>备注:</text>
-        <text class="remarks_detail">1、申请表中，如仅有几次课的时间需调整，申请类型需选择"调串"选项；如因故需要调整整门课的上课时间或将课程转给其他老师，申请类型需选择"变更"选项。</text>
-        <text class="remarks_detail">2、申请类型为"变更"时必须填写代课老师姓名。申请类型为"调串"时，根据需求填写代课老师(非必填)。</text>
-        <text class="remarks_detail"> 3、除极特殊原因外，不可随意调串课。凡因公出差、因病者，该教学单位必须在同时间、同地点安排代课教师。</text>
-        <text class="remarks_detail">4、只能以普通职工身份提交申请。以下身份不能进行提交：教研室主任、教学院长、教务处处长、教务科、评估中心、督导。</text>
-        <text class="remarks_detail">5、若信息有误，请联系管理员。电话：123456789
-        </text>
+        <text class="remarks_detail">1、申请表中，如因故需要调整整门课程，申请类型需选择"变更"选项，其余所有情况都选择"调串"。</text>
+        <text class="remarks_detail">2、申请类型为"调串"时，如果课程时间不变，'调整前'和'调整后'请选择相同时间（必填）。</text>
+        <text class="remarks_detail">3、代课老师根据需求填写(非必填)。</text>
+        <text class="remarks_detail"> 4、除极特殊原因外，不可随意调串课。</text>
+        <text class="remarks_detail"> 5、只能以普通职工身份提交申请。以下身份不能进行提交：教研室主任、教学院长、教务处处长、教务科、评估中心、督导。</text>
+        <text class="remarks_detail">6、若信息有误，请联系管理员。电话：123456789</text>
     </view>
 </view>
