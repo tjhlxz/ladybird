@@ -3,6 +3,18 @@
     height: 100%;
     color: #222;
 }
+.box {
+  width: 50%;
+  margin: 0 auto;
+}
+.xiala {
+  text-align: center;
+  width: 100%;
+  font-size: 34rpx;
+  color: #0AB179;
+  font-weight: bold;
+  font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 .empty{
     background-color: #fff;
     display: flex;

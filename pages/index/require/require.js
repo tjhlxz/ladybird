@@ -9,6 +9,8 @@ Page({
   },
 
   myRequest: function(e) {
+    
+    
     var index = e.currentTarget.dataset.index;
 
     var form = JSON.stringify(e.currentTarget.dataset.form[index]);
@@ -56,6 +58,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var a;
+    if (a = wx.getStorageSync('user')) {
+      //强制注销
+      wx.request({
+        url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
+        success(res) {
+          if (res.data.status == 400) {
+            wx.showModal({
+              content: res.data.message,
+              mask: true,
+              showCancel: false,
+              success: function (res) {
+                wx.clearStorageSync('user');
+                wx.redirectTo({
+                  url: '../login/login',
+                })
+              }
+            })
+          }
+        }
+      })
+    }
       setTimeout(function (res) {
           wx.hideLoading();
       }, 1000)

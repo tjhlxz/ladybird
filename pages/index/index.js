@@ -25,6 +25,28 @@ Page({
   },
   //事件处理函数
   myRequest: function (e) {
+    var a;
+    if (a = wx.getStorageSync('user')) {
+      //强制注销
+      wx.request({
+        url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
+        success(res) {
+          if (res.data.status == 400) {
+            wx.showModal({
+              content: res.data.message,
+              mask: true,
+              showCancel: false,
+              success: function (res) {
+                wx.clearStorageSync('user');
+                wx.redirectTo({
+                  url: '../login/login',
+                })
+              }
+            })
+          }
+        }
+      })
+    }
     if (!wx.getStorageSync('user')) {
       wx.navigateTo({
         url: '../login/login'
@@ -38,6 +60,28 @@ Page({
   },
   myApproval: function (e) {
     var _this = this;
+    var a;
+    if (a = wx.getStorageSync('user')) {
+      //强制注销
+      wx.request({
+        url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
+        success(res) {
+          if (res.data.status == 400) {
+            wx.showModal({
+              content: res.data.message,
+              mask: true,
+              showCancel: false,
+              success: function (res) {
+                wx.clearStorageSync('user');
+                wx.redirectTo({
+                  url: '../login/login',
+                })
+              }
+            })
+          }
+        }
+      })
+    }
     if (!wx.getStorageSync('user')) {
       wx.navigateTo({
         url: '../login/login'
@@ -56,6 +100,28 @@ Page({
   },
   detail: function (e) {
     var _this = this;
+    var a;
+    if (a = wx.getStorageSync('user')) {
+      //强制注销
+      wx.request({
+        url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
+        success(res) {
+          if (res.data.status == 400) {
+            wx.showModal({
+              content: res.data.message,
+              mask: true,
+              showCancel: false,
+              success: function (res) {
+                wx.clearStorageSync('user');
+                wx.redirectTo({
+                  url: '../login/login',
+                })
+              }
+            })
+          }
+        }
+      })
+    }
     var index = e.currentTarget.dataset.index;
     var form = JSON.stringify(e.currentTarget.dataset.form[index]);
     wx.navigateTo({
@@ -64,6 +130,28 @@ Page({
   },
   detail1(e) {
     var _this = this;
+    var a;
+    if (a = wx.getStorageSync('user')) {
+      //强制注销
+      wx.request({
+        url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
+        success(res) {
+          if (res.data.status == 400) {
+            wx.showModal({
+              content: res.data.message,
+              mask: true,
+              showCancel: false,
+              success: function (res) {
+                wx.clearStorageSync('user');
+                wx.redirectTo({
+                  url: '../login/login',
+                })
+              }
+            })
+          }
+        }
+      })
+    }
     var data = this.data.a;
     var len = data.length;
     if (_this.data.pgzx == 0) {
@@ -123,6 +211,28 @@ Page({
         url: '../login/login'
       })
     }
+    var a;
+    if (a = wx.getStorageSync('user')) {
+      //强制注销
+      wx.request({
+        url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
+        success(res) {
+          if (res.data.status == 400) {
+            wx.showModal({
+              content: res.data.message,
+              mask: true,
+              showCancel: false,
+              success: function (res) {
+                wx.clearStorageSync('user');
+                wx.redirectTo({
+                  url: '../login/login',
+                })
+              }
+            })
+          }
+        }
+      })
+    }
     if (_this.data.pgzx == 0) {
       var Form = JSON.stringify(_this.data.f);
       wx.navigateTo({
@@ -178,7 +288,8 @@ Page({
       })
     }
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    console.log(options);
     var _this = this;
 
     if (!wx.getStorageSync('user')) {
@@ -342,7 +453,8 @@ Page({
       })
     }
   },
-  onShow: function () {
+  onShow: function (options) {
+    console.log(options);
     var _this = this;
     if (!wx.getStorageSync('user')) {
       wx.redirectTo({
