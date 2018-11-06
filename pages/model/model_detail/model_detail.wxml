@@ -88,7 +88,7 @@
                 </view>
                 <view class='model_column last'>
                     <text class='reason'>申请原因</text>
-                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因"></textarea>
+                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因;如课程地点有改变，请在此处填写。"></textarea>
                 </view>
                 <button class='submit' form-type='submit'>提交</button>
             </form>

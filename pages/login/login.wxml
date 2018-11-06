@@ -5,11 +5,11 @@
   </view>
   <view class='content'>
     <view class='block'>
-      <label>教工号：</label>
+      <view class="label">教工号</view>
       <input name='username' placeholder="请输入教工号" bindinput='usernameInput'></input>
     </view>
     <view class='block'>
-      <label>密   码：</label>
+      <view class="label">密码</view>
       <input type='password' name='password' placeholder="请输入密码" bindinput='passwordInput'></input>
     </view>
     <button class='btn' bindtap='click'>登录</button>
