@@ -385,23 +385,27 @@ Page({
         title: '正在更新页面',
       })
       wx.request({
-        url: app.globalData.config + 'sub_forms' + '?staff_id=' + staff_id,
+        url: app.globalData.config + 'onload' + '?staff_id=' + staff_id,
         success(res) {
           if (res.data.status == 200) {
-
-            var s = res.data.data ? res.data.data : [];
-
+            wx.stopPullDownRefresh();
+            _this.setData({
+              items: res.data.data
+            });
+            var a = res.data.data.approve_forms_deal ? _this.data.items.approve_forms_deal : [];
+            var s = res.data.data.sub_forms_deal ? _this.data.items.sub_forms_deal : [];
             _this.data.s = s;
-
+            _this.data.a = a;
             // 对数据进行处理
             var arr = [];
             var num = 0;
             for (var d of _this.data.s) {
               var name = d.form_flow_name.split(',');
               s[num].name = name;
-              _this.data.s = s;
+              s[num].name.push('无');
               num++;
             }
+            _this.data.s = s;
 
             var data = _this.data.s
             var len = data.length ? data.length : 0;
@@ -418,12 +422,16 @@ Page({
             wx.removeStorage({
               key: 'lock',
               success: function (res) {
+                console.log('home')
+                //处理未读消息状态小红点
+                var a = _this.data.a;
                 var unreadNum = _this.data.a.length ? _this.data.a.length : 0;
-
                 _this.setData({
-                  s: s,
-                  unreadNum: unreadNum
+                  unreadNum: unreadNum,
+                  a: a,
+                  s: data
                 });
+
                 wx.hideLoading();
               },
             })
