@@ -23,7 +23,7 @@
                 <view class='model_column'>
                     <text class='username'>申请人</text>
                     <view class='right'>
-                        <text class='usrname_text'>{{storage_data[0].staff_name}}</text>
+                        <text class='usrname_text'>{{storage_data_new[0].staff_name}}</text>
                     </view>
                 </view>
                 <view class='model_column' wx:if="{{storage_data_new.length>1}}">
@@ -40,13 +40,13 @@
                     <view class='model_column'>
                         <text class='college'>所在学院</text>
                         <view class='right'>
-                            <text class='usrname_text'>{{storage_data[0].college}}</text>
+                            <text class='usrname_text'>{{storage_data_new[0].college}}</text>
                         </view>
                     </view>
                     <view class='model_column'>
                         <text class='college'>教研室</text>
                         <view class='right'>
-                            <text class='usrname_text'>{{storage_data[0].staff_room}}</text>
+                            <text class='usrname_text'>{{storage_data_new[0].staff_room}}</text>
                         </view>
                     </view>
                 </view>
