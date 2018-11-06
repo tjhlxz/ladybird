@@ -6,7 +6,8 @@
     font-family: Mricrosoft Yahei;
     color: #444;
 }
-.name { 
+
+.name {
     margin-top: 30rpx;
     color: #0ab179;
     font-size: 55rpx;
@@ -37,7 +38,8 @@ button {
     font-size: 32rpx;
     color: #797676;
 }
-.list_container{
+
+.list_container {
     margin-left: 5%;
     height: 40rpx;
     width: 90%;
@@ -49,18 +51,23 @@ button {
     flex-direction: row;
     align-items: center;
 }
-.title{
+
+.title {
     width: 200rpx;
 }
-input{
+
+input {
     width: 400rpx;
     border-bottom: 2rpx solid #f2f2f2;
     text-align: left;
-    padding: 0 20rpx;
+    padding: 0 5rpx;
+    margin-left: 15rpx;
 }
-input:hover{
+
+input:hover {
     width: 400rpx;
     border-bottom: 2rpx solid #0ab179;
     text-align: left;
-    padding: 0 20rpx;
+    padding: 0 5rpx;
+    margin-left: 15rpx;
 }

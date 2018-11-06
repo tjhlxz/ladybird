@@ -1,59 +1,69 @@
 .wrapper {
-  width: 100%;
-  font-size: 38rpx;
-  padding-top: 30rpx;
+    width: 100%;
+    font-size: 38rpx;
+    padding-top: 30rpx;
 }
+
 .title {
-  text-align: center;
-  margin: 36px 0;
-  
+    text-align: center;
+    margin: 36px 0;
 }
-.xitong{
+
+.xitong {
     font-size: 33px;
     font-weight: 700;
-    color: rgb(10,177,121);
+    color: rgb(10, 177, 121);
 }
-.welcome{
+
+.welcome {
     font-size: 40rpx;
     font-weight: bold;
     color: #0ab179;
     margin-top: 60rpx;
 }
+
 .content {
-  width: 100%;
-  margin:150rpx auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #444;
+    width: 100%;
+    margin: 150rpx auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #444;
 }
-.block{
+
+.block {
     display: flex;
     flex-direction: row;
     width: 600rpx;
     align-items: center;
     margin-bottom: 100rpx;
 }
-label{
+
+.label {
     height: 50rpx;
     line-height: 50rpx;
-    text-align: center;
-    width:170rpx;
+    text-align: justify;
+    text-align-last: justify;
+    width: 170rpx;
     font-size: 40rpx;
 }
-input{
+
+input {
     height: 50rpx;
     line-height: 50rpx;
     text-align: left;
-    padding: 0 10px;
+    padding: 0 5px;
+    margin-left: 20rpx;
     width: 410rpx;
     border-bottom: 1rpx solid #f2f2f2;
     font-size: 35rpx;
 }
-input:hover{
+
+input:hover {
     border-bottom: 1px solid #0ab179;
 }
-button{
+
+button {
     margin-top: 100rpx;
     width: 600rpx;
     color: #fff;
