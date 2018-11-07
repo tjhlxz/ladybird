@@ -1,3 +1,4 @@
+var app = getApp();
 // pages/model/model.js
 Page({
 

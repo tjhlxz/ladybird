@@ -1,3 +1,4 @@
+var app = getApp();
 // pages/index/supervisor/supervisor_detail/supervisor_detail.js
 Page({
 

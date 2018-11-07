@@ -1,3 +1,4 @@
+var app = getApp();
 // pages/index/require/require.js
 Page({
 
