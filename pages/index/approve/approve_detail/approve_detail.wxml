@@ -83,7 +83,7 @@
             </view>
             <view wx:if="{{form.form_status==='待审批'}}" class='button'>
                 <button class='submit' catchtap='agree'>同意</button>
-                <button class='refuse' catchtap='refuse'>拒绝</button>
+                <button wx:if="{{!jwk}}" class='refuse' catchtap='refuse'>拒绝</button>
             </view>
             <view wx:if="{{pgzx == 1}}" class='button'>
               <button wx:if="{{form.status == 1||form.status == 0}}" class='submit' open-type="share">分享</button>
