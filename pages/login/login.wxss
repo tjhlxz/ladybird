@@ -1,7 +1,7 @@
 .wrapper {
     width: 100%;
     font-size: 38rpx;
-    padding-top: 30rpx;
+    position: fixed;
 }
 
 .title {
@@ -64,8 +64,14 @@ input:hover {
 }
 
 button {
-    margin-top: 100rpx;
+    margin-top: 70rpx;
     width: 600rpx;
     color: #fff;
     background-color: #0ab179;
+}
+.copyright{
+    color:#999;
+    font-size:34rpx;
+    position: fixed;
+    bottom: 10%;
 }

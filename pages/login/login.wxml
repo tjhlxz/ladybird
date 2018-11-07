@@ -13,5 +13,7 @@
       <input type='password' name='password' placeholder="请输入密码" bindinput='passwordInput'></input>
     </view>
     <button class='btn' bindtap='click'>登录</button>
+    <view class="copyright">Copyright © 2018 黑龙江科技大学教务处</view>
   </view>
+  
 </view>
