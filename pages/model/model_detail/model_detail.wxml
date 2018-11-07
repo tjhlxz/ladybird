@@ -81,7 +81,7 @@
                         <text wx:if="{{length!==1}}" catchtap='deletechange'>删除</text>
                         <text wx:else catchtap='nodelete'>删除</text>
                         <view class='xian'></view>
-                        <text wx:if="{{length!==8}}" catchtap='addchange'>添加</text>
+                        <text wx:if="{{length!==4}}" catchtap='addchange'>添加</text>
                         <text wx:else form-type='submit' catchtap='noadd'>添加</text>
                     </view>
                     <!-- </form> -->
