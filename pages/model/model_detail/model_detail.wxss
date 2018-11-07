@@ -171,10 +171,18 @@ radio {
     
 }
 .remarks_detail{
+    padding: 0 20rpx;
     color: #666;
-    font-size: 30rpx;
+    font-size: 34rpx;
+    margin-top: 20rpx;
+    line-height: 44rpx;
+}
+.hahaha{
+    padding: 0;
+    color: #444;
     margin-top: 30rpx;
-    line-height: 40rpx;
+    font-size: 38rpx;
+    line-height: 48rpx;
 }
 
 
@@ -196,11 +204,27 @@ radio {
     font-weight: 700;
     color: #0ab179;
 }
+
 .first_detail{
-    padding: 0 30rpx;
+    padding: 0 5rpx 0 50rpx;
     color: #666;
-    margin-top: 20rpx;
+    margin-top: 10rpx;
     font-size: 35rpx;
+    display: flex;
+    flex-direction: row;
+    line-height: 44rpx;
+}
+.text{
+    line-height: 40rpx;
+    padding-right:60rpx;
+}
+.first1{
+    color: #444;
+    margin-top: 50rpx;
+    margin-bottom: 10rpx;
+    font-size: 36rpx;
+    padding:0 40rpx;
+    line-height: 48rpx;
 }
 .first_button{
     display: flex;

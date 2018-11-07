@@ -12,7 +12,7 @@ Page({
     download(e){
         wx.showLoading({
             title: '正在打开',
-            mask:'true'
+            mask:true
         })
         wx.downloadFile({
             // 示例 url，并非真实存在
