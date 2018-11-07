@@ -40,7 +40,7 @@ Page({
             var pas = this.data.password;
             //向服务器发送请求 由此用户则登录
             wx.showLoading({
-              title: '正在登陆',
+              title: '正在登录',
               mask: true
             }),
             wx.request({

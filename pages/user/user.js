@@ -44,7 +44,7 @@ Page({
         wx.showModal({
             title: '注销',
             content: '确定要注销当前账户吗？',
-            showCancel: 'true',
+            showCancel: true,
             cancelText: '取消',
             cancelColor: '#666',
             confirmText: '确定',
