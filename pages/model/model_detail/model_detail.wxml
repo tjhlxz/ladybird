@@ -1,12 +1,14 @@
 <import src="change-date-template/change-date-template.wxml" />
 <view wx:if="{{first_request==='first'}}" class='first_request_mask'>
     <view class='first_title'>申请须知</view>
-    <view class="first_detail">1、申请表中，如因故需要调整整门课，申请类型需选择"变更"选项，其余所有情况都选择"调串"选项。</view>
-    <view class="first_detail"> 2、申请类型为"调串"时，如果课程时间不变，'调整前'和'调整后'请选择相同时间（必填）。</view>
-    <view class="first_detail"> 3、代课老师根据需求填写(非必填)。</view>
-    <view class="first_detail"> 4、除极特殊原因外，不可随意调串课。</view>
-    <view class="first_detail">5、只能以普通职工身份提交申请。以下身份不能进行提交：教研室主任、教学院长、教务处处长、教务科、评估中心、督导。</view>
-    <view class="first_detail">6、若信息有误，请联系管理员。管理员电话：123456789</view>
+    <view class="first_detail first1">1.调串类型：调串申请时教师课表不会发生永久变化，此时无附件。</view>
+    <view class="first_detail">A、<view class="text">临时代课：调整前后时间保持不变填写，明确填写代课教师；</view></view>
+    <view class="first_detail">B、<view class="text">临时顺延：调整前后时间地点按二级学院教务科实际可行填写，代课教师可不填；</view></view>
+    <view class="first_detail">C、<view class="text">临时调串：若干次调串时间地点按二级学院教务科实际可行填写，代课教师可不填；</view></view>
+    <view class="first_detail first1">2.变更类型：变更申请时教师课表将永久变化，教务处教务科变更后新课表详见附件。</view>
+    <view class="first_detail">A、<view class="text">教师永久性变更：申请整门课程的任课教师永久性变更。</view></view>
+     <view class="first_detail">B、<view class="text">时间地点久性变更：申请整门课的上课时间地点永久性变更。</view></view>
+     <view class="first_detail first1">3.若教师个人信息有误，请联系二级学院教务科。</view>
     <view class='first_button'>
     <view class='first_cancel' catchtap='first_cancel'>取消</view>
     <view class="first_nofirst" catchtap='nofirst'>不再提示</view>
@@ -86,9 +88,13 @@
                     </view>
                     <!-- </form> -->
                 </view>
-                <view class='model_column last'>
-                    <text class='reason'>申请原因</text>
-                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因;如课程地点有改变，请在此处填写。"></textarea>
+                <view wx:if="{{index==0}}" class='model_column last'>
+                    <text class='reason'>申请原因及详情</text>
+                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因。（如课程时间、地点有变动，请在此处填写）"></textarea>
+                </view>
+                <view wx:if="{{index==1||index==null}}"class='model_column last'>
+                    <text class='reason'>申请原因及详情</text>
+                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因。（如课程地点有变动，请在此处填写）"></textarea>
                 </view>
                 <button class='submit' form-type='submit'>提交</button>
             </form>
@@ -96,11 +102,13 @@
     </view>
     <view class='remarks_container'>
         <text class='remarks'>备注:</text>
-        <text class="remarks_detail">1、申请表中，如因故需要调整整门课程，申请类型需选择"变更"选项，其余所有情况都选择"调串"。</text>
-        <text class="remarks_detail">2、申请类型为"调串"时，如果课程时间不变，'调整前'和'调整后'请选择相同时间（必填）。</text>
-        <text class="remarks_detail">3、代课老师根据需求填写(非必填)。</text>
-        <text class="remarks_detail"> 4、除极特殊原因外，不可随意调串课。</text>
-        <text class="remarks_detail"> 5、只能以普通职工身份提交申请。以下身份不能进行提交：教研室主任、教学院长、教务处处长、教务科、评估中心、督导。</text>
-        <text class="remarks_detail">6、若信息有误，请联系管理员。电话：123456789</text>
+        <text class="remarks_detail hahaha">1.调串类型：调串申请时教师课表不会发生永久变化，此时无附件。</text>
+        <text class="remarks_detail">A、临时代课：调整前后时间保持不变填写，明确填写代课教师；</text>
+        <text class="remarks_detail">B、临时顺延：调整前后时间地点按二级学院教务科实际可行填写，代课教师可不填；</text>
+        <text class="remarks_detail"> C、临时调串：若干次调串时间地点按二级学院教务科实际可行填写，代课教师可不填；</text>
+        <text class="remarks_detail hahaha"> 2.变更类型：变更申请时教师课表将永久变化，教务处教务科变更后新课表详见附件。</text>
+        <text class="remarks_detail">A、教师永久性变更：申请整门课程的任课教师永久性变更。</text>
+        <text class="remarks_detail">B、时间地点久性变更：申请整门课的上课时间地点永久性变更。</text>
+        <text class="remarks_detail hahaha">3.若教师个人信息有误，请联系二级学院教务科。</text>
     </view>
 </view>
