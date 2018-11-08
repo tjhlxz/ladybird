@@ -63,7 +63,7 @@
         </view>
     </view>
     <view class='content' wx:else>
-    <scroll-view wx:if='{{pgzx}}' scroll-y="true" bindscrolltolower="load" class='scroll-loading' style="height:{{windowHeight}}px;">
+    <scroll-view wx:if='{{pgzx}}' scroll-y="true" bindscrolltolower="load" class='scroll-loading' style="height:{{windowHeight/1.9}}px;">
         <view class='xian'></view>
         <view class='content_top'>
             <view wx:if="{{pgzx == 0}}" class='content_title'>待审批</view>

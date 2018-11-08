@@ -23,19 +23,26 @@ Page({
     click: function(e) {
         var _this = this;
         var regRule = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g;
-        if (this.data.username.match(regRule) || this.data.password.match(regRule)) {
-            wx.showToast({
-                title: '禁止输入表情',
-                image: '/static/ico/fail.png',
-                mask: true
-            })
-        } else {
         if (this.data.username == null) {
-            wx.showToast({
-                title: '教工号不能为空',
-                icon: 'none'
-            })
+          wx.showToast({
+            title: '教工号不能为空',
+            icon: 'none'
+        })
         } else {
+          if (this.data.password == null) {
+            wx.showToast({
+              title: '密码不能为空',
+              icon: 'none'
+            });
+            return false;
+          }
+          if (this.data.username.match(regRule) || this.data.password.match(regRule)) {
+            wx.showToast({
+              title: '禁止输入表情',
+              image: '/static/ico/fail.png',
+              mask: true
+            })
+          }
             var num = this.data.username;
             var pas = this.data.password;
             //向服务器发送请求 由此用户则登录
@@ -82,7 +89,7 @@ Page({
                 }
             })
         }
-        }
+        
     },
     // bindTap: function (e) {
     //   wx.navigateTo({
