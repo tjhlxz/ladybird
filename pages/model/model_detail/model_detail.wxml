@@ -7,7 +7,7 @@
     <view class="first_detail">C、<view class="text">临时调串：若干次调串时间地点按二级学院教务科实际可行填写，代课教师可不填；</view></view>
     <view class="first_detail first1">2.变更类型：变更申请时教师课表将永久变化，教务处教务科变更后新课表详见附件。</view>
     <view class="first_detail">A、<view class="text">教师永久性变更：申请整门课程的任课教师永久性变更。</view></view>
-     <view class="first_detail">B、<view class="text">时间地点久性变更：申请整门课的上课时间地点永久性变更。</view></view>
+     <view class="first_detail">B、<view class="text">时间地点永久性变更：申请整门课的上课时间地点永久性变更。</view></view>
      <view class="first_detail first1">3.若教师个人信息有误，请联系二级学院教务科。</view>
     <view class='first_button'>
     <view class='first_cancel' catchtap='first_cancel'>取消</view>
@@ -90,11 +90,11 @@
                 </view>
                 <view wx:if="{{index==0}}" class='model_column last'>
                     <text class='reason'>申请原因及详情</text>
-                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因。（如课程时间、地点有变动，请在此处填写）"></textarea>
+                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因。（如有课程时间、地点变动意向，请在此处说明）"></textarea>
                 </view>
                 <view wx:if="{{index==1||index==null}}"class='model_column last'>
                     <text class='reason'>申请原因及详情</text>
-                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因。（如课程地点有变动，请在此处填写）"></textarea>
+                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因。（如课程地点有变动，请务必在此处填写）"></textarea>
                 </view>
                 <button class='submit' form-type='submit'>提交</button>
             </form>
@@ -108,7 +108,7 @@
         <text class="remarks_detail"> C、临时调串：若干次调串时间地点按二级学院教务科实际可行填写，代课教师可不填；</text>
         <text class="remarks_detail hahaha"> 2.变更类型：变更申请时教师课表将永久变化，教务处教务科变更后新课表详见附件。</text>
         <text class="remarks_detail">A、教师永久性变更：申请整门课程的任课教师永久性变更。</text>
-        <text class="remarks_detail">B、时间地点久性变更：申请整门课的上课时间地点永久性变更。</text>
+        <text class="remarks_detail">B、时间地点永久性变更：申请整门课的上课时间地点永久性变更。</text>
         <text class="remarks_detail hahaha">3.若教师个人信息有误，请联系二级学院教务科。</text>
     </view>
 </view>

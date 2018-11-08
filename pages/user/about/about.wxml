@@ -1,2 +1,8 @@
 <!--pages/user/about/about.wxml-->
-<text>这里是关于我们</text>
+<view class='container'>
+<center><image src='/static/ico/logo2.png'></image></center>
+<text decode="{{true}}">
+    &nbsp;&nbsp;&nbsp;&nbsp;为提升教学运行办公效率与质量，黑龙江教务处为我校教师研发数字化审批服务系统：《移动版--教务掌上审批系统》服务于教师、督学、审批人、教务处教务科、评估中心，《Web版--教务审批后台管理系统》服务于教务处教务科、评估中心、教学单位教务科，欢迎使用。
+</text> 
+<center><view class='last'>研发团队：教务处、ladybird项目组</view></center>
+</view>
