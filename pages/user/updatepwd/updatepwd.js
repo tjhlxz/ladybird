@@ -38,10 +38,10 @@ Page({
                 content: '您输入的原密码不正确',
                 showCancel: false
             })
-        } else if (newpwd.length < 6 || newpwd.length > 16) {
+        } else if (newpwd.length < 6 || newpwd.length > 12) {
             wx.showModal({
                 title: '密码无效',
-                content: '密码由6-16个字符组成',
+                content: '密码由6-12个字符组成',
                 showCancel: false
             })
         } else {

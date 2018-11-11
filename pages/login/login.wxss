@@ -56,7 +56,7 @@ input {
     margin-left: 20rpx;
     width: 410rpx;
     border-bottom: 1rpx solid #f2f2f2;
-    font-size: 35rpx;
+    font-size: 30rpx;
 }
 
 input:hover {

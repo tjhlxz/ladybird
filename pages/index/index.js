@@ -289,7 +289,6 @@ Page({
     }
   },
   onLoad: function (options) {
-    console.log(options);
     var _this = this;
 
     if (!wx.getStorageSync('user')) {
@@ -308,7 +307,6 @@ Page({
           _this.setData({
             windowHeight: res.windowHeight
           });
-          console.log("屏幕高度: " + res.windowHeight)
         }
       }),
       this.setData({
@@ -454,7 +452,6 @@ Page({
     }
   },
   onShow: function (options) {
-    console.log(options);
     var _this = this;
     if (!wx.getStorageSync('user')) {
       wx.redirectTo({
@@ -558,7 +555,6 @@ Page({
             wx.removeStorage({
               key: 'lock',
               success: function (res) {
-                console.log('home')
                 //处理未读消息状态小红点
                 var a = _this.data.a;
                 var unreadNum = _this.data.a.length ? _this.data.a.length : 0;
@@ -619,7 +615,6 @@ Page({
               wx.removeStorage({
                 key: 'lock_a',
                 success: function (res) {
-                  console.log('home')
                   //处理未读消息状态小红点
                   var a = _this.data.a;
                   var unreadNum = _this.data.a.length ? _this.data.a.length : 0;
@@ -665,7 +660,6 @@ Page({
         url: app.globalData.config + 'edu_center_list' + '?page=' + _this.data.page,
         success: function (res) {
           if (res.data.status == '201') {
-            // console.log(res.data.data.already_send)
             var words = _this.data.a.concat(res.data.data.already_send);
             _this.setData({
               a: words
