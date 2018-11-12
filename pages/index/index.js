@@ -238,6 +238,10 @@ Page({
       wx.navigateTo({
         url: './supervisor/supervisor?Form=' + Form,
       })
+    } else {
+      wx.navigateTo({
+        url: './evaluate/evaluate'
+      })
     }
   },
   //下面是小仙女的代码，实现不同身份的渲染，不要乱动喔！
@@ -416,15 +420,8 @@ Page({
           url: app.globalData.config + 'edu_center_list?page=1',
           success(res) {
             var _send = res.data.data.already_send;
-            var no_send = res.data.data.no_send;
-            var len = no_send.length;
-            for (var no = 0; no < len; no++) {
-              no_send[no].staff_name = '未定义';
-              no_send[no].status = -1;
-            }
-
-            var data = no_send.concat(_send);
-            _this.setData({ a: data });
+            
+            _this.setData({ a: _send });
             wx.hideLoading();
           },
           fail() {
@@ -486,7 +483,7 @@ Page({
     // if(a=wx.getStorageSync('user')) {
     //   //强制注销
     //   wx.request({
-    //     url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
+    //     url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,1884648226
     //     success(res) {
     //       if (res.data.status == 400) {
     //         wx.showModal({
@@ -660,44 +657,5 @@ Page({
   },
   onPullDownRefresh: function() {
     this.onShow();
-  },
-
-  load: function () {
-    var _this = this;
-    if(_this.data.pgzx == 1){
-      _this.setData({
-        page: _this.data.page + 1
-      });
-      _this.loading();
-    }
-  },
-
-  loading: function () {
-    var _this = this;
-    if (_this.data.pgzx == 1) {
-      var staff_id = wx.getStorageSync('user').staff_id;
-      wx.request({
-        method: 'GET',
-        url: app.globalData.config + 'edu_center_list' + '?page=' + _this.data.page,
-        success: function (res) {
-          if (res.data.status == '201') {
-            var words = _this.data.a.concat(res.data.data.already_send);
-            _this.setData({
-              a: words
-            })
-            if(res.data.data.no_send) {
-            var words = _this.data.a.concat(res.data.data.no_send);
-            }
-            _this.setData({
-              a: words
-            })
-          } else if (res.data.status == '200') {
-            wx.showToast({
-              title: res.data.message,
-            })
-          }
-        }
-      });
-    }
-  },
+  }
 })

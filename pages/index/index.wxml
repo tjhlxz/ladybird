@@ -4,11 +4,6 @@
         <text class='title_header'>教务掌上审批系统</text>
     </view>
     <view class='nav'>
-
-        <view class='nav_item' wx:if="{{pgzx==1}}">
-            <view style='border:0rpx solid #000;color:#0AB179;font-size: 50rpx;font-weight:bold;'>评估中心</view>
-        </view>
-
         <view class='nav_item' wx:if="{{ptzg==='1'||jyszr==='1'}}" bindtap='myRequest' data-form='{{s}}'>
             <view class='logo'>
                 <image src='../../static/ico/send.png'></image>
@@ -25,14 +20,15 @@
             <view class='nav_item_text'>我的审批</view>
         </view>
 
-        <view class='nav_item' wx:if="{{dd=='1'}}" bindtap='demo' data-form='{{items}}'>
+        <view class='nav_item' wx:if="{{dd=='1'||pgzx=='1'}}" bindtap='demo' data-form='{{items}}'>
             <view class='logo'>
               <view class='red_point_box'>
                     <view class='red_point' wx:if='{{unreadForm}}'>{{unreadForm}}</view>
                 </view>
                 <image src='../../static/ico/supervise.png'></image>
             </view>
-            <view class='nav_item_text'>变更通知</view>
+            <view wx:if="{{dd==1}}" class='nav_item_text'>变更通知</view>
+            <view wx:if="{{pgzx==1}}" class='nav_item_text'>已读列表</view>
         </view>
     </view>
     <view class='content' wx:if="{{just_teacher}}">
@@ -82,7 +78,6 @@
                     <view class='tr_td1 ing'>待审批</view>
                 </view>
             </view>
-
 
             <view class='tr projectList' wx:if="{{pgzx == 1}}" wx:for="{{a}}" wx:key="" bindtap='detail1' data-form='{{a}}' data-index='{{index}}'>
               <view class='left1'>
