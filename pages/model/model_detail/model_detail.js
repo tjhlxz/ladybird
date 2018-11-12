@@ -1,9 +1,35 @@
 var app = getApp();
+var COS = require('../../../cos-wx-sdk-v5.js');
+var cos = new COS({
+  getAuthorization: function (params, callback) {	//获取签名
+    var authorization = COS.getAuthorization({
+      SecretId: 'AKIDIUSq8Fjzb2Im9QrTRNBqS0Nfp8e4Co9J',
+      SecretKey: '8A1iFbmYBg0vfEfv1v35wcKrDYlpjS0Q',
+      Method: params.Method,
+      Key: params.Key,
+    });
+    callback(authorization);
+  }
+});
+
+var requestCallback = function (err, data) {
+  if (err && err.error) {
+    wx.showModal({ title: '返回错误', content: '请求失败：' + err.error.Message + '；状态码：' + err.statusCode, showCancel: false });
+  } else if (err) {
+    wx.showModal({ title: '请求出错', content: '请求出错：' + err + '；状态码：' + err.statusCode, showCancel: false });
+  } else {
+    wx.showToast({ title: '上传成功', icon: 'success', duration: 1000 });
+  }
+};
+
 Page({
   /** 
    * 页面的初始数据
    */
   data: {
+    filepath:'',
+    list: [],
+    url: '',
     first_request: '',
     length: 0,
     nums: [],
@@ -19,6 +45,53 @@ Page({
       ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
       ['第1-2节', '第3-4节', '第5-6节', '第7-8节', '第9-10节']
     ]
+  },
+  deleteUpload: function() {
+    var that=this;
+    wx.showModal({
+      content: '是否要删除该附件',
+      success: function (res) {
+        if (res.confirm) {
+          that.setData({
+            filepath: ''
+          })
+        }
+        }
+    })
+  },
+  preView: function() {
+      var _this = this;
+      wx.previewImage({
+        urls: [_this.data.filepath],
+      })
+  },
+  
+  upload: function() {
+    var _this = this;
+    // 初始化实例
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        var filepath = res.tempFilePaths[0];
+        var et = filepath.split('.');
+        var et = et[et.length-1];
+        var timestamp = new Date().getTime();
+        var fileName ='upload' + timestamp;
+        _this.data.url = 'https://static.flowhandsome.cn/' + fileName + '.'+ et;
+        _this.setData({
+          filepath:filepath
+        })
+        // sdk提供的COS上传函数，如果想批量上传，在这里加FOR循环即可。
+        cos.postObject({
+          Bucket: app.globalData.Bucket,  // 存储桶
+          Region: app.globalData.Region,  // 地域
+          Key: fileName+'.'+et,
+          FilePath: filepath,     // 本地文件临时地址
+        }, requestCallback(null, ''));
+      }
+    })
   },
     /**
      * 生命周期函数--监听页面加载
@@ -73,8 +146,6 @@ Page({
             staff_level: staff_level,
             storage_data_new: storage_data_new
         })
-        console.log(this.data.storage_data_new);
-        console.log(this.data.staff_info)
         if (storage_data_new.length === 1) {
             this.setData({
                 identity_index: 0
@@ -225,8 +296,6 @@ Page({
     var data = e.detail.value;
     var identity_index = this.data.identity_index;
     var that = this;
-      console.log(identity_index);
-      console.log(that.data.storage_data_new);
     wx.showModal({
       title: '提交确认',
       content: '提交后不可修改，确定要提交吗？',
@@ -255,7 +324,8 @@ Page({
               form_before_adjust: that.data.date_before,
               form_later_adjust: that.data.date_after,
               form_reason: data.reason_input,
-              form_teacher: data.teacher
+              form_teacher: data.teacher,
+              form_picurl: that.data.url
             },
             header: {
               'content-type': 'application/x-www-form-urlencoded'

@@ -87,6 +87,12 @@
                     <view class='form_date tr'>{{item.staff_update}}</view>
                 </view>
             </view>
+            <view wx:if='{{form.form_picurl}}' class='model_column last form_refuse_column' >
+                <text class='reason'>申请附件</text>
+                <view bindtap='download2'>
+                    <image src='{{form.form_picurl}}' class='excel_icon_image'></image>
+                </view>
+            </view>
             <view wx:if="{{form.form_attachment!==null}}" class='model_column last form_refuse_column' >
                 <text class='reason'>附件</text>
                 <view catchtap='download'>

@@ -10,6 +10,12 @@ Page({
         overflow: '',
         refuse_modal: 'false'
     },
+    preView() {
+      var _this = this;
+      wx.previewImage({
+        urls: [_this.data.form.form_picurl],
+      })
+    },
     agree(e) {
         var _this = this;
         var form = _this.data.form;
@@ -101,9 +107,6 @@ Page({
                   showCancel: false,
                   mask: true
                 })
-                setTimeout(function () {
-                  wx.navigateBack({})
-                }, 1000);
               } else if (res.data.status === 401) {
                 wx.hideLoading();
                 wx.showToast({
@@ -118,6 +121,7 @@ Page({
           wx.request({
             url: app.globalData.config + "last_relayForChangeCourse" + '?form_id=' + form.form_id,
             success(res) {
+              console.log(res.data);
               if (res.data.status === 200) {
                 wx.setStorageSync('lock_a', '1');
                 //用户是从approve.js跳转过来的
@@ -174,79 +178,29 @@ Page({
                   }
                 }
                 //======================================
+                setTimeout(function () {
+                  wx.hideLoading();
+                  wx.showToast({
+                    title: res.data.message,
+                  })
+                  setTimeout(function () {
+                    wx.navigateBack({})
+                  }, 1000);
+                }, 1000)
+              } else if (res.data.status === 400) {
                 wx.hideLoading();
                 wx.showModal({
                   content: res.data.message,
                   showCancel: false,
                   mask: true
                 })
-                setTimeout(function () {
-                  wx.navigateBack({})
-                }, 1000);
-              } else {
-                wx.setStorageSync('lock_a', '1');
-                //用户是从approve.js跳转过来的
-                if (getCurrentPages().length == 3) {
-
-                  var last_page_data = [];
-                  var first_page_data = [];
-
-                  //上一个页面的数据
-                  last_page_data = getCurrentPages()[1].data.items;
-                  //首页数据
-                  first_page_data = getCurrentPages()[0].data.a;
-
-                  //当前审批的form id
-                  var this_page_id = _this.data.form.form_id;
-                  //或取历史页面的长度，没有则为0
-                  var last_length = last_page_data.length ? last_page_data.length : 0;
-                  var first_length = first_page_data.length ? first_page_data.length : 0;
-
-                  //把和当前审批表id相同的表给干掉
-                  for (var del = 0; del < last_length; del++) {
-                    if (last_page_data[del]) {
-                      if (last_page_data[del].form_id == this_page_id) {
-                        last_page_data.splice(del, 1);
-                      }
-                    }
-                  }
-                  for (var home_del = 0; home_del < first_length; home_del++) {
-                    if (first_page_data[home_del]) {
-                      if (first_page_data[home_del].form_id == this_page_id) {
-                        first_page_data.splice(home_del, 1);
-                      }
-                    }
-                  }
-                  //用户是从首页跳转进来的
-                } else {
-                  var first_page_data = [];
-
-                  //首页数据
-                  first_page_data = getCurrentPages()[0].data.a;
-
-                  //当前审批的form id
-                  var this_page_id = _this.data.form.form_id;
-                  //或取历史页面的长度，没有则为0
-                  var first_length = first_page_data.length ? first_page_data.length : 0;
-
-                  //把和当前审批表id相同的表给干掉
-                  for (var home_del = 0; home_del < first_length; home_del++) {
-                    if (first_page_data[home_del]) {
-                      if (first_page_data[home_del].form_id == this_page_id) {
-                        first_page_data.splice(home_del, 1);
-                      }
-                    }
-                  }
-                }   
+              } else if (res.data.status === 401) {
                 wx.hideLoading();
-                wx.showModal({
-                  content: res.data.message,
-                  showCancel: false,
-                  mask: true
+                wx.showToast({
+                  title: res.data.message,
+                  mask: true,
+                  image: '/static/ico/fail.png'
                 })
-                setTimeout(function () {
-                  wx.navigateBack({})
-                }, 1000);
               }
             }
           })
