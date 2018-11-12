@@ -62,6 +62,7 @@ input {
     text-align: left;
     padding: 0 5rpx;
     margin-left: 15rpx;
+    font-size: 30rpx;
 }
 
 input:hover {
@@ -70,4 +71,5 @@ input:hover {
     text-align: left;
     padding: 0 5rpx;
     margin-left: 15rpx;
+    font-size: 30rpx;
 }

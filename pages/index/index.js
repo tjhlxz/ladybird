@@ -331,7 +331,6 @@ Page({
           _this.setData({
             windowHeight: res.windowHeight
           });
-          console.log("屏幕高度: " + res.windowHeight)
         }
       }),
         this.setData({
@@ -475,8 +474,7 @@ Page({
         dd: '1'
       })
     }
-
-
+    
     //====================================================
     // var _this = this;
     // if (!wx.getStorageSync('user')) {
@@ -505,7 +503,6 @@ Page({
     //       }
     //     }
     //   })
-      
     // if (this.data.first === 0) {
     //   this.setData({
     //     ptzg: '1',
@@ -577,7 +574,6 @@ Page({
     //             data[i].form_status = '已拒绝'
     //           }
     //         }
-
     //         wx.removeStorage({
     //           key: 'lock',
     //           success: function (res) {
@@ -590,7 +586,6 @@ Page({
     //               a: a,
     //               s: data
     //             });
-
     //             wx.hideLoading();
     //           },
     //         })
@@ -638,7 +633,6 @@ Page({
     //               data[i].form_status = '已拒绝'
     //             }
     //           }
-
     //           wx.removeStorage({
     //             key: 'lock_a',
     //             success: function (res) {
@@ -651,7 +645,6 @@ Page({
     //                 a: a,
     //                 s: data
     //               });
-
     //               wx.hideLoading();
     //             },
     //           })
