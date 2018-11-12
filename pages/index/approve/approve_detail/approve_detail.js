@@ -100,13 +100,6 @@ Page({
                     wx.navigateBack({})
                   }, 1000);
                 }, 1000)
-              } else if (res.data.status === 400) {
-                wx.hideLoading();
-                wx.showModal({
-                  content: res.data.message,
-                  showCancel: false,
-                  mask: true
-                })
               } else if (res.data.status === 401) {
                 wx.hideLoading();
                 wx.showToast({
@@ -114,14 +107,23 @@ Page({
                   mask: true,
                   image: '/static/ico/fail.png'
                 })
-              }
+                setTimeout(function () {
+                  wx.navigateBack({})
+                }, 1000);
+              } else {
+                wx.hideLoading();
+                wx.showModal({
+                  content: res.data.message,
+                  showCancel: false,
+                  mask: true
+                })
+              } 
             }
           })
         }else {
           wx.request({
             url: app.globalData.config + "last_relayForChangeCourse" + '?form_id=' + form.form_id,
             success(res) {
-              console.log(res.data);
               if (res.data.status === 200) {
                 wx.setStorageSync('lock_a', '1');
                 //用户是从approve.js跳转过来的
@@ -187,21 +189,21 @@ Page({
                     wx.navigateBack({})
                   }, 1000);
                 }, 1000)
-              } else if (res.data.status === 400) {
-                wx.hideLoading();
-                wx.showModal({
-                  content: res.data.message,
-                  showCancel: false,
-                  mask: true
-                })
-              } else if (res.data.status === 401) {
+              }else if (res.data.status === 401) {
                 wx.hideLoading();
                 wx.showToast({
                   title: res.data.message,
                   mask: true,
                   image: '/static/ico/fail.png'
                 })
-              }
+              } else {
+                wx.hideLoading();
+                wx.showModal({
+                  content: res.data.message,
+                  showCancel: false,
+                  mask: true
+                })
+              } 
             }
           })
         }

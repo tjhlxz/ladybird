@@ -1,0 +1,278 @@
+.main {
+    width: 100%;
+    height: 100%;
+    color: #222;
+}
+.box {
+  width: 50%;
+  margin: 0 auto;
+}
+.xiala {
+  text-align: center;
+  width: 100%;
+  font-size: 34rpx;
+  color: #0AB179;
+  font-weight: bold;
+  font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.empty{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+.empty_ico{
+    margin-top: 80rpx;
+    width: 160rpx;
+    height: 160rpx;
+}
+.empty_text{
+    font-size: 35rpx;
+    margin-top: 40rpx;
+    color: #666;
+}
+.header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 250rpx;
+    flex-direction: column;
+}
+
+.header image {
+    width: 100%;
+
+}
+
+.title_header {
+    margin-top: 100rpx;
+    font-size: 65rpx;
+    font-family: Microsoft Yahei;
+    font-weight: 700;
+    color: #0ab179;
+}
+
+.main .nav {
+    width: 100%;
+    height: 200rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20rpx;
+    margin-top: 20rpx;
+}
+
+.nav_item {
+    height: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main .nav .nav_item {
+    margin: auto 64rpx;
+    padding-top: 40rpx;
+}
+.red_point_box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  text-align: center;
+}
+.red_point {
+  position: absolute;
+  width: 40rpx;
+  height: 40rpx;
+  font-size: 25rpx;
+  background-color: red;
+  color: #fff;
+  border-radius: 50%;
+  right: -25%;
+  /* top: -25%; */
+  line-height: 40rpx;
+}
+.main .nav .nav_item .nav_item_text {
+    font-size: 30rpx;
+    margin-top: 15rpx;
+}
+.logo image {
+    width: 80rpx;
+    height: 80rpx;
+}
+.xian{
+    height: 20rpx;
+    width: 100%;
+    background-color: #f2f2f2;
+}
+.content{
+    background-color: #fff;
+}
+.content_top{
+    border-bottom: 1rpx solid #f2f2f2;
+}
+.content_title{
+    width: 100%;
+    background-color: #fff;
+    height: 80rpx;
+    line-height: 80rpx;
+
+    margin-left:30rpx;
+    color: #0ab179;
+    font-weight: 700;
+}
+.form_detail{
+    display: flex;
+    height: 170rpx;
+    flex-direction: row;
+    background-color: #fff;
+    border-bottom:1rpx solid #f2f2f2;
+}
+.left{
+    width: 60%;
+    display: flex;
+    padding: 10rpx 30rpx;
+    flex-direction: column;
+}
+.right{
+    margin-left: 30rpx;    
+}
+.head{
+    display: flex;
+    flex-direction: row;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+}
+.title{
+    margin-left: 30rpx;
+}
+.model_icon{
+    margin-top: 30rpx;
+    width: 90rpx;
+    height: 90rpx;
+}
+.model {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120rpx;
+    overflow: hidden;
+    background-color: #0ab179;
+    text-align: center;
+    line-height: 120rpx;
+    color: #fff;
+}
+.time{
+    margin-left: 120rpx;
+    font-size: 30rpx;
+    color: #666;
+}
+.tr_td{
+    width: 120rpx;
+    height: 170rpx;
+    padding-top: 20rpx;
+    line-height: 150rpx;
+    text-align: center;
+    font-size: 35rpx;
+}
+.ing {
+    color: #1090ff;
+}
+
+.ok {
+    color: #0ab179;
+}
+.fail {
+    color: red;
+}
+.more{
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    font-size: 35rpx;
+    color: #666;
+    padding: 40rpx 0 0 0;
+}
+
+
+
+
+
+
+.items-container{
+    padding-top:10rpx;
+    padding-bottom: 140rpx;
+}
+.tr {
+   display: flex;
+    height: 120rpx;
+    flex-direction: row;
+    background-color: #fff;
+    border-bottom:1rpx solid #f2f2f2;
+}
+.txt {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    font-size: 38rpx;
+    width: 100%;
+    height: 120rpx;
+    overflow: hidden;
+    background-color: #0ab179;
+    text-align: center;
+    line-height: 120rpx;
+    color: #fff;
+}
+.left1{
+    width: 60%;
+    display: flex;
+    padding: 0rpx 30rpx 10rpx 30rpx;
+    flex-direction: column;
+}
+.right1{
+    margin-left: 30rpx;    
+}
+.head1{
+    display: flex;
+    flex-direction: row;
+    height: 70rpx;
+    line-height: 70rpx;
+    text-align: center;
+}
+.form_proposer_name{
+    margin-left: 38rpx;
+}
+.model_icon1{
+    margin-top: 20rpx;
+    width: 85rpx;
+    height: 85rpx;
+}
+.model {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120rpx;
+    overflow: hidden;
+    background-color: #0ab179;
+    text-align: center;
+    line-height: 120rpx;
+    color: #fff;
+}
+.time1{
+    margin-left: 120rpx;
+    font-size: 30rpx;
+    color: #666;
+}
+.tr_td1{
+    width: 120rpx;
+    height: 120rpx;
+    line-height: 120rpx;
+    text-align: center;
+    font-size: 35rpx;
+}

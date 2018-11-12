@@ -21,5 +21,5 @@
             </view>
         </block>
     </view>
-    <view class='txt' bindtap='showMore' wx:if='{{show}}'>点击查看审批完成</view>
+    <view class='txt' bindtap='showMore' wx:if='{{show}}'>点击查看审批完成      </view>
 </view>
