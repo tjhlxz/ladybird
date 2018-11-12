@@ -238,6 +238,10 @@ Page({
       wx.navigateTo({
         url: './supervisor/supervisor?Form=' + Form,
       })
+    } else {
+      wx.navigateTo({
+        url: './evaluate/evaluate'
+      })
     }
   },
   //下面是小仙女的代码，实现不同身份的渲染，不要乱动喔！
@@ -289,7 +293,32 @@ Page({
     }
   },
   onLoad: function (options) {
+    
+  },
+  onShow: function (options) {
     var _this = this;
+    var a;
+    if (a = wx.getStorageSync('user')) {
+      //强制注销
+      wx.request({
+        url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
+        success(res) {
+          if (res.data.status == 400) {
+            wx.showModal({
+              content: res.data.message,
+              mask: true,
+              showCancel: false,
+              success: function (res) {
+                wx.clearStorageSync('user');
+                wx.redirectTo({
+                  url: '../login/login',
+                })
+              }
+            })
+          }
+        }
+      })
+    }
 
     if (!wx.getStorageSync('user')) {
       wx.redirectTo({
@@ -298,9 +327,8 @@ Page({
     }
 
     //如果用户登录了
-    var a;
     if (wx.getStorageSync('user')) {
-      
+
       //获取屏幕高度
       wx.getSystemInfo({
         success: function (res) {
@@ -309,16 +337,16 @@ Page({
           });
         }
       }),
-      this.setData({
-        first: 1,
-        ptzg: '0',
-        jyszr: '0',
-        jxyz: '0',
-        jwccz: '0',
-        jwk: '0',
-        pgzx: '0',
-        dd: '0'
-      })
+        this.setData({
+          first: 1,
+          ptzg: '0',
+          jyszr: '0',
+          jxyz: '0',
+          jwccz: '0',
+          jwk: '0',
+          pgzx: '0',
+          dd: '0'
+        })
       //小仙女写的判断身份函数
       this.showlevel();
       //==================
@@ -350,7 +378,7 @@ Page({
               }
               _this.data.s = s;
 
-              var data = _this.data.s
+              var data = _this.data.s;
               var len = data.length ? data.length : 0;
               for (var i = 0; i < len; i++) {
                 if (data[i].form_status == 0) {
@@ -371,20 +399,20 @@ Page({
               });
 
               wx.hideLoading();
-            }else{
-                wx.hideLoading();
-                wx.showToast({
-                    title: res.data.message
-                })
-            }
-          },
-          fail(){
+            } else {
               wx.hideLoading();
               wx.showToast({
-                  title: '网络中断',
-                  mask: true,
-                  image: '/static/ico/fail.png'
+                title: res.data.message
               })
+            }
+          },
+          fail() {
+            wx.hideLoading();
+            wx.showToast({
+              title: '网络中断',
+              mask: true,
+              image: '/static/ico/fail.png'
+            })
           }
         })
       } else {
@@ -392,25 +420,18 @@ Page({
           url: app.globalData.config + 'edu_center_list?page=1',
           success(res) {
             var _send = res.data.data.already_send;
-            var no_send = res.data.data.no_send;
-            var len = no_send.length;
-            for (var no = 0; no < len; no++) {
-              no_send[no].staff_name = '未定义';
-              no_send[no].status = -1;
-            }
-
-            var data = no_send.concat(_send);
-            _this.setData({ a: data });
+            
+            _this.setData({ a: _send });
             wx.hideLoading();
           },
           fail() {
-                wx.hideLoading();
-                wx.showToast({
-                    title: '网络中断',
-                    mask: true,
-                    image: '/static/ico/fail.png'
-                })
-            }
+            wx.hideLoading();
+            wx.showToast({
+              title: '网络中断',
+              mask: true,
+              image: '/static/ico/fail.png'
+            })
+          }
         })
       }
       if (_this.data.dd == '1') {
@@ -429,58 +450,17 @@ Page({
             }
             _this.setData({ unreadForm: unreadform })
           },
-            fail() {
-                wx.hideLoading();
-                wx.showToast({
-                    title: '网络中断',
-                    mask: true,
-                    image: '/static/ico/fail.png'
-                })
-            }
-        })
-      }
-    } else {
-      this.setData({
-        ptzg: '1',
-        jyszr: '1',
-        jxyz: '1',
-        jwccz: '1',
-        jwk: '1',
-        pgzx: '1',
-        dd: '1'
-      })
-    }
-  },
-  onShow: function (options) {
-    var _this = this;
-    if (!wx.getStorageSync('user')) {
-      wx.redirectTo({
-        url: '../login/login'
-      })
-    }
-    var a;
-    if(a=wx.getStorageSync('user')) {
-      //强制注销
-      wx.request({
-        url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
-        success(res) {
-          if (res.data.status == 400) {
-            wx.showModal({
-              content: res.data.message,
+          fail() {
+            wx.hideLoading();
+            wx.showToast({
+              title: '网络中断',
               mask: true,
-              showCancel: false,
-              success: function (res) {
-                wx.clearStorageSync('user');
-                wx.redirectTo({
-                  url: '../login/login',
-                })
-              }
+              image: '/static/ico/fail.png'
             })
           }
-        }
-      })
-      
-    if (this.data.first === 0) {
+        })
+      }
+    } else {
       this.setData({
         ptzg: '1',
         jyszr: '1',
@@ -490,193 +470,192 @@ Page({
         pgzx: '1',
         dd: '1'
       })
-      if (wx.getStorageSync('user')) {
-        this.setData({
-          first: 1,
-          ptzg: '0',
-          jyszr: '0',
-          jxyz: '0',
-          jwccz: '0',
-          jwk: '0',
-          pgzx: '0',
-          dd: '0'
-        })
-        //小仙女写的判断身份函数
-        this.showlevel();
-      }
-    } else {
-      this.showlevel();
     }
-    //===================
-    var _this = this;
-    var staff_id = wx.getStorageSync('user').staff_id;
+    
+    //====================================================
+    // var _this = this;
+    // if (!wx.getStorageSync('user')) {
+    //   wx.redirectTo({
+    //     url: '../login/login'
+    //   })
+    // }
+    // var a;
+    // if(a=wx.getStorageSync('user')) {
+    //   //强制注销
+    //   wx.request({
+    //     url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,1884648226
+    //     success(res) {
+    //       if (res.data.status == 400) {
+    //         wx.showModal({
+    //           content: res.data.message,
+    //           mask: true,
+    //           showCancel: false,
+    //           success: function (res) {
+    //             wx.clearStorageSync('user');
+    //             wx.redirectTo({
+    //               url: '../login/login',
+    //             })
+    //           }
+    //         })
+    //       }
+    //     }
+    //   })
+    // if (this.data.first === 0) {
+    //   this.setData({
+    //     ptzg: '1',
+    //     jyszr: '1',
+    //     jxyz: '1',
+    //     jwccz: '1',
+    //     jwk: '1',
+    //     pgzx: '1',
+    //     dd: '1'
+    //   })
+    //   if (wx.getStorageSync('user')) {
+    //     this.setData({
+    //       first: 1,
+    //       ptzg: '0',
+    //       jyszr: '0',
+    //       jxyz: '0',
+    //       jwccz: '0',
+    //       jwk: '0',
+    //       pgzx: '0',
+    //       dd: '0'
+    //     })
+    //     //小仙女写的判断身份函数
+    //     this.showlevel();
+    //   }
+    // } else {
+    //   this.showlevel();
+    // }
+    // //===================
+    // var _this = this;
+    // var staff_id = wx.getStorageSync('user').staff_id;
 
 
-    //判断用户是否是从提交表单页面跳转来的
-    if (wx.getStorageSync('lock')) {
-      wx.showLoading({
-        title: '正在更新页面',
-      })
-      wx.request({
-        url: app.globalData.config + 'onload' + '?staff_id=' + staff_id,
-        success(res) {
-          if (res.data.status == 200) {
-            wx.stopPullDownRefresh();
-            _this.setData({
-              items: res.data.data
-            });
-            var a = res.data.data.approve_forms_deal ? _this.data.items.approve_forms_deal : [];
-            var s = res.data.data.sub_forms_deal ? _this.data.items.sub_forms_deal : [];
-            _this.data.s = s;
-            _this.data.a = a;
-            // 对数据进行处理
-            var arr = [];
-            var num = 0;
-            for (var d of _this.data.s) {
-              var name = d.form_flow_name.split(',');
-              s[num].name = name;
-              s[num].name.push('无');
-              num++;
-            }
-            _this.data.s = s;
+    // //判断用户是否是从提交表单页面跳转来的
+    // if (wx.getStorageSync('lock')) {
+    //   wx.showLoading({
+    //     title: '正在更新页面',
+    //   })
+    //   wx.request({
+    //     url: app.globalData.config + 'onload' + '?staff_id=' + staff_id,
+    //     success(res) {
+    //       if (res.data.status == 200) {
+    //         wx.stopPullDownRefresh();
+    //         _this.setData({
+    //           items: res.data.data
+    //         });
+    //         var a = res.data.data.approve_forms_deal ? _this.data.items.approve_forms_deal : [];
+    //         var s = res.data.data.sub_forms_deal ? _this.data.items.sub_forms_deal : [];
+    //         _this.data.s = s;
+    //         _this.data.a = a;
+    //         // 对数据进行处理
+    //         var arr = [];
+    //         var num = 0;
+    //         for (var d of _this.data.s) {
+    //           var name = d.form_flow_name.split(',');
+    //           s[num].name = name;
+    //           s[num].name.push('无');
+    //           num++;
+    //         }
+    //         _this.data.s = s;
 
-            var data = _this.data.s
-            var len = data.length ? data.length : 0;
-            for (var i = 0; i < len; i++) {
-              if (data[i].form_status == 0) {
-                data[i].form_status = '待审批'
-              } else if (data[i].form_status == 1) {
-                data[i].form_status = '已同意'
-              } else {
-                data[i].form_status = '已拒绝'
-              }
-            }
+    //         var data = _this.data.s
+    //         var len = data.length ? data.length : 0;
+    //         for (var i = 0; i < len; i++) {
+    //           if (data[i].form_status == 0) {
+    //             data[i].form_status = '待审批'
+    //           } else if (data[i].form_status == 1) {
+    //             data[i].form_status = '已同意'
+    //           } else {
+    //             data[i].form_status = '已拒绝'
+    //           }
+    //         }
+    //         wx.removeStorage({
+    //           key: 'lock',
+    //           success: function (res) {
+    //             console.log('home')
+    //             //处理未读消息状态小红点
+    //             var a = _this.data.a;
+    //             var unreadNum = _this.data.a.length ? _this.data.a.length : 0;
+    //             _this.setData({
+    //               unreadNum: unreadNum,
+    //               a: a,
+    //               s: data
+    //             });
+    //             wx.hideLoading();
+    //           },
+    //         })
+    //       }
+    //     }
+    //   })
+    // }
+    // //
+    // if(wx.getStorageSync('lock_a')) {
+    //   var staff_id = wx.getStorageSync('user').staff_id;
+    //   wx.showLoading({
+    //     title: '正在加载',
+    //   })
+    //     wx.request({
+    //       url: app.globalData.config + 'onload' + '?staff_id=' + staff_id,
+    //       success(res) {
+    //         if (res.data.status == 200) {
+    //           wx.stopPullDownRefresh();
+    //           _this.setData({
+    //             items: res.data.data
+    //           });
+    //           var a = res.data.data.approve_forms_deal ? _this.data.items.approve_forms_deal : [];
+    //           var s = res.data.data.sub_forms_deal ? _this.data.items.sub_forms_deal : [];
+    //           _this.data.s = s;
+    //           _this.data.a = a;
+    //           // 对数据进行处理
+    //           var arr = [];
+    //           var num = 0;
+    //           for (var d of _this.data.s) {
+    //             var name = d.form_flow_name.split(',');
+    //             s[num].name = name;
+    //             s[num].name.push('无');
+    //             num++;
+    //           }
+    //           _this.data.s = s;
 
-            wx.removeStorage({
-              key: 'lock',
-              success: function (res) {
-                //处理未读消息状态小红点
-                var a = _this.data.a;
-                var unreadNum = _this.data.a.length ? _this.data.a.length : 0;
-                _this.setData({
-                  unreadNum: unreadNum,
-                  a: a,
-                  s: data
-                });
+    //           var data = _this.data.s
+    //           var len = data.length ? data.length : 0;
+    //           for (var i = 0; i < len; i++) {
+    //             if (data[i].form_status == 0) {
+    //               data[i].form_status = '待审批'
+    //             } else if (data[i].form_status == 1) {
+    //               data[i].form_status = '已同意'
+    //             } else {
+    //               data[i].form_status = '已拒绝'
+    //             }
+    //           }
+    //           wx.removeStorage({
+    //             key: 'lock_a',
+    //             success: function (res) {
+    //               console.log('home')
+    //               //处理未读消息状态小红点
+    //               var a = _this.data.a;
+    //               var unreadNum = _this.data.a.length ? _this.data.a.length : 0;
+    //               _this.setData({
+    //                 unreadNum: unreadNum,
+    //                 a: a,
+    //                 s: data
+    //               });
+    //               wx.hideLoading();
+    //             },
+    //           })
+    //         }
+    //       }
+    //     })
+    // }
 
-                wx.hideLoading();
-              },
-            })
-          }
-        }
-      })
-    }
-    //
-    if(wx.getStorageSync('lock_a')) {
-      var staff_id = wx.getStorageSync('user').staff_id;
-      wx.showLoading({
-        title: '正在加载',
-      })
-        wx.request({
-          url: app.globalData.config + 'onload' + '?staff_id=' + staff_id,
-          success(res) {
-            if (res.data.status == 200) {
-              wx.stopPullDownRefresh();
-              _this.setData({
-                items: res.data.data
-              });
-              var a = res.data.data.approve_forms_deal ? _this.data.items.approve_forms_deal : [];
-              var s = res.data.data.sub_forms_deal ? _this.data.items.sub_forms_deal : [];
-              _this.data.s = s;
-              _this.data.a = a;
-              // 对数据进行处理
-              var arr = [];
-              var num = 0;
-              for (var d of _this.data.s) {
-                var name = d.form_flow_name.split(',');
-                s[num].name = name;
-                s[num].name.push('无');
-                num++;
-              }
-              _this.data.s = s;
-
-              var data = _this.data.s
-              var len = data.length ? data.length : 0;
-              for (var i = 0; i < len; i++) {
-                if (data[i].form_status == 0) {
-                  data[i].form_status = '待审批'
-                } else if (data[i].form_status == 1) {
-                  data[i].form_status = '已同意'
-                } else {
-                  data[i].form_status = '已拒绝'
-                }
-              }
-
-              wx.removeStorage({
-                key: 'lock_a',
-                success: function (res) {
-                  //处理未读消息状态小红点
-                  var a = _this.data.a;
-                  var unreadNum = _this.data.a.length ? _this.data.a.length : 0;
-                  _this.setData({
-                    unreadNum: unreadNum,
-                    a: a,
-                    s: data
-                  });
-
-                  wx.hideLoading();
-                },
-              })
-            }
-          }
-        })
-    }
-
-    var a = _this.data.a ? _this.data.a : [];
-    var s = _this.data.s ? _this.data.s : [];
-    var unreadNum = a.length;
-    }
+    // var a = _this.data.a ? _this.data.a : [];
+    // var s = _this.data.s ? _this.data.s : [];
+    // var unreadNum = a.length;
+    // }
   },
   onPullDownRefresh: function() {
-    this.onLoad();
-  },
-
-  load: function () {
-    var _this = this;
-    if(_this.data.pgzx == 1){
-      _this.setData({
-        page: _this.data.page + 1
-      });
-      _this.loading();
-    }
-  },
-
-  loading: function () {
-    var _this = this;
-    if (_this.data.pgzx == 1) {
-      var staff_id = wx.getStorageSync('user').staff_id;
-      wx.request({
-        method: 'GET',
-        url: app.globalData.config + 'edu_center_list' + '?page=' + _this.data.page,
-        success: function (res) {
-          if (res.data.status == '201') {
-            var words = _this.data.a.concat(res.data.data.already_send);
-            _this.setData({
-              a: words
-            })
-            if(res.data.data.no_send) {
-            var words = _this.data.a.concat(res.data.data.no_send);
-            }
-            _this.setData({
-              a: words
-            })
-          } else if (res.data.status == '200') {
-            wx.showToast({
-              title: res.data.message,
-            })
-          }
-        }
-      });
-    }
-  },
+    this.onShow();
+  }
 })

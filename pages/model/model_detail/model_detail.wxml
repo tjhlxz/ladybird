@@ -88,13 +88,21 @@
                     </view>
                     <!-- </form> -->
                 </view>
-                <view wx:if="{{index==0}}" class='model_column last'>
+                <view wx:if="{{index==0}}" class='model_column'>
                     <text class='reason'>申请原因及详情</text>
                     <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因。（如有课程时间、地点变动意向，请在此处说明）"></textarea>
                 </view>
-                <view wx:if="{{index==1||index==null}}"class='model_column last'>
+                <view wx:if="{{index==1||index==null}}"class='model_column'>
                     <text class='reason'>申请原因及详情</text>
                     <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因。（如课程地点有变动，请务必在此处填写）"></textarea>
+                </view>
+                <view class='model_column last'>
+                    <text class='reason'>申请附件(证明材料)</text>
+                    <button bindtap='upload' wx:if="{{filepath==''}}" class="add_image">+</button>
+                    <view wx:if="{{filepath!==''}}" class="image_container">
+                      <image class='excel_icon' src='{{filepath}}' bindtap='preView'></image>
+                      <view class="delete" bindtap="deleteUpload">×</view>
+                    </view>
                 </view>
                 <button class='submit' form-type='submit'>提交</button>
             </form>

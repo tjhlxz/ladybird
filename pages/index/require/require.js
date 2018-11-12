@@ -38,10 +38,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
     onLoad: function (options) {
-        wx.showLoading({
-            title: '正在加载',
-            mask: "true"
-        })
+        
         
     var _this = this;
     var _form = JSON.parse(options.form);
@@ -61,6 +58,10 @@ Page({
   onShow: function () {
     var a;
     if (a = wx.getStorageSync('user')) {
+      wx.showLoading({
+        title: '正在加载',
+        mask: "true"
+      })
       //强制注销
       wx.request({
         url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
@@ -71,19 +72,20 @@ Page({
               mask: true,
               showCancel: false,
               success: function (res) {
+                wx.hideLoading();
                 wx.clearStorageSync('user');
                 wx.redirectTo({
                   url: '../login/login',
                 })
               }
             })
+          }else{
+            wx.hideLoading();
           }
+          
         }
       })
     }
-      setTimeout(function (res) {
-          wx.hideLoading();
-      }, 1000)
   },
 
   /**

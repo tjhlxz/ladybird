@@ -326,3 +326,8 @@ radio {
     background-color: #fff;
     color: #666;
 }
+.excel_icon_image{
+    width: 230rpx;
+    height: 230rpx;
+    margin-top: 30rpx;
+}

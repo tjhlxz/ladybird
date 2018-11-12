@@ -44,6 +44,12 @@ Page({
             }
         })
     },
+  download2(e) {
+    var _this = this;
+    wx.previewImage({
+      urls: [_this.data.form.form_picurl],
+    })
+  },
     /**
      * 生命周期函数--监听页面加载
      */

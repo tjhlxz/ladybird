@@ -263,3 +263,8 @@ radio {
     height: 90rpx;
     margin-top: 30rpx;
 }
+.excel_icon_image{
+    width: 230rpx;
+    height: 230rpx;
+    margin-top: 30rpx;
+}
