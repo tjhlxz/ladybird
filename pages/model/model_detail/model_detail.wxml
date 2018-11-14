@@ -1,14 +1,12 @@
 <import src="change-date-template/change-date-template.wxml" />
 <view wx:if="{{first_request==='first'}}" class='first_request_mask'>
     <view class='first_title'>申请须知</view>
-    <view class="first_detail first1">1.调串类型：调串申请时教师课表不会发生永久变化，此时无附件。</view>
-    <view class="first_detail">A、<view class="text">临时代课：调整前后时间保持不变填写，明确填写代课教师；</view></view>
-    <view class="first_detail">B、<view class="text">临时顺延：调整前后时间地点按二级学院教务科实际可行填写，代课教师可不填；</view></view>
-    <view class="first_detail">C、<view class="text">临时调串：若干次调串时间地点按二级学院教务科实际可行填写，代课教师可不填；</view></view>
-    <view class="first_detail first1">2.变更类型：变更申请时教师课表将永久变化，教务处教务科变更后新课表详见附件。</view>
-    <view class="first_detail">A、<view class="text">教师永久性变更：申请整门课程的任课教师永久性变更。</view></view>
-     <view class="first_detail">B、<view class="text">时间地点永久性变更：申请整门课的上课时间地点永久性变更。</view></view>
-     <view class="first_detail first1">3.若教师个人信息有误，请联系二级学院教务科。</view>
+    <view class="first_detail first1">1.“申请类型”：可选调串与变更，类型详情请参见页面下的备注。</view>
+    <view class="first_detail first1">2.“代课教师”：如合班代课（即将课程调到代课教师的班级一起上课）填写代课教师姓名后必需标注“合班”字样，如刘兴丽（合班）；单独代课只填写代课教师姓名即可。</view>
+     <view class="first_detail first1">3.“调整时间”：如代课时间不变，调整前后时间填一样的即可。</view>
+     <view class="first_detail first1">4.“调整后地点"：若调整后地点发生变化的，请任课教师事先与二级学院教务科确认可用地点后填写，而地点不变必需填写原地点；若变更申请如有意向变更地点可在此处填写。</view>
+     <view class="first_detail first1">5. “申请证明”： 非必填项，其中“公事”如开会、调研等必需填；“私事”如读博必需上传博士课程、私人其他原因可酌情填写。</view>
+     
     <view class='first_button'>
     <view class='first_cancel' catchtap='first_cancel'>取消</view>
     <view class="first_nofirst" catchtap='nofirst'>不再提示</view>
@@ -53,7 +51,7 @@
                     </view>
                 </view>
                 <view class='model_column'>
-                    <text class='type'>申请类型</text>
+                    <text class='type'><text style='color:red;'>*</text>申请类型</text>
                     <view class='right'>
                         <picker name="type" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
                             <text wx:if="{{index==null}}">请选择</text>
@@ -62,7 +60,7 @@
                     </view>
                 </view>
                 <view class='model_column class_input'>
-                    <text class='classname'>课程</text>
+                    <text class='classname'><text style='color:red;'>*</text>课程</text>
                     <textarea name="classname" maxlength="80" placeholder='请在此处填写课程名'></textarea>
                 </view>
                 <view class='model_column'>
@@ -70,7 +68,7 @@
                     <input name="teacher" class="teacher_name" placeholder='请在此处填写代课老师姓名(按需填写)'></input>
                 </view>
                 <view wx:if="{{index==1}}" class='model_column date'>
-                    <text class='date'>调整课程时间</text>
+                    <text class='date'><text style='color:red;'>*</text>调整课程时间</text>
                     <view class='date_text'>
                         <text class='date_before_text'>调整前</text>
                         <text class='date_after_text'>调整后</text>
@@ -88,13 +86,17 @@
                     </view>
                     <!-- </form> -->
                 </view>
-                <view wx:if="{{index==0}}" class='model_column'>
-                    <text class='reason' style="color:red;">调整后上课地点、调整原因</text>
-                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="1、“变更类型”如有变更后的意向时间、地点，请在此处说明。2、请在此处填写申请原因（如：“公差”需提交申请证明；私差、病假请酌情填写）。"></textarea>
+                <view class='model_column' wx:if="{{index==0||index==null}}">
+                    <text class='teacher'>调整后地点</text>
+                    <textarea name="address2" class="address" maxlength="120" placeholder='如有变更后的意向时间、地点，请在此处说明。'></textarea>
                 </view>
-                <view wx:if="{{index==1||index==null}}"class='model_column'>
-                    <text class='reason' style="color:red;">调整后上课地点、调整原因</text>
-                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="1、“调串类型”如需地点调整请与二级学院教务科确认调整后上课地点并务必在此填写，方可提交。2、请在此处填写申请原因（如：“公差”需提交申请证明；私差、病假请酌情填写）。"></textarea>
+                <view class='model_column' wx:if="{{index==1}}">
+                    <text class='teacher'><text style='color:red;'>*</text>调整后地点</text>
+                    <textarea name="address2" class="address" maxlength="120" placeholder='如需地点调整请与二级学院教务科确认调整后上课地点并务必在此填写'></textarea>
+                </view>
+                <view class='model_column'>
+                    <text class='reason'><text style='color:red;'>*</text>申请原因</text>
+                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因"></textarea>
                 </view>
                 <view class='model_column'>
                     <text class='reason'>申请证明（酌情填写）</text>
@@ -119,4 +121,5 @@
         <text class="remarks_detail">B、时间地点永久性变更：申请整门课的上课时间地点永久性变更。</text>
         <text class="remarks_detail hahaha">3.若教师个人信息有误，请联系二级学院教务科。</text>
     </view>
+    <center><view style="color:#999;width:100%;text-align:center;font-size:35rpx;margin:40rpx 0;">客服电话：0451-88036057</view></center>
 </view>

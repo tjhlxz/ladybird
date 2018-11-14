@@ -66,8 +66,6 @@ Page({
       _this.setData({
         detail: data
       })
-
-
         var date_before = [];
         var date_after = [];
         var date_before = detail.form_before_adjust.split(',');

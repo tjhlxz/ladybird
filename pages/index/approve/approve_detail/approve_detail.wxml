@@ -56,7 +56,12 @@
                 <text class='classname'>课程</text>
                 <view class="form_course">{{form.form_course}}</view>
             </view>
-
+            <view wx:if="{{form.form_teacher!==''}}" class='model_column'>
+                    <text class='reason'>代课老师</text>
+                    <view class="reason_input">
+                        {{form.form_teacher}}
+                    </view>
+                </view>
             <view wx:if="{{form.form_type===2}}" class='model_column date'>
                 <text class='date'>调整课程时间</text>
                 <view class='date_text'>
@@ -69,8 +74,12 @@
                     <view class='date_after'>{{date[i][1]}}</view>
                 </view>
             </view>
+            <view class='model_column class_input'  wx:if="{{form.form_place!==null&&form.form_place!==''}}">
+                <text class='classname'>调整后地点</text>
+                <view class="form_course">{{form.form_place}}</view>
+            </view>
             <view class='model_column'>
-                <text class='reason' style="color:red;">调整后地点、调整原因</text>
+                <text class='reason'>申请原因</text>
                 <view class="reason_input">
                     {{form.form_reason}}
                 </view>
