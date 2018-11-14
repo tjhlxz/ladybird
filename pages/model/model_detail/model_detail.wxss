@@ -3,7 +3,9 @@
 .first {
   display: hidden;
 }
-
+.ture{
+    display: block;
+}
 .model_detail_container {
   display: flex;
   flex-direction: column;
@@ -28,9 +30,9 @@ text {
   background-color: #fff;
   display: flex;
   flex: row;
-  height: 100rpx;
+  height: 120rpx;
   padding-top: 10rpx;
-  padding-bottom: 10rpx;
+  padding-bottom: 20rpx;
   align-items: center;
 }
 

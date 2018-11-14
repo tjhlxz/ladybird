@@ -77,7 +77,11 @@ Page({
             urls: [_this.data.filepath],
         })
     },
-
+    toggle_first(){
+        this.setData({
+            first_request: 'first'
+        })
+    },
     upload: function() {
         var _this = this;
         // 初始化实例
