@@ -401,10 +401,16 @@ Page({
       var _this = this;
       var a;
       if (a = wx.getStorageSync('user')) {
+          wx.showLoading({
+              title: '正在加载',
+              duration: 500,
+              mask: true
+          })
         //强制注销
         wx.request({
           url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
           success(res) {
+              wx.hideLoading();
             if (res.data.status == 400) {
               wx.showModal({
                 content: res.data.message,
