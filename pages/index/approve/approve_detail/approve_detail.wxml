@@ -97,7 +97,7 @@
                 </view>
             </view>
             <view wx:if="{{form.form_status==='待审批'}}" class='button'>
-                <button class='submit' catchtap='agree'>同意</button>
+                <button wx:if="{{jwk==0}}" class='submit' catchtap='agree'>同意</button>
                 <button wx:if="{{jwk==0}}" class='refuse' catchtap='refuse'>拒绝</button>
             </view>
         </view>
