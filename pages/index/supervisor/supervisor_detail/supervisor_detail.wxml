@@ -64,12 +64,18 @@
                     </view>
                 </view>
                 <view class='model_column'>
-                    <text class='reason'>申请原因及地点</text>
+                    <text class='reason' style="color:red;">调整后上课地点、调整原因</text>
                     <view class="reason_input">
                     {{detail.form_reason}}
                     </view>
                 </view>
-                <view wx:if="{{detail.form_attachment!==null}}" class='model_column last form_refuse_column' >
+                <view wx:if='{{form.form_picurl}}' class='model_column' >
+                <text class='reason'>申请证明</text>
+                <view bindtap='download2'>
+                    <image src='{{form.form_picurl}}' class='excel_icon_image'></image>
+                </view>
+            </view>
+                <view wx:if="{{detail.form_attachment!==null}}" class='model_column'>
                   <text class='reason'>附件</text>
                   <view catchtap='download'>
                       <image src='/static/ico/excel.png' class='excel_icon'></image>

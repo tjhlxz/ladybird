@@ -70,13 +70,13 @@
                 </view>
             </view>
             <view class='model_column last'>
-                <text class='reason'>申请原因及地点</text>
+                <text class='reason' style="color:red;">调整后地点、调整原因</text>
                 <view class="reason_input">
                     {{form.form_reason}}
                 </view>
             </view>
             <view wx:if='{{form.form_picurl}}' class='model_column last form_refuse_column' >
-                <text class='reason'>申请附件</text>
+                <text class='reason'>申请证明</text>
                 <view bindtap='preView'>
                     <image src='{{form.form_picurl}}' class='excel_icon_image'></image>
                 </view>

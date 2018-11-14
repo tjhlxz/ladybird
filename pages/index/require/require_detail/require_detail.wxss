@@ -75,10 +75,12 @@ text {
 .model_column {
     background-color: #fff;
     padding: 25rpx 15rpx;
-    margin-bottom: 15rpx;
+    margin-top: 15rpx;
     font-size: 32rpx;
 }
-
+.first{
+    margin-top: 0;
+}
 .describe {
     margin-left: 20rpx;
     font-size: 25rpx;
@@ -250,9 +252,6 @@ radio {
 .form_refuse1{
     color: red;
     margin-top: 20rpx;
-}
-.form_refuse_column{
-    border-top: 15rpx solid #f2f2f2;
 }
 .form_attachment{
     border-bottom: 1rpx solid #0ab179;

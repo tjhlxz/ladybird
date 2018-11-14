@@ -61,10 +61,12 @@ text {
 .model_column {
   background-color: #fff;
   padding: 25rpx 15rpx;
-  margin-bottom: 15rpx;
+  margin-top: 15rpx;
   font-size: 32rpx;
 }
-
+.first_column{
+    margin-top: 0;
+}
 .describe {
   margin-left: 20rpx;
   font-size: 25rpx;
@@ -101,7 +103,10 @@ radio {
   margin-top: 15rpx;
   font-size: 35rpx;
 }
-
+.teacher_name{
+  margin-top: 15rpx;
+  font-size: 35rpx;
+}
 .date {
   display: flex;
   flex-direction: column;

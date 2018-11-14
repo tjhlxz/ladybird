@@ -1,7 +1,7 @@
 /* pages/user/about/about.wxss */
 .container{
     width: 100%;
-    padding:80rpx 50rpx;
+    padding:80rpx 50rpx 0 50rpx;
     font-size: 33rpx;
 }
 text{
