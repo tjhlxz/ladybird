@@ -64,7 +64,7 @@
                     </view>
                 </view>
                 <view class='model_column'>
-                    <text class='reason'>申请原因</text>
+                    <text class='reason'>申请原因及地点</text>
                     <view class="reason_input">
                     {{detail.form_reason}}
                     </view>

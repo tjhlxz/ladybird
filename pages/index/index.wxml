@@ -59,14 +59,14 @@
         </view>
     </view>
     <view class='content' wx:else>
-    <scroll-view wx:if='{{pgzx}}' scroll-y="true" bindscrolltolower="load" class='scroll-loading' style="height:{{windowHeight/1.9}}px;">
+    <scroll-view scroll-y="true" bindscrolltolower="load" class='scroll-loading' style="height:{{windowHeight/1.9}}px;">
         <view class='xian'></view>
         <view class='content_top'>
-            <view wx:if="{{pgzx == 0}}" class='content_title'>待审批</view>
+            <view wx:if="{{pgzx==0}}" class='content_title'>待审批</view>
             <view wx:else class='content_title'>督导消息</view>
         </view>
         <view wx:if="{{a.length!==0}}">
-            <view class='tr' wx:if="{{index<4 && pgzx == 0}}" wx:for="{{a}}" wx:key="" bindtap='detail1' data-form='{{a}}' data-index='{{index}}'>
+            <view class='tr' wx:if="{{pgzx==0}}" wx:for="{{a}}" wx:key="" bindtap='detail1' data-form='{{a}}' data-index='{{index}}'>
                 <view class='left1'>
                     <view class='head1'>
                         <image class="model_icon1" src='/static/ico/model.png'></image>
@@ -79,7 +79,7 @@
                 </view>
             </view>
 
-            <view class='tr projectList' wx:if="{{pgzx == 1}}" wx:for="{{a}}" wx:key="" bindtap='detail1' data-form='{{a}}' data-index='{{index}}'>
+            <view class='tr projectList' wx:if="{{pgzx==1}}" wx:for="{{a}}" wx:key="" bindtap='detail1' data-form='{{a}}' data-index='{{index}}'>
               <view class='left1'>
                     <view class='head1'>
                         <image class="model_icon1" src='/static/ico/model.png'></image>

@@ -17,16 +17,6 @@ Page({
       var _this = this;
       var items = JSON.parse(options.Form);
       _this.setData({items: items});
-
-      //获取屏幕高度
-      wx.getSystemInfo({
-        success: function (res) {
-          _this.setData({
-            windowHeight: res.windowHeight
-          });
-          console.log("屏幕高度: " + res.windowHeight)
-        }
-      })    
   },
 
   load: function () {
@@ -45,10 +35,10 @@ Page({
       url: app.globalData.config + 'edu_stu_list' + '?edu_id=' + staff_id + '&page=' + _this.data.page,
       success: function (res) {
         if (res.data.status == '200') {
-            var words = _this.data.items.concat(res.data.data);
-            _this.setData({
-              items: words
-            })
+          var words = _this.data.items.concat(res.data.data.formdata);
+          _this.setData({
+            items: words
+          })
         } else if (res.data.status == '202') {
           wx.showToast({
             title: res.data.message,
@@ -103,6 +93,15 @@ Page({
           }
         }
       })
+      //获取屏幕高度
+      wx.getSystemInfo({
+        success: function (res) {
+          _this.setData({
+            windowHeight: res.windowHeight
+          });
+          console.log("屏幕高度: " + res.windowHeight)
+        }
+      })    
     }
     var items = _this.data.items;
     _this.setData({ items: items })
