@@ -342,14 +342,6 @@ Page({
      */
     onLoad: function(options) {
         var _this = this;
-        wx.showLoading({
-            title: '正在加载',
-            duration: 500,
-            mask: true
-        })
-        setTimeout(function(){
-            wx.hideLoading();
-        },1000)
         var user = wx.getStorageSync("user");
         var form = JSON.parse(options.form);
         if(options.jwk) {
@@ -397,10 +389,16 @@ Page({
     onShow: function() {
       var a;
       if (a = wx.getStorageSync('user')) {
+          wx.showLoading({
+              title: '正在加载',
+              duration: 500,
+              mask: true
+          })
         //强制注销
         wx.request({
           url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
           success(res) {
+              wx.hideLoading();
             if (res.data.status == 400) {
               wx.showModal({
                 content: res.data.message,
