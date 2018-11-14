@@ -14,8 +14,11 @@
 </view>
 <view wx:else class="model_detail_container {{first_request}}">
     <view class='model_detail_head'>
-        <image src='/static/ico/model.png'></image>
+        <image style="margin-bottom:10rpx;" src='/static/ico/model.png'></image>
+        <view>
         <text>课程表变更审批表</text>
+       <view bindtap="toggle_first" style="font-size:30rpx;color:#0ab179;margin-top:10rpx;width:180rpx;margin-left:20rpx;border-bottom:1px solid #0ab179">申请填写须知</view>
+       </view>
     </view>
     <view class='model_form_container'>
         <view class="form_border">
