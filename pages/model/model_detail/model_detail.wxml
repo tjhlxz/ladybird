@@ -22,7 +22,7 @@
     <view class='model_form_container'>
         <view class="form_border">
             <form class='model_detail_form' catchsubmit="formSubmit" catchreset="formReset">
-                <view class='model_column'>
+                <view class='model_column first_column'>
                     <text class='username'>申请人</text>
                     <view class='right'>
                         <text class='usrname_text'>{{storage_data_new[0].staff_name}}</text>
@@ -67,7 +67,7 @@
                 </view>
                 <view class='model_column'>
                     <text class='teacher'>代课老师</text>
-                    <input name="teacher" placeholder='请在此处填写代课老师姓名'></input>
+                    <input name="teacher" class="teacher_name" placeholder='请在此处填写代课老师姓名(按需填写)'></input>
                 </view>
                 <view wx:if="{{index==1}}" class='model_column date'>
                     <text class='date'>调整课程时间</text>
@@ -89,15 +89,15 @@
                     <!-- </form> -->
                 </view>
                 <view wx:if="{{index==0}}" class='model_column'>
-                    <text class='reason'>申请原因及地点</text>
-                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因。（如有课程时间、地点变动意向，合班，请在此处说明）"></textarea>
+                    <text class='reason' style="color:red;">调整后上课地点、调整原因</text>
+                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="1、“变更类型”如有变更后的意向时间、地点，请在此处说明。2、请在此处填写申请原因（如：“公差”需提交申请证明；私差、病假请酌情填写）。"></textarea>
                 </view>
                 <view wx:if="{{index==1||index==null}}"class='model_column'>
-                    <text class='reason'>申请原因及地点</text>
-                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因。（如课程地点有变动，合班，请务必在此处填写）"></textarea>
+                    <text class='reason' style="color:red;">调整后上课地点、调整原因</text>
+                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="1、“调串类型”如需地点调整请与二级学院教务科确认调整后上课地点并务必在此填写，方可提交。2、请在此处填写申请原因（如：“公差”需提交申请证明；私差、病假请酌情填写）。"></textarea>
                 </view>
-                <view class='model_column last'>
-                    <text class='reason'>申请附件(证明材料)</text>
+                <view class='model_column'>
+                    <text class='reason'>申请证明（酌情填写）</text>
                     <button bindtap='upload' wx:if="{{filepath==''}}" class="add_image">+</button>
                     <view wx:if="{{filepath!==''}}" class="image_container">
                       <image class='excel_icon' src='{{filepath}}' bindtap='preView'></image>
