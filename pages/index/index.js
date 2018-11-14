@@ -152,7 +152,7 @@ Page({
         }
       })
     }
-    var data = this.data.a;
+    var data = this.data.a||'';
     var len = data.length;
     if (_this.data.pgzx == 0) {
       for (var i = 0; i < len; i++) {
@@ -333,7 +333,7 @@ Page({
       wx.getSystemInfo({
         success: function (res) {
           _this.setData({
-            windowHeight: res.windowHeight
+            windowHeight: res.windowHeight||0
           });
         }
       }),
@@ -361,7 +361,7 @@ Page({
             if (res.data.status == 200) {
               wx.stopPullDownRefresh();
               _this.setData({
-                items: res.data.data
+                items: res.data.data||''
               });
               var a = res.data.data.approve_forms_deal ? _this.data.items.approve_forms_deal : [];
               var s = res.data.data.sub_forms_deal ? _this.data.items.sub_forms_deal : [];
@@ -393,9 +393,9 @@ Page({
               //处理未读消息状态小红点
               var unreadNum = _this.data.a.length ? _this.data.a.length : 0;
               _this.setData({
-                unreadNum: unreadNum,
-                a: a,
-                s: data
+                unreadNum: unreadNum||0,
+                a: a||'',
+                s: data||''
               });
 
               wx.hideLoading();
@@ -419,7 +419,7 @@ Page({
         wx.request({
           url: app.globalData.config + 'edu_center_list?page=1',
           success(res) {
-            var _send = res.data.data.already_send;
+            var _send = res.data.data.already_send||'';
             
             _this.setData({ a: _send });
             wx.hideLoading();
@@ -441,7 +441,7 @@ Page({
             _this.data.f = res.data.data.formdata ? res.data.data.formdata : [];
 
             //循环算出unreadForm值
-            var unreadform = res.data.data.count;
+            var unreadform = res.data.data.count||0;
             
             _this.setData({ unreadForm: unreadform })
           },
