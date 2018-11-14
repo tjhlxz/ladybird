@@ -249,11 +249,11 @@ radio {
 
 .first1 {
   color: #444;
-  margin-top: 10rpx;
+  margin-top: 2rpx;
   margin-bottom: 10rpx;
-  font-size: 36rpx;
-  padding: 0 40rpx;
-  line-height: 48rpx;
+  font-size: 34rpx;
+  padding: 0 35rpx;
+  line-height: 43rpx;
 }
 
 .first_button {

@@ -68,7 +68,7 @@
                             <view class='date_after'>{{date[index][1]}}</view>
                     </view>
                 </view>
-                <view class='model_column class_input' wx:if="{{detail.form_place!==null&&form.form_place!==''}}">
+                <view class='model_column class_input' wx:if="{{detail.form_place!==null&&detail.form_place!==''}}">
                 <text class='classname'>调整后地点</text>
                 <view class="form_course">{{detail.form_place}}</view>
                 </view>

@@ -1,12 +1,12 @@
 <import src="change-date-template/change-date-template.wxml" />
 <view wx:if="{{first_request==='first'}}" class='first_request_mask'>
-    <view class='first_title'>申请须知</view>
+    <view class='first_title'>申请填写须知</view>
     <view class="first_detail first1">1.“申请类型”：可选调串与变更，类型详情请参见页面下的备注。</view>
     <view class="first_detail first1">2.“代课教师”：如合班代课（即将课程调到代课教师的班级一起上课）填写代课教师姓名后必需标注“合班”字样，如刘兴丽（合班）；单独代课只填写代课教师姓名即可。</view>
-     <view class="first_detail first1">3.“调整时间”：如代课时间不变，调整前后时间填一样的即可。</view>
-     <view class="first_detail first1">4.“调整后地点"：若调整后地点发生变化的，请任课教师事先与二级学院教务科确认可用地点后填写，而地点不变必需填写原地点；若变更申请如有意向变更地点可在此处填写。</view>
-     <view class="first_detail first1">5. “申请证明”： 非必填项，其中“公事”如开会、调研等必需填；“私事”如读博必需上传博士课程、私人其他原因可酌情填写。</view>
-     
+     <view class="first_detail first1">3.“调整时间”：如上课时间不变，调整前后时间填一样的即可。原则上同一门课程同一个班级一天只能上一次。</view>
+     <view class="first_detail first1">4.“调整后地点”：若调整后地点发生变化的，请任课教师事先与二级学院教务科确认可用地点后填写，而地点不变必需填写原地点。</view>
+     <view class="first_detail first1">5.“申请证明”： 非必填项，其中“公事”如开会、调研、出差、访学等上传会议通知等材料：“私事”如读博必需上传博士课程，其他特殊原因可酌情填写。</view>
+     <view class="first_detail first1">6.“调串原因”： 不可随意人为调串，特殊情况请填写具体原因并明确调串时间与地点，不要用“有事”、“急事”、“顺延”和“后补”等词语。</view>
     <view class='first_button'>
     <view class='first_cancel' catchtap='first_cancel'>取消</view>
     <view class="first_nofirst" catchtap='nofirst'>不再提示</view>
