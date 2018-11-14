@@ -99,7 +99,8 @@
         </view>
         <view wx:else class='empty'>
             <image class='empty_ico' src='/static/ico/empty.png'></image>
-            <view class='empty_text'>暂无待审批</view>
+            <view wx:if='{{pgzx==0}}' class='empty_text'>暂无待审批</view>
+            <view wx:if='{{pgzx==1}}' class='empty_text'>督导暂无未读消息</view>
         </view>
     </scroll-view>
     </view>
