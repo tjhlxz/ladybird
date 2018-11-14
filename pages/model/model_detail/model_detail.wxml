@@ -6,7 +6,6 @@
      <view class="first_detail first1">3.“调整时间”：如代课时间不变，调整前后时间填一样的即可。</view>
      <view class="first_detail first1">4.“调整后地点"：若调整后地点发生变化的，请任课教师事先与二级学院教务科确认可用地点后填写，而地点不变必需填写原地点；若变更申请如有意向变更地点可在此处填写。</view>
      <view class="first_detail first1">5. “申请证明”： 非必填项，其中“公事”如开会、调研等必需填；“私事”如读博必需上传博士课程、私人其他原因可酌情填写。</view>
-     
     <view class='first_button'>
     <view class='first_cancel' catchtap='first_cancel'>取消</view>
     <view class="first_nofirst" catchtap='nofirst'>不再提示</view>

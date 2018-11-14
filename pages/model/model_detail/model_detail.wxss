@@ -1,7 +1,7 @@
 @import "change-date-template/change-date-template.wxss";
 
 .first {
-  display: none;
+  display: hidden;
 }
 
 .model_detail_container {

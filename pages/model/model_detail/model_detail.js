@@ -86,6 +86,7 @@ Page({
             sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
             sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
             success: function(res) {
+            
                 var filepath = res.tempFilePaths[0];
                 var et = filepath.split('.');
                 var et = et[et.length - 1];
@@ -550,7 +551,6 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function() {
-
     },
 
     /**
@@ -579,10 +579,6 @@ Page({
                 }
             })
         }
-        var first_request = wx.getStorageSync('first_request');
-        this.setData({
-            first_request: first_request
-        })
     },
 
     /**
