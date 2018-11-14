@@ -8,7 +8,8 @@ Page({
         date: [],
         user: {},
         overflow: '',
-        refuse_modal: 'false'
+        refuse_modal: 'false',
+        show: false
     },
     preView() {
       var _this = this;
@@ -24,6 +25,7 @@ Page({
             mask: true
         })
         if(_this.data.jwk == 0) {
+
           wx.request({
             url: app.globalData.config + "relay",
             method: "POST",
@@ -102,21 +104,24 @@ Page({
                 }, 1000)
               } else if (res.data.status === 401) {
                 wx.hideLoading();
-                wx.showToast({
-                  title: res.data.message,
+                wx.showModal({
+                  content: res.data.message,
+                  showCancel: false,
                   mask: true,
-                  image: '/static/ico/fail.png'
-                })
-                setTimeout(function () {
-                  wx.navigateBack({})
-                }, 1000);
+                  success() {
+                    wx.navigateBack();
+                  }
+                });
               } else {
                 wx.hideLoading();
                 wx.showModal({
                   content: res.data.message,
                   showCancel: false,
-                  mask: true
-                })
+                  mask: true,
+                  success() {
+                    wx.navigateBack();
+                  }
+                });
               } 
             }
           })
@@ -124,6 +129,7 @@ Page({
           wx.request({
             url: app.globalData.config + "last_relayForChangeCourse" + '?form_id=' + form.form_id,
             success(res) {
+              wx.hideLoading();
               if (res.data.status === 200) {
                 wx.setStorageSync('lock_a', '1');
                 //用户是从approve.js跳转过来的
@@ -181,7 +187,6 @@ Page({
                 }
                 //======================================
                 setTimeout(function () {
-                  wx.hideLoading();
                   wx.showToast({
                     title: res.data.message,
                   })
@@ -191,18 +196,24 @@ Page({
                 }, 1000)
               }else if (res.data.status === 401) {
                 wx.hideLoading();
-                wx.showToast({
-                  title: res.data.message,
+                wx.showModal({
+                  content: res.data.message,
+                  showCancel: false,
                   mask: true,
-                  image: '/static/ico/fail.png'
-                })
+                  success() {
+                    wx.navigateBack();
+                  }
+                });
               } else {
                 wx.hideLoading();
                 wx.showModal({
                   content: res.data.message,
                   showCancel: false,
-                  mask: true
-                })
+                  mask: true,
+                  success() {
+                      wx.navigateBack();
+                  }
+                });
               } 
             }
           })
@@ -380,13 +391,14 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function() {
-
+      this.setData({show: true});
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
+      var _this = this;
       var a;
       if (a = wx.getStorageSync('user')) {
           wx.showLoading({
@@ -449,5 +461,6 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function() {
+      
     }
 })

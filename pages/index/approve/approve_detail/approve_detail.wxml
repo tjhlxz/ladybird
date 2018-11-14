@@ -1,4 +1,4 @@
-<view class="model_detail_container {{refuse_modal}}">
+<view class="model_detail_container {{refuse_modal}}" wx:if="{{show}}">
     <view class='model_detail_head'>
         <view class='head_title'>
             <image src='/static/ico/model.png'></image>
@@ -70,7 +70,7 @@
                 </view>
             </view>
             <view class='model_column last'>
-                <text class='reason'>申请原因</text>
+                <text class='reason'>申请原因及地点</text>
                 <view class="reason_input">
                     {{form.form_reason}}
                 </view>
@@ -90,9 +90,6 @@
             <view wx:if="{{form.form_status==='待审批'}}" class='button'>
                 <button class='submit' catchtap='agree'>同意</button>
                 <button wx:if="{{jwk==0}}" class='refuse' catchtap='refuse'>拒绝</button>
-            </view>
-            <view wx:if="{{pgzx == 1}}" class='button'>
-              <button wx:if="{{form.status == 1||form.status == 0}}" class='submit' open-type="share">分享</button>
             </view>
         </view>
     </view>
