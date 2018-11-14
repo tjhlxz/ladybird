@@ -438,16 +438,11 @@ Page({
         wx.request({
           url: app.globalData.config + 'edu_stu_list' + '?edu_id=' + staff_id + '&page=1',
           success(res) {
-            _this.data.f = res.data.data ? res.data.data : [];
+            _this.data.f = res.data.data.formdata ? res.data.data.formdata : [];
 
             //循环算出unreadForm值
-            var unreadform = 0;
-            var fLen = _this.data.f.length;
-            for (var num = 0; num < fLen; num++) {
-              if (_this.data.f[num].status == 1) {
-                unreadform++;
-              }
-            }
+            var unreadform = res.data.data.count;
+            
             _this.setData({ unreadForm: unreadform })
           },
           fail() {
