@@ -312,8 +312,6 @@ radio {
   line-height: 200rpx;
   text-align: center;
   color: #bbb;
-  margin-top: 50rpx;
-  background-color: #f4f4f4;
-  border-radius: 10rpx;
-  border:1px solid #eee;
+  margin-top: 40rpx;
+  margin-left:0rpx;
 }
