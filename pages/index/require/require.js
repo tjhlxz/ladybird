@@ -74,7 +74,7 @@ Page({
               success: function (res) {
                 wx.hideLoading();
                 wx.clearStorageSync('user');
-                wx.redirectTo({
+                wx.reLaunch({
                   url: '/pages/login/login',
                 })
               }

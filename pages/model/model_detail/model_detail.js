@@ -574,7 +574,7 @@ Page({
                             showCancel: false,
                             success: function(res) {
                                 wx.clearStorageSync('user');
-                                wx.redirectTo({
+                              wx.reLaunch({
                                   url: '/pages/login/login',
                                 })
                             }
