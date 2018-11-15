@@ -575,7 +575,7 @@ Page({
                             success: function(res) {
                                 wx.clearStorageSync('user');
                                 wx.redirectTo({
-                                    url: '../login/login',
+                                  url: '/pages/login/login',
                                 })
                             }
                         })
