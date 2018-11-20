@@ -1,3 +1,4 @@
+var app = getApp();
 // pages/user/user.js
 Page({
  
@@ -5,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-      storage_userInfo:{}
+      storage_data:{}
   },
 
   /**
@@ -18,9 +19,9 @@ Page({
       })
     }
     
-      var storage_userInfo=wx.getStorageSync("userInfo");
+      var storage_data = wx.getStorageSync("data");
         this.setData({
-            storage_userInfo:storage_userInfo
+            storage_data:storage_data
         })
     
   },
@@ -43,7 +44,7 @@ Page({
         wx.showModal({
             title: '注销',
             content: '确定要注销当前账户吗？',
-            showCancel: 'true',
+            showCancel: true,
             cancelText: '取消',
             cancelColor: '#666',
             confirmText: '确定',
@@ -71,6 +72,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var a;
+    if (a = wx.getStorageSync('user')) {
+      //强制注销
+      wx.request({
+        url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
+        success(res) {
+          if (res.data.status == 400) {
+            wx.showModal({
+              content: res.data.message,
+              mask: true,
+              showCancel: false,
+              success: function (res) {
+                wx.clearStorageSync('user');
+                wx.reLaunch({
+                  url: '../login/login',
+                })
+              }
+            })
+          }
+        }
+      })
+    }
     if (!wx.getStorageSync('user')) {
 
       wx.switchTab({

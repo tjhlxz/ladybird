@@ -1,7 +1,7 @@
 <view class='main'>
     <view class='header'>
         <!-- <image src='../../static/img/index_bg.jpg' mode='aspectFill'></image> -->
-        <text class='title_header'>黑龙江科技大学审批系统</text>
+        <text class='title_header'>教务掌上审批系统</text>
     </view>
     <view class='nav'>
         <view class='nav_item' wx:if="{{ptzg==='1'||jyszr==='1'}}" bindtap='myRequest' data-form='{{s}}'>
@@ -20,16 +20,16 @@
             <view class='nav_item_text'>我的审批</view>
         </view>
 
-        <view class='nav_item' wx:if="{{dd=='1'}}" bindtap='demo' data-form='{{items}}'>
+        <view class='nav_item' wx:if="{{dd=='1'||pgzx=='1'}}" bindtap='demo' data-form='{{items}}'>
             <view class='logo'>
               <view class='red_point_box'>
                     <view class='red_point' wx:if='{{unreadForm}}'>{{unreadForm}}</view>
                 </view>
                 <image src='../../static/ico/supervise.png'></image>
             </view>
-            <view class='nav_item_text'>变更通知</view>
+            <view wx:if="{{dd==1}}" class='nav_item_text'>变更通知</view>
+            <view wx:if="{{pgzx==1}}" class='nav_item_text'>已读列表</view>
         </view>
-
     </view>
     <view class='content' wx:if="{{just_teacher}}">
         <view class='xian'></view>
@@ -43,9 +43,9 @@
                         <image class="model_icon" src='/static/ico/model.png'></image>
                         <view class='title'>课程表变更审批表</view>
                     </view>
-                    <view wx-if='{{!pgzx}}' class='time'>当前审批人：{{item.name[item.form_flow_sign-1]}}</view>
+                    <view class='time'>当前审批人：{{item.name[item.form_flow_sign-1]}}</view>
                 </view>
-                <view wx-if='{{!pgzx}}' class='right'>
+                <view class='right'>
                     <view wx:if="{{item.form_status==='待审批'}}" class='tr_td ing'>审批中</view>
                     <view wx:if="{{item.form_status==='已同意'}}" class='tr_td ok'>已通过</view>
                     <view wx:if="{{item.form_status==='已拒绝'}}" class='tr_td fail'>未通过</view>
@@ -59,13 +59,14 @@
         </view>
     </view>
     <view class='content' wx:else>
+    <scroll-view scroll-y="true" bindscrolltolower="load" class='scroll-loading' style="height:{{windowHeight/1.9}}px;">
         <view class='xian'></view>
         <view class='content_top'>
-            <view wx:if="{{pgzx == 0}}" class='content_title'>待审批</view>
+            <view wx:if="{{pgzx==0}}" class='content_title'>待审批</view>
             <view wx:else class='content_title'>督导消息</view>
         </view>
         <view wx:if="{{a.length!==0}}">
-            <view class='tr' wx:if="{{index<4 && pgzx == 0}}" wx:for="{{a}}" wx:key="" bindtap='detail1' data-form='{{a}}' data-index='{{index}}'>
+            <view class='tr' wx:if="{{pgzx==0}}" wx:for="{{a}}" wx:key="" bindtap='detail1' data-form='{{a}}' data-index='{{index}}'>
                 <view class='left1'>
                     <view class='head1'>
                         <image class="model_icon1" src='/static/ico/model.png'></image>
@@ -77,7 +78,8 @@
                     <view class='tr_td1 ing'>待审批</view>
                 </view>
             </view>
-            <view class='tr' wx:if="{{pgzx == 1}}" wx:for="{{a}}" wx:key="" bindtap='detail1' data-form='{{a}}' data-index='{{index}}'>
+
+            <view class='tr projectList' wx:if="{{pgzx==1}}" wx:for="{{a}}" wx:key="" bindtap='detail1' data-form='{{a}}' data-index='{{index}}'>
               <view class='left1'>
                     <view class='head1'>
                         <image class="model_icon1" src='/static/ico/model.png'></image>
@@ -92,11 +94,14 @@
                 </view>
             </view>
             
+            
             <view class='more' wx:if="{{a.length>4 && pgzx == 0}}">"我的审批"中查看更多</view>
         </view>
         <view wx:else class='empty'>
             <image class='empty_ico' src='/static/ico/empty.png'></image>
-            <view class='empty_text'>暂无待审批</view>
+            <view wx:if='{{pgzx==0}}' class='empty_text'>暂无待审批</view>
+            <view wx:if='{{pgzx==1}}' class='empty_text'>督导暂无未读消息</view>
         </view>
+    </scroll-view>
     </view>
 </view>

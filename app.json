@@ -1,49 +1,49 @@
 {
-    "pages": [
-        
-        "pages/index/index",
-        "pages/index/approve/approve",
-        "pages/model/model_detail/model_detail",
-        "pages/index/require/require_detail/require_detail",
-        "pages/model/model",
-        "pages/user/user",
-        "pages/login/login",
-        "pages/index/approve/approve_detail/approve_detail",
-        "pages/test/test",
-        "pages/index/require/require",
-        "pages/index/supervisor/supervisor",
-        "pages/index/supervisor/supervisor_detail/supervisor_detail",
-        "pages/user/help/help",
-        "pages/user/about/about",
-        "pages/user/updatepwd/updatepwd"
+  "pages": [
+    "pages/index/index",
+    "pages/index/approve/approve",
+    "pages/model/model_detail/model_detail",
+    "pages/index/require/require_detail/require_detail",
+    "pages/model/model",
+    "pages/user/user",
+    "pages/login/login",
+    "pages/index/approve/approve_detail/approve_detail",
+    "pages/index/require/require",
+    "pages/index/supervisor/supervisor",
+    "pages/index/supervisor/supervisor_detail/supervisor_detail",
+    "pages/user/help/help",
+    "pages/user/about/about",
+    "pages/user/updatepwd/updatepwd",
+    "pages/index/evaluate/evaluate"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "黑龙江科技大学",
+    "navigationBarTextStyle": "black",
+    "onReachBottomDistance": 50
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/ico/homepage.png",
+        "selectedIconPath": "static/ico/homepage_fill.png"
+      },
+      {
+        "pagePath": "pages/model/model",
+        "text": "审批表模板",
+        "iconPath": "static/ico/document.png",
+        "selectedIconPath": "static/ico/document_fill.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "static/ico/addressbook.png",
+        "selectedIconPath": "static/ico/addressbook_fill.png"
+      }
     ],
-    "window": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "校园审批系统",
-        "navigationBarTextStyle": "black"
-    },
-    "tabBar": {
-        "list": [
-            {
-                "pagePath": "pages/index/index",
-                "text": "首页",
-                "iconPath": "static/ico/homepage.png",
-                "selectedIconPath": "static/ico/homepage_fill.png"
-            },
-            {
-                "pagePath": "pages/model/model",
-                "text": "审批表模板",
-                "iconPath": "static/ico/document.png",
-                "selectedIconPath": "static/ico/document_fill.png"
-            },
-            {
-                "pagePath": "pages/user/user",
-                "text": "我的",
-                "iconPath": "static/ico/addressbook.png",
-                "selectedIconPath": "static/ico/addressbook_fill.png"
-            }
-        ],
-        "selectedColor": "#0AB179"
-    }
+    "selectedColor": "#0AB179"
+  }
 }

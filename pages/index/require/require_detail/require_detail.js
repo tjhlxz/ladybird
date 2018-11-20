@@ -1,3 +1,4 @@
+var app = getApp();
 Page({
 
     /**
@@ -11,7 +12,7 @@ Page({
     download(e){
         wx.showLoading({
             title: '正在打开',
-            mask:'true'
+            mask:true
         })
         wx.downloadFile({
             // 示例 url，并非真实存在
@@ -43,6 +44,12 @@ Page({
             }
         })
     },
+  download2(e) {
+    var _this = this;
+    wx.previewImage({
+      urls: [_this.data.form.form_picurl],
+    })
+  },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -118,7 +125,28 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-
+      var a;
+      if (a = wx.getStorageSync('user')) {
+        //强制注销
+        wx.request({
+          url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
+          success(res) {
+            if (res.data.status == 400) {
+              wx.showModal({
+                content: res.data.message,
+                mask: true,
+                showCancel: false,
+                success: function (res) {
+                  wx.clearStorageSync('user');
+                  wx.reLaunch({
+                    url: '/pages/login/login',
+                  })
+                }
+              })
+            }
+          }
+        })
+      }
     },
 
     /**

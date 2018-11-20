@@ -1,66 +1,77 @@
 .wrapper {
-  width: 100%;
-  font-size: 14px;
+    width: 100%;
+    font-size: 38rpx;
+    position: fixed;
 }
+
 .title {
-  text-align: center;
-  margin: 36px 0;
-  color: rgb(10,177,121);
-  font-size: 58px;
-  font-weight: bold;
+    text-align: center;
+    margin: 36px 0;
 }
+
+.xitong {
+    font-size: 33px;
+    font-weight: 700;
+    color: rgb(10, 177, 121);
+}
+
+.welcome {
+    font-size: 40rpx;
+    font-weight: bold;
+    color: #0ab179;
+    margin-top: 60rpx;
+}
+
 .content {
-  width: 80%;
-  margin:0 auto;
+    width: 100%;
+    margin: 150rpx auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #444;
 }
-.content .username {
-  width: 100%;
-  height: 200rpx;
+
+.block {
+    display: flex;
+    flex-direction: row;
+    width: 600rpx;
+    align-items: center;
+    margin-bottom: 100rpx;
 }
-.content .password {
-  width: 100%;
-  height: 200rpx;
+
+.label {
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: justify;
+    text-align-last: justify;
+    width: 170rpx;
+    font-size: 40rpx;
 }
-.content .user_inp {
-  border: 0px solid #000;
-  border-bottom: 1px solid #ccc;
-  padding: 6px 0;
+
+input {
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: left;
+    padding: 0 5px;
+    margin-left: 20rpx;
+    width: 410rpx;
+    border-bottom: 1rpx solid #f2f2f2;
+    font-size: 30rpx;
 }
-.content .pass_inp {
-  border: 0px solid #000;
-  border-bottom: 1px solid #ccc;
-  padding: 6px 0;
+
+input:hover {
+    border-bottom: 1px solid #0ab179;
 }
-.content .btn {
-  width: 100%;
-  height: 36px;
-  margin-top: 30px;
-  background-color: rgb(10,177,121);
-  color: #fff;
-  text-align: center;
-  line-height: 36px;
-  font-size: 16px;
-  font-weight: bold;
+
+button {
+    margin-top: 70rpx;
+    width: 600rpx;
+    color: #fff;
+    background-color: #0ab179;
 }
-.footer {
-  width: 100%;
-  height: 60px;
-  margin: 30px auto;
-  text-align: center;
-}
-.footer .footer_label {
-  border: 1px solid #fff;
-  width: 80%;
-  height: 75rpx;
-  margin: 0 auto;
-  padding-top: 25rpx;
-  color: #000;
-  font-size: 12px;
-  font-weight: bold;
-  display: block;
-}
-.footer image {
-  width:54px;
-  height: 52px;
-  margin-top: 30px;
+.copyright{
+    color:#999;
+    font-size:34rpx;
+    position: fixed;
+    bottom: 10%;
 }

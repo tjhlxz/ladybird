@@ -4,8 +4,10 @@ Page({
      * 页面的初始数据
      */
     data: {
-        items: [],
-        show: true
+      items: [],
+      show: true,
+      windowHeight: 0,
+      page: 1
     },
 
     /**
@@ -44,7 +46,13 @@ Page({
             url: './approve_detail/approve_detail?form=' + form + '&jwk='+_this.data.jwk,
         })
     },
-
+    load: function () {
+      var _this = this;
+      _this.setData({
+        page: _this.data.page + 1
+      });
+      _this.showMore();
+    },
     showMore: function() {
         var _this = this;
         _this.setData({
@@ -55,25 +63,12 @@ Page({
             title: '正在加载',
         })
         wx.request({
-            url: app.globalData.config + 'history' + '?staff_id=' + staff_id,
+            url: app.globalData.config + 'history' + '?staff_id=' + staff_id + '&page=' + _this.data.page,
             success(res) {
-                console.log(res);
                 if (res.data.status == 200) {
                     var items = res.data.data.history_form;
-                    console.log(items);
                     var len = items.length ? items.length : 0;
-                    //   for(var i=0;i<len;i++){
-                    //       if(items[i].status===0){
-                    //           items[i].form_status = '待审批';
-                    //       }
-                    //       else if (items[i].status === 1) {
-                    //           items[i].form_status = '已同意';
-                    //       }
-                    //       else if(items[i].status === -1) {
-                    //           items[i].form_status = '已拒绝';
-                    //       }
-                    //       _this.data.items.push(items[i]);
-                    //   }
+                    var arr = [];
                     for (var i = 0; i < len; i++) {
                         //处理数据中的from_status
                         if (items[i].form_status == -1) {
@@ -81,9 +76,9 @@ Page({
                         } else {
                             items[i].form_status = '已同意';
                         }
-                        _this.data.items.push(items[i]);
+                        arr.push(items[i]);
                     }
-                    var data = _this.data.items;
+                    var data = _this.data.items.concat(arr);
                     _this.setData({
                         items: data
                     })
@@ -115,6 +110,37 @@ Page({
      */
     onShow: function() {
         var _this = this;
+      var a;
+      if (a = wx.getStorageSync('user')) {
+        //强制注销
+        wx.request({
+          url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
+          success(res) {
+            if (res.data.status == 400) {
+              wx.showModal({
+                content: res.data.message,
+                mask: true,
+                showCancel: false,
+                success: function (res) {
+                  wx.clearStorageSync('user');
+                  wx.reLaunch({
+                    url: '/pages/login/login',
+                  })
+                }
+              })
+            }
+          }
+        })
+      }
+      //获取屏幕高度
+      wx.getSystemInfo({
+        success: function (res) {
+          _this.setData({
+            windowHeight: res.windowHeight
+          });
+          console.log("屏幕高度: " + res.windowHeight)
+        }
+      })  
         var item = _this.data.items;
         _this.setData({
             items: item

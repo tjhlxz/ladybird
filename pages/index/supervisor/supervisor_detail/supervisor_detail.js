@@ -1,3 +1,4 @@
+var app = getApp();
 // pages/index/supervisor/supervisor_detail/supervisor_detail.js
 Page({
 
@@ -12,7 +13,7 @@ Page({
     var _this = this;
     wx.showLoading({
       title: '正在打开',
-      mask: 'true'
+      mask: true
     })
     wx.downloadFile({
       // 示例 url，并非真实存在
@@ -65,8 +66,6 @@ Page({
       _this.setData({
         detail: data
       })
-
-
         var date_before = [];
         var date_after = [];
         var date_before = detail.form_before_adjust.split(',');
@@ -95,7 +94,28 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-
+      var a;
+      if (a = wx.getStorageSync('user')) {
+        //强制注销
+        wx.request({
+          url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
+          success(res) {
+            if (res.data.status == 400) {
+              wx.showModal({
+                content: res.data.message,
+                mask: true,
+                showCancel: false,
+                success: function (res) {
+                  wx.clearStorageSync('user');
+                  wx.reLaunch({
+                    url: '/pages/login/login',
+                  })
+                }
+              })
+            }
+          }
+        })
+      }
     },
 
     /**

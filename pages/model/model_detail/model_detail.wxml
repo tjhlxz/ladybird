@@ -1,31 +1,35 @@
 <import src="change-date-template/change-date-template.wxml" />
 <view wx:if="{{first_request==='first'}}" class='first_request_mask'>
-    <view class='first_title'>申请须知</view>
-    <view class="first_detail">1、申请表中，如仅有几次课的时间需调整，申请类型需选择"调串"选项；如因故需要调整整门课的上课时间或将课程转给其他老师，申请类型需选择"变更"选项。</view>
-    <view class="first_detail"> 2、申请类型为"变更"时必须填写代课老师姓名。申请类型为"调串"时，根据需求填写代课老师(非必填)。</view>
-    <view class="first_detail"> 3、除极特殊原因外，不可随意调串课。凡因公出差、因病者，该教学单位必须在同时间、同地点安排代课教师。</view>
-    <view class="first_detail">4、有多重身份者，申请身份需选择普通职工或教研室主任。以下身份不能进行提交：教学院长、教务处处长、教务科、评估中心、督导。</view>
-    <view class="first_detail">5、若信息有误，请联系管理员。管理员电话：123456789</view>
+    <view class='first_title'>申请填写须知</view>
+    <view class="first_detail first1">1.“申请类型”：可选调串与变更，类型详情请参见页面下的备注。</view>
+    <view class="first_detail first1">2.“代课教师”：如合班代课（即将课程调到代课教师的班级一起上课）填写代课教师姓名后必需标注“合班”字样，如刘兴丽（合班）；单独代课只填写代课教师姓名即可。</view>
+    <view class="first_detail first1">3.“调整时间”：如上课时间不变，调整前后时间填一样的即可。原则上同一门课程同一个班级一天只能上一次。</view>
+    <view class="first_detail first1">4.“调整后地点”：若调整后地点发生变化的，请任课教师事先与二级学院教务科确认可用地点后填写，而地点不变必需填写原地点。</view>
+    <view class="first_detail first1">5.“申请证明”： 非必填项，其中“公事”如开会、调研、出差、访学等上传会议通知等材料：“私事”如读博必需上传博士课程，其他特殊原因可酌情填写。</view>
+    <view class="first_detail first1">6.“调串原因”： 不可随意人为调串，特殊情况请填写具体原因并明确调串时间与地点，不要用“有事”、“急事”、“顺延”和“后补”等词语。</view>
     <view class='first_button'>
-    <view class='first_cancel' catchtap='first_cancel'>取消</view>
-    <view class="first_nofirst" catchtap='nofirst'>不再提示</view>
+        <view class='first_cancel' catchtap='first_cancel'>取消</view>
+        <view class="first_nofirst" catchtap='nofirst'>不再提示</view>
     </view>
 </view>
 <view wx:else class="model_detail_container {{first_request}}">
     <view class='model_detail_head'>
-        <image src='/static/ico/model.png'></image>
-        <text>课程表变更审批表</text>
+        <image style="margin-bottom:10rpx;" src='/static/ico/model.png'></image>
+        <view>
+            <text>课程表变更审批表</text>
+            <view bindtap="toggle_first" style="font-size:30rpx;color:#0ab179;margin-top:10rpx;width:180rpx;margin-left:20rpx;border-bottom:1px solid #0ab179">申请填写须知</view>
+        </view>
     </view>
     <view class='model_form_container'>
         <view class="form_border">
             <form class='model_detail_form' catchsubmit="formSubmit" catchreset="formReset">
-                <view class='model_column'>
+                <view class='model_column first_column'>
                     <text class='username'>申请人</text>
                     <view class='right'>
-                        <text class='usrname_text'>{{storage_data[0].staff_name}}</text>
+                        <text class='usrname_text'>{{storage_data_new[0].staff_name}}</text>
                     </view>
                 </view>
-                <view class='model_column' wx:if="{{storage_data.length!==1}}">
+                <view class='model_column' wx:if="{{storage_data_new.length>1}}">
                     <text class='type'>申请身份</text>
                     <text class='level_detail'>(学院-教研室-职位)</text>
                     <view class='staff_info'>
@@ -39,18 +43,18 @@
                     <view class='model_column'>
                         <text class='college'>所在学院</text>
                         <view class='right'>
-                            <text class='usrname_text'>{{storage_data[0].college}}</text>
+                            <text class='usrname_text'>{{storage_data_new[0].college}}</text>
                         </view>
                     </view>
                     <view class='model_column'>
                         <text class='college'>教研室</text>
                         <view class='right'>
-                            <text class='usrname_text'>{{storage_data[0].staff_room}}</text>
+                            <text class='usrname_text'>{{storage_data_new[0].staff_room}}</text>
                         </view>
                     </view>
                 </view>
                 <view class='model_column'>
-                    <text class='type'>申请类型</text>
+                    <text class='type'><text style='color:red;'>*</text>申请类型</text>
                     <view class='right'>
                         <picker name="type" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
                             <text wx:if="{{index==null}}">请选择</text>
@@ -58,16 +62,16 @@
                         </picker>
                     </view>
                 </view>
-                <view class='model_column'>
-                    <text class='teacher'>代课老师</text>
-                    <input name="teacher" placeholder='请在此处填写代课老师姓名(根据需求填写)'></input>
-                </view>
                 <view class='model_column class_input'>
-                    <text class='classname'>课程</text>
+                    <text class='classname'><text style='color:red;'>*</text>课程</text>
                     <textarea name="classname" maxlength="80" placeholder='请在此处填写课程名'></textarea>
                 </view>
+                <view class='model_column'>
+                    <text class='teacher'>代课老师</text>
+                    <input name="teacher" class="teacher_name" placeholder='请在此处填写代课老师姓名(按需填写)'></input>
+                </view>
                 <view wx:if="{{index==1}}" class='model_column date'>
-                    <text class='date'>调整课程时间</text>
+                    <text class='date'><text style='color:red;'>*</text>调整课程时间</text>
                     <view class='date_text'>
                         <text class='date_before_text'>调整前</text>
                         <text class='date_after_text'>调整后</text>
@@ -80,14 +84,30 @@
                         <text wx:if="{{length!==1}}" catchtap='deletechange'>删除</text>
                         <text wx:else catchtap='nodelete'>删除</text>
                         <view class='xian'></view>
-                        <text wx:if="{{length!==8}}" catchtap='addchange'>添加</text>
+                        <text wx:if="{{length!==4}}" catchtap='addchange'>添加</text>
                         <text wx:else form-type='submit' catchtap='noadd'>添加</text>
                     </view>
                     <!-- </form> -->
                 </view>
-                <view class='model_column last'>
-                    <text class='reason'>申请原因</text>
+                <view class='model_column' wx:if="{{index==0||index==null}}">
+                    <text class='teacher'>调整后地点</text>
+                    <textarea name="address2" class="address" maxlength="120" placeholder='如有变更后的意向时间、地点，请在此处说明'></textarea>
+                </view>
+                <view class='model_column' wx:if="{{index==1}}">
+                    <text class='teacher'><text style='color:red;'>*</text>调整后地点</text>
+                    <textarea name="address2" class="address" maxlength="120" placeholder='如需地点调整请与二级学院教务科确认调整后上课地点并务必在此填写'></textarea>
+                </view>
+                <view class='model_column'>
+                    <text class='reason'><text style='color:red;'>*</text>申请原因</text>
                     <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因"></textarea>
+                </view>
+                <view class='model_column'>
+                    <text class='reason'>申请证明（酌情填写）</text>
+                    <button bindtap='upload' wx:if="{{filepath==''}}" class="add_image">+</button>
+                    <view wx:if="{{filepath!==''}}" class="image_container">
+                        <image class='excel_icon' src='{{filepath}}' bindtap='preView'></image>
+                        <view class="delete" bindtap="deleteUpload">×</view>
+                    </view>
                 </view>
                 <button class='submit' form-type='submit'>提交</button>
             </form>
@@ -95,11 +115,16 @@
     </view>
     <view class='remarks_container'>
         <text class='remarks'>备注:</text>
-        <text class="remarks_detail">1、申请表中，如仅有几次课的时间需调整，申请类型需选择"调串"选项；如因故需要调整整门课的上课时间或将课程转给其他老师，申请类型需选择"变更"选项。</text>
-        <text class="remarks_detail">2、申请类型为"变更"时必须填写代课老师姓名。申请类型为"调串"时，根据需求填写代课老师(非必填)。</text>
-        <text class="remarks_detail"> 3、除极特殊原因外，不可随意调串课。凡因公出差、因病者，该教学单位必须在同时间、同地点安排代课教师。</text>
-        <text class="remarks_detail">4、有多重身份者，申请身份需选择普通职工或教研室主任。以下身份不能进行提交：教学院长、教务处处长、教务科、评估中心、督导。</text>
-        <text class="remarks_detail">5、若信息有误，请联系管理员。电话：123456789
-        </text>
+        <text class="remarks_detail hahaha">1.调串类型：调串申请时教师课表不会发生永久变化，此时无附件。</text>
+        <text class="remarks_detail">A、临时代课：调整前后时间保持不变填写，明确填写代课教师；</text>
+        <text class="remarks_detail">B、临时顺延：调整前后时间地点按二级学院教务科实际可行填写，代课教师可不填；</text>
+        <text class="remarks_detail"> C、临时调串：若干次调串时间地点按二级学院教务科实际可行填写，代课教师可不填；</text>
+        <text class="remarks_detail hahaha"> 2.变更类型：变更申请时教师课表将永久变化，教务处教务科变更后新课表详见附件。</text>
+        <text class="remarks_detail">A、教师永久性变更：申请整门课程的任课教师永久性变更。</text>
+        <text class="remarks_detail">B、时间地点永久性变更：申请整门课的上课时间地点永久性变更。</text>
+        <text class="remarks_detail hahaha">3.若教师个人信息有误，请联系二级学院教务科。</text>
     </view>
+    <center>
+        <view style="color:#999;width:100%;text-align:center;font-size:35rpx;margin:40rpx 0;">客服电话：0451-88036057</view>
+    </center>
 </view>

@@ -1,0 +1,28 @@
+<view class='table'>
+    <scroll-view scroll-y="true" bindscrolltolower="load" class='scroll-loading' style="height:{{windowHeight}}px;">
+        <view class='xian'></view>
+        <view class='content_top'>
+            <view class='content_title'>督导消息</view>
+        </view>
+        <view wx:if="{{items.length!==0}}">
+            <view class='tr projectList' wx:for="{{items}}" wx:key="" bindtap='detail1' data-form='{{items}}' data-index='{{index}}'>
+              <view class='left1'>
+                    <view class='head1'>
+                        <image class="model_icon1" src='/static/ico/model.png'></image>
+                        <view class='form_proposer_name'>所属督导：{{item.staff_name}}</view>
+                    </view>
+                    <view class='time1'>{{item.create_time}}</view>
+                </view>
+                <view class='right'>
+                    <view wx:if='{{item.status == 0}}' class='tr_td1 ok'>已读</view>
+                </view>
+            </view>
+            
+            <view class='more' wx:if="{{a.length>4 && pgzx == 0}}">"我的审批"中查看更多</view>
+        </view>
+        <view wx:else class='empty'>
+            <image class='empty_ico' src='/static/ico/empty.png'></image>
+            <view class='empty_text'>暂无待审批</view>
+        </view>
+    </scroll-view>
+</view>

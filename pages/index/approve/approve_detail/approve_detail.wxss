@@ -86,8 +86,12 @@ text {
 .model_column {
     background-color: #fff;
     padding: 25rpx 15rpx;
-    margin-bottom: 15rpx;
+    margin-top: 15rpx;
     font-size: 32rpx;
+}
+
+.first {
+    margin-top: 0;
 }
 
 .describe {
@@ -253,16 +257,14 @@ radio {
     color: red;
 }
 
-.form_refuse_column {
-    border-top: 15rpx solid #f2f2f2;
-}
-
 /* 弹窗效果 */
-.true{
+
+.true {
     position: fixed;
     overflow: hidden;
     width: 100%;
 }
+
 .refuse_modal_mask {
     position: fixed;
     width: 100%;
@@ -271,7 +273,8 @@ radio {
     background: rgba(0, 0, 0, 0.2);
     overflow: hidden;
 }
-.refuse_modal_container{
+
+.refuse_modal_container {
     position: fixed;
     width: 90%;
     top: 20%;
@@ -281,34 +284,40 @@ radio {
     background-color: #fff;
     border: 1rpx solid #f2f2f2;
 }
-.refuse_modal_form{
+
+.refuse_modal_form {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20rpx 20rpx;
 }
-.refuse_modal_text{
+
+.refuse_modal_text {
     font-weight: 700;
     color: #0ab179;
     font-size: 38rpx;
     margin-bottom: 10rpx;
 }
-.refuse_modal_reason{
+
+.refuse_modal_reason {
     width: 96%;
     padding: 10rpx 10rpx;
     height: 100%;
     border: 1rpx solid #f2f2f2;
     border-radius: 20rpx;
 }
-.reason_input{
+
+.reason_input {
     width: 100%;
     height: 100%;
 }
-.refuse_modal_button{
+
+.refuse_modal_button {
     display: flex;
     width: 100%;
 }
-.refuse_modal_button button{
+
+.refuse_modal_button button {
     margin-top: 30rpx;
     height: 80rpx;
     width: 150rpx;
@@ -318,11 +327,24 @@ radio {
     line-height: 80rpx;
     text-align: center;
 }
-.refuse_modal_confirm{
+
+.refuse_modal_confirm {
     background-color: #0ab179;
     color: #fff;
 }
-.refuse_modal_cancel{
+
+.refuse_modal_cancel {
     background-color: #fff;
     color: #666;
+}
+
+.excel_icon{
+    width: 90rpx;
+    height: 90rpx;
+    margin-top: 30rpx;
+}
+.excel_icon_image{
+    width: 230rpx;
+    height: 230rpx;
+    margin-top: 30rpx;
 }

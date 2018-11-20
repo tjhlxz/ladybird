@@ -3,8 +3,8 @@
         <image class='empty_ico' src='/static/ico/empty.png'></image>
         <view class='empty_text'>暂无待审批</view>
     </view>
-    <view class='items-container'>
-        <block wx:for="{{items}}" wx:key=''>
+    <scroll-view scroll-y="true" bindscrolltolower="load" class='items-container scroll-loading' style="height:{{windowHeight/0.9}}px;">
+        <block class="projectList" wx:for="{{items}}" wx:key=''>
         <view class='red' wx-if="{{item.status}}"></view>
             <view class='tr' bindtap='detail' data-form='{{items}}' data-index='{{index}}'>
                 <view class='left'>
@@ -21,6 +21,5 @@
                 </view>
             </view>
         </block>
-    </view>
-    <view class='txt' bindtap='showMore' wx:if='{{show}}'>点击查看审批完成</view>
+    </scroll-view>
 </view>

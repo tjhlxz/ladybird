@@ -1,10 +1,48 @@
 var app = getApp();
+var COS = require('../../../cos-wx-sdk-v5.js');
+var cos = new COS({
+    getAuthorization: function(params, callback) { //获取签名
+        var authorization = COS.getAuthorization({
+            SecretId: 'AKIDIUSq8Fjzb2Im9QrTRNBqS0Nfp8e4Co9J',
+            SecretKey: '8A1iFbmYBg0vfEfv1v35wcKrDYlpjS0Q',
+            Method: params.Method,
+            Key: params.Key,
+        });
+        callback(authorization);
+    }
+});
+
+var requestCallback = function(err, data) {
+    if (err && err.error) {
+        wx.showModal({
+            title: '返回错误',
+            content: '请求失败：' + err.error.Message + '；状态码：' + err.statusCode,
+            showCancel: false
+        });
+    } else if (err) {
+        wx.showModal({
+            title: '请求出错',
+            content: '请求出错：' + err + '；状态码：' + err.statusCode,
+            showCancel: false
+        });
+    } else {
+        wx.showToast({
+            title: '上传成功',
+            icon: 'success',
+            duration: 1000
+        });
+    }
+};
+
 Page({
     /** 
      * 页面的初始数据
      */
     data: {
-        first_request:'',
+        filepath: '',
+        list: [],
+        url: '',
+        first_request: '',
         length: 0,
         nums: [],
         array: ['变更', '调串'],
@@ -13,11 +51,124 @@ Page({
         date_before: "",
         date_after: "",
         identity_index: '',
+        storage_data_new: [],
         multiArray: [
             ['第1周', '第2周', '第3周', '第4周', '第5周', '第6周', '第7周', '第8周', '第9周', '第10周', '第11周', '第12周', '第13周', '第14周', '第15周', '第16周', '第17周', '第18周', '第19周', '第20周'],
             ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
             ['第1-2节', '第3-4节', '第5-6节', '第7-8节', '第9-10节']
         ]
+    },
+    deleteUpload: function() {
+        var that = this;
+        wx.showModal({
+            content: '是否要删除该附件',
+            success: function(res) {
+                if (res.confirm) {
+                    that.setData({
+                        filepath: ''
+                    })
+                }
+            }
+        })
+    },
+    preView: function() {
+        var _this = this;
+        wx.previewImage({
+            urls: [_this.data.filepath],
+        })
+    },
+    toggle_first(){
+        this.setData({
+            first_request: 'first'
+        })
+    },
+    upload: function() {
+        var _this = this;
+        // 初始化实例
+        wx.chooseImage({
+            count: 1, // 默认9
+            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function(res) {
+            
+                var filepath = res.tempFilePaths[0];
+                var et = filepath.split('.');
+                var et = et[et.length - 1];
+                var timestamp = new Date().getTime();
+                var fileName = 'upload' + timestamp;
+                _this.data.url = 'https://static.flowhandsome.cn/' + fileName + '.' + et;
+                _this.setData({
+                    filepath: filepath
+                })
+                // sdk提供的COS上传函数，如果想批量上传，在这里加FOR循环即可。
+                cos.postObject({
+                    Bucket: app.globalData.Bucket, // 存储桶
+                    Region: app.globalData.Region, // 地域
+                    Key: fileName + '.' + et,
+                    FilePath: filepath, // 本地文件临时地址
+                }, requestCallback);
+            }
+        })
+    },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function(options) {
+        var first_request = wx.getStorageSync('first_request');
+        this.setData({
+            first_request: first_request
+        })
+        var staff_info = [];
+        var staff_level = [];
+        var storage_data = wx.getStorageSync("data");
+        var storage_data_new = []
+        for (var i = 0; i < storage_data.length; i++) {
+            if (storage_data[i].staff_level === 0) {
+                storage_data_new.push(storage_data[i]);
+            }
+        }
+        for (var j = 0; j < storage_data_new.length; j++) {
+            switch (storage_data_new[j].staff_level) {
+                case 0:
+                    staff_level[j] = "普通职工";
+                    break;
+                case 1:
+                    staff_level[j] = "教研室主任";
+                    break;
+                case 2:
+                    staff_level[j] = "教学院长";
+                    break;
+                case 3:
+                    staff_level[j] = "教务处处长";
+                    break;
+                case 4:
+                    staff_level[j] = "教务科";
+                    break;
+                case 5:
+                    staff_level[j] = "评估中心";
+                    break;
+                case 6:
+                    staff_level[j] = "督导";
+                    break;
+            }
+        }
+
+
+        for (var i = 0; i < storage_data_new.length; i++) {
+            staff_info[i] = storage_data_new[i].college + '-' + storage_data_new[i].staff_room + '-' + staff_level[i];
+        }
+        this.setData({
+            storage_data: storage_data,
+            staff_info: staff_info,
+            staff_level: staff_level,
+            storage_data_new: storage_data_new
+        })
+        if (storage_data_new.length === 1) {
+            this.setData({
+                identity_index: 0
+            })
+        }
+        this.addchange();
     },
     bindPickerChange: function(event) {
         this.setData({
@@ -85,63 +236,52 @@ Page({
     },
     //表单提交
     formSubmit(e) {
-        var identity_index = this.data.identity_index;
-        //处理调整时间，拼接字符串
-        var nums = this.data.nums;
-        var multiArray = this.data.multiArray;
-        this.setData({
-            date_before: '',
-            date_after: ''
-        });
-        for (var i = 0; i < nums.length; i++) {
-            var date_before;
-            var multiIndex = nums[i].multiIndex;
-            if (this.data.date_before === '') {
-                date_before = nums[i].multiArray[0][multiIndex[0]] + ' ' + nums[i].multiArray[1][multiIndex[1]] + ' ' + nums[i].multiArray[2][multiIndex[2]];
-            } else {
-                date_before = this.data.date_before + ',' + nums[i].multiArray[0][multiIndex[0]] + ' ' + nums[i].multiArray[1][multiIndex[1]] + ' ' + nums[i].multiArray[2][multiIndex[2]];
-            }
-            this.setData({
-                date_before: date_before
-            })
-        }
-        for (var i = 0; i < nums.length; i++) {
-            var date_after;
-            var multiIndex2 = nums[i].multiIndex2;
-            if (this.data.date_after === '') {
-                date_after = nums[i].multiArray[0][multiIndex2[0]] + ' ' + nums[i].multiArray[1][multiIndex2[1]] + ' ' + nums[i].multiArray[2][multiIndex2[2]];
-            } else {
-                date_after = this.data.date_after + ',' + nums[i].multiArray[0][multiIndex2[0]] + ' ' + nums[i].multiArray[1][multiIndex2[1]] + ' ' + nums[i].multiArray[2][multiIndex2[2]];
-            }
-            this.setData({
-                date_after: date_after
-            })
-        }
         var data = e.detail.value;
-        //只有一种身份的情况下
-        if (this.data.storage_data.length === 1) {
-            var level = this.data.storage_data[0].staff_level;
-            if (level === 2 || level === 3 || level === 4 || level === 5 || level === 6) {
-                wx.showToast({
-                    title: '此身份不可提交',
-                    image: '/static/ico/fail.png',
-                    mask: true
-                })
-            } else this.confirm(e);
-        }
-        //有多种身份的时候
-        else {
-            //如果未选择身份
-            if (data.staff_level === '') {
-                wx.showToast({
-                    title: '请选择申请身份',
-                    image: '/static/ico/zhuyi.png',
-                    mask: true
+        var regRule = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g;
+        if (data.classname.match(regRule) || data.reason_input.match(regRule) || data.teacher.match(regRule)) {
+            wx.showToast({
+                title: '禁止输入表情',
+                image: '/static/ico/fail.png',
+                mask: true
+            })
+        } else {
+            var identity_index = this.data.identity_index;
+            //处理调整时间，拼接字符串
+            var nums = this.data.nums;
+            var multiArray = this.data.multiArray;
+            this.setData({
+                date_before: '',
+                date_after: ''
+            });
+            for (var i = 0; i < nums.length; i++) {
+                var date_before;
+                var multiIndex = nums[i].multiIndex;
+                if (this.data.date_before === '') {
+                    date_before = nums[i].multiArray[0][multiIndex[0]] + ' ' + nums[i].multiArray[1][multiIndex[1]] + ' ' + nums[i].multiArray[2][multiIndex[2]];
+                } else {
+                    date_before = this.data.date_before + ',' + nums[i].multiArray[0][multiIndex[0]] + ' ' + nums[i].multiArray[1][multiIndex[1]] + ' ' + nums[i].multiArray[2][multiIndex[2]];
+                }
+                this.setData({
+                    date_before: date_before
                 })
             }
-            //如果选择了身份
-            else {
-                if (this.data.storage_data[identity_index].staff_room === "无") {
+            for (var i = 0; i < nums.length; i++) {
+                var date_after;
+                var multiIndex2 = nums[i].multiIndex2;
+                if (this.data.date_after === '') {
+                    date_after = nums[i].multiArray[0][multiIndex2[0]] + ' ' + nums[i].multiArray[1][multiIndex2[1]] + ' ' + nums[i].multiArray[2][multiIndex2[2]];
+                } else {
+                    date_after = this.data.date_after + ',' + nums[i].multiArray[0][multiIndex2[0]] + ' ' + nums[i].multiArray[1][multiIndex2[1]] + ' ' + nums[i].multiArray[2][multiIndex2[2]];
+                }
+                this.setData({
+                    date_after: date_after
+                })
+            }
+            var data = e.detail.value;
+            //只有一种身份的情况下
+            if (this.data.storage_data.length === 1) {
+                var level = this.data.storage_data[0].staff_level;
+                if (level === 1 || level === 2 || level === 3 || level === 4 || level === 5 || level === 6) {
                     wx.showToast({
                         title: '此身份不可提交',
                         image: '/static/ico/fail.png',
@@ -149,7 +289,24 @@ Page({
                     })
                 } else this.confirm(e);
             }
+            //有多种身份的时候
+            else {
+                //有效身份不止一个
+                if (this.data.storage_data_new.length > 1) {
+                    //如果未选择身份
+                    if (data.staff_level === '') {
+                        wx.showToast({
+                            title: '请选择申请身份',
+                            image: '/static/ico/zhuyi.png',
+                            mask: true
+                        })
+                    }
+                    //如果选择了身份
+                    else this.confirm(e);
+                } else this.confirm(e);
+            }
         }
+
     },
     add_form_base(e) {
         var data = e.detail.value;
@@ -174,16 +331,18 @@ Page({
                         url: app.globalData.config + "add_form_base",
                         method: "POST",
                         data: {
-                            form_proposer_id: that.data.storage_data[identity_index].staff_id,
-                            form_proposer_name: that.data.storage_data[identity_index].staff_name,
-                            form_college: that.data.storage_data[identity_index].college,
-                            form_staff_room: that.data.storage_data[identity_index].staff_room,
+                            form_proposer_id: that.data.storage_data_new[identity_index].staff_id,
+                            form_proposer_name: that.data.storage_data_new[identity_index].staff_name,
+                            form_college: that.data.storage_data_new[identity_index].college,
+                            form_staff_room: that.data.storage_data_new[identity_index].staff_room,
                             form_type: +data.type + 1,
                             form_course: data.classname,
                             form_before_adjust: that.data.date_before,
                             form_later_adjust: that.data.date_after,
                             form_reason: data.reason_input,
-                            form_teacher: data.teacher
+                            form_teacher: data.teacher,
+                            form_picurl: that.data.url,
+                            form_place: data.address2
                         },
                         header: {
                             'content-type': 'application/x-www-form-urlencoded'
@@ -196,7 +355,7 @@ Page({
                                     mask: true
                                 })
                                 wx.request({
-                                    url: app.globalData.config + "build?staff_id=" + that.data.storage_data[identity_index].staff_id + "&form_id=" + form_id + "&staff_level=" + that.data.storage_data[identity_index].staff_level + "&staff_room=" + that.data.storage_data[identity_index].staff_room + "&college=" + that.data.storage_data[identity_index].college,
+                                    url: app.globalData.config + "build?staff_id=" + that.data.storage_data_new[identity_index].staff_id + "&form_id=" + form_id + "&staff_level=" + that.data.storage_data_new[identity_index].staff_level + "&staff_room=" + that.data.storage_data_new[identity_index].staff_room + "&college=" + that.data.storage_data_new[identity_index].college,
                                     success(res) {
                                         if (res.data.status === 200) {
                                             setTimeout(function() {
@@ -264,6 +423,13 @@ Page({
                                     mask: true
                                 })
                             }
+                        },
+                        fail(res) {
+                            wx.showToast({
+                                title: '提交失败',
+                                image: '/static/ico/fail.png',
+                                mask: true
+                            })
                         }
                     })
                 }
@@ -272,6 +438,7 @@ Page({
     },
     confirm(e) {
         var data = e.detail.value;
+
         //申请类型为空
         if (!data.type) {
             wx.showToast({
@@ -289,33 +456,33 @@ Page({
                     date_before: '',
                     date_after: ''
                 })
-                if (data.teacher == '') {
+                // if (data.teacher == '') {
+                //   wx.showToast({
+                //     title: '请填写代课老师',
+                //     image: '/static/ico/zhuyi.png',
+                //     duration: 1000,
+                //     mask: true,
+                //   })
+                // } else {
+                if (data.classname == '') {
                     wx.showToast({
-                        title: '请填写代课老师',
+                        title: '请填写课程名',
                         image: '/static/ico/zhuyi.png',
                         duration: 1000,
                         mask: true,
                     })
                 } else {
-                    if (data.classname == '') {
+                    if (data.reason_input == '') {
                         wx.showToast({
-                            title: '请填写课程名',
+                            title: '请填写申请原因',
                             image: '/static/ico/zhuyi.png',
                             duration: 1000,
                             mask: true,
                         })
-                    } else {
-                        if (data.reason_input == '') {
-                            wx.showToast({
-                                title: '请填写申请原因',
-                                image: '/static/ico/zhuyi.png',
-                                duration: 1000,
-                                mask: true,
-                            })
-                        } else this.add_form_base(e);
-                    }
+                    } else this.add_form_base(e);
                 }
             }
+            //   }
             //申请类型是调串
             else {
                 var str = this.data.date_before;
@@ -339,14 +506,23 @@ Page({
                             mask: true,
                         })
                     } else {
-                        if (data.reason_input == '') {
+                        if (data.address2 !== '') {
+                            if (data.reason_input == '') {
+                                wx.showToast({
+                                    title: '请填写申请原因',
+                                    image: '/static/ico/zhuyi.png',
+                                    duration: 1000,
+                                    mask: true,
+                                })
+                            } else this.add_form_base(e);
+                        } else {
                             wx.showToast({
-                                title: '请填写申请原因',
+                                title: '请填写地点',
                                 image: '/static/ico/zhuyi.png',
                                 duration: 1000,
                                 mask: true,
                             })
-                        } else this.add_form_base(e);
+                        }
                     }
                 }
             }
@@ -362,89 +538,51 @@ Page({
     submitSuccess(e) {
         var data = e.detail.value;
     },
-    first_cancel(e){
+    first_cancel(e) {
         this.setData({
             first_request: 'nofirst'
         })
     },
-    nofirst(e){
+    nofirst(e) {
         this.setData({
-            first_request:'nofirst'
+            first_request: 'nofirst'
         })
         wx.setStorageSync('first_request', 'nofirst');
     },
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function(options) {
-        var first_request=wx.getStorageSync('first_request');
-        this.setData({
-            first_request:first_request
-        })
-        var staff_info = [];
-        var staff_level = [];
-        var storage_data = wx.getStorageSync("data");
-        for (var j = 0; j < storage_data.length; j++) {
-            switch (storage_data[j].staff_level) {
-                case 0:
-                    staff_level[j] = "普通职工";
-                    break;
-                case 1:
-                    staff_level[j] = "教研室主任";
-                    break;
-                case 2:
-                    staff_level[j] = "教学院长";
-                    break;
-                case 3:
-                    staff_level[j] = "教务处处长";
-                    break;
-                case 4:
-                    staff_level[j] = "教务科";
-                    break;
-                case 5:
-                    staff_level[j] = "评估中心";
-                    break;
-                case 6:
-                    staff_level[j] = "督导";
-                    break;
-            }
-        }
-        for (var i = 0; i < storage_data.length; i++) {
-            if (storage_data[i].staff_level === 0 || storage_data[i].staff_level === 1) {
-                staff_info[i] = storage_data[i].college + '-' + storage_data[i].staff_room + '-' + staff_level[i];
-            } else if (storage_data[i].staff_level === 2) {
-                staff_info[i] = storage_data[i].college + '-' + staff_level[i]
-            } else
-                staff_info[i] = staff_level[i];
-        }
-        this.setData({
-            storage_data: storage_data,
-            staff_info: staff_info,
-            staff_level: staff_level
-        })
-        if (storage_data.length === 1) {
-            this.setData({
-                identity_index: 0
-            })
-        }
-        this.addchange();
-    },
+
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function() {
-
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-        var first_request = wx.getStorageSync('first_request');
-        this.setData({
-            first_request: first_request
-        })
+        var a;
+        if (a = wx.getStorageSync('user')) {
+            //强制注销
+            wx.request({
+                url: app.globalData.config + 'force_logout?staff_id=' + a.staff_id,
+                success(res) {
+                    if (res.data.status == 400) {
+                        wx.showModal({
+                            content: res.data.message,
+                            mask: true,
+                            showCancel: false,
+                            success: function(res) {
+                                wx.clearStorageSync('user');
+                              wx.reLaunch({
+                                  url: '/pages/login/login',
+                                })
+                            }
+                        })
+                    }
+                }
+            })
+        }
     },
 
     /**

@@ -1,19 +1,19 @@
 <view class='wrapper'>
   <view class='title'>
-    <text>登录</text>
+    <view class='xitong'>教务掌上审批系统</view>
+    <view class='welcome'>欢迎您!</view>
   </view>
   <view class='content'>
-    <view class='username'>
-      <label for='username' class='username_label'>教工号</label>
-      <input name='username' class='user_inp' bindinput='usernameInput'></input>
+    <view class='block'>
+      <view class="label">教工号</view>
+      <input name='username' placeholder="请输入教工号" bindinput='usernameInput'></input>
     </view>
-    <view class='password'>
-      <label for='password' class='password_label'>密码</label>
-      <input name='password' class='pass_inp' bindinput='passwordInput'></input>
+    <view class='block'>
+      <view class="label">密码</view>
+      <input type='password' name='password' placeholder="请输入密码" bindinput='passwordInput'></input>
     </view>
     <button class='btn' bindtap='click'>登录</button>
+    <view class="copyright">Copyright © 2018 黑龙江科技大学教务处</view>
   </view>
-  <view class='footer'>
-      <label class='footer_label' bindtap='bindTap'>忘记密码</label>
-  </view>
+  
 </view>

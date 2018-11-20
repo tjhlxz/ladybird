@@ -69,6 +69,10 @@
                         <view class='date_after'>{{date[index][1]}}</view>
                     </view>
                 </view>
+                <view class='model_column class_input' wx:if="{{form.form_place!==null&&form.form_place!==''}}">
+                <text class='classname'>调整后地点</text>
+                <view class="form_course">{{form.form_place}}</view>
+                </view>
                 <view class='model_column'>
                     <text class='reason'>申请原因</text>
                     <view class="reason_input">
@@ -76,7 +80,13 @@
                     </view>
                 </view>
             </form>
-            <view class='model_column last'>
+            <view wx:if='{{form.form_picurl}}' class='model_column' >
+                <text class='reason'>申请证明</text>
+                <view bindtap='download2'>
+                    <image src='{{form.form_picurl}}' class='excel_icon_image'></image>
+                </view>
+            </view>
+            <view class='model_column'>
                 <view class='liucheng'>审批流程</view>
                 <view class='footer_content table' wx:for='{{staff}}' wx:key=''>
                     <view class='form_name'>{{item.staff_name}}</view>
@@ -87,16 +97,17 @@
                     <view class='form_date tr'>{{item.staff_update}}</view>
                 </view>
             </view>
-            <view wx:if="{{form.form_attachment!==null}}" class='model_column last form_refuse_column' >
+            
+            <view wx:if="{{form.form_attachment!==null}}" class='model_column' >
                 <text class='reason'>附件</text>
                 <view catchtap='download'>
                     <image src='/static/ico/excel.png' class='excel_icon'></image>
                     <view>新课表.xls</view>
                 </view>
             </view>
-            <view class='model_column last form_refuse_column' wx:if="{{form.form_status==='已拒绝'}}">
+            <view class='model_column' wx:if="{{form.form_status==='已拒绝'}}">
                 <text class='form_refuse'>未通过原因</text>
-                <view class="form_refuse1">
+                <view class="form_refuse1" style='margin-top:10rpx;'>
                     {{form.form_refuse}}
                 </view>
             </view>
