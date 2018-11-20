@@ -12,6 +12,41 @@ Page({
         show: false,
         disabled: ''
     },
+  download(e) {
+    wx.showLoading({
+      title: '正在打开',
+      mask: true
+    })
+    wx.downloadFile({
+      // 示例 url，并非真实存在
+      url: this.data.form.form_attachment,
+      success: function (res) {
+        wx.hideLoading();
+        const filePath = res.tempFilePath
+        wx.openDocument({
+          filePath: filePath,
+          success: function (res) {
+          },
+          fail: function (res) {
+            console.log("打开失败")
+            wx.showToast({
+              title: '文件打开失败',
+              image: '/static/ico/fail.png',
+              mask: true,
+            })
+          }
+        })
+      },
+      fail: function (res) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '文件打开失败',
+          image: '/static/ico/fail.png',
+          mask: true,
+        })
+      }
+    })
+  },
     preView() {
       var _this = this;
       wx.previewImage({

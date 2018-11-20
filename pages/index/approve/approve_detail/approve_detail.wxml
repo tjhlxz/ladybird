@@ -90,6 +90,13 @@
                     <image src='{{form.form_picurl}}' class='excel_icon_image'></image>
                 </view>
             </view>
+            <view wx:if="{{form.form_attachment!==null}}" class='model_column'>
+                <text class='reason'>附件</text>
+                <view catchtap='download'>
+                    <image src='/static/ico/excel.png' class='excel_icon'></image>
+                    <view>新课表.xls</view>
+                </view>
+              </view>
             <view class='model_column' wx:if="{{form.form_status==='已拒绝'}}">
                 <text class='form_refuse'>拒绝原因</text>
                 <view class="form_refuse1">

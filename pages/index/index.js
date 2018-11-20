@@ -420,6 +420,7 @@ Page({
           url: app.globalData.config + 'edu_center_list?page=1',
           success(res) {
             var _send = res.data.data.already_send||'';
+            wx.stopPullDownRefresh();
             
             _this.setData({ a: _send });
             wx.hideLoading();
@@ -438,6 +439,7 @@ Page({
         wx.request({
           url: app.globalData.config + 'edu_stu_list' + '?edu_id=' + staff_id + '&page=1',
           success(res) {
+            wx.stopPullDownRefresh();
             _this.data.f = res.data.data.formdata ? res.data.data.formdata : [];
 
             //循环算出unreadForm值
