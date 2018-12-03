@@ -315,3 +315,6 @@ radio {
   margin-top: 40rpx;
   margin-left:0rpx;
 }
+switch{
+    zoom:.8;
+}

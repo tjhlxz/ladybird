@@ -54,7 +54,19 @@
                         </view>
                     </view>
                 </view>
-                <view class='model_column'>
+                <view class='model_column class_input'>
+                    <text class='classname'>多媒体故障</text>
+                    <view class="right"><switch name="repair" value="{{repair}}" bindchange='repairChange'></switch></view>
+                </view>
+                <view class='model_column' wx:if="{{repair}}">
+                    <text class='type'><text style='color:red;'>*</text>申请类型</text>
+                    <view class='right'>调串</view>
+                </view>
+                <view class='model_column' wx:if="{{repair}}">
+                    <text style='color:red;'>*</text><text class='repair_room'>故障教室</text>
+                    <input name="repair_room" placeholder='请在此处填写故障教室地点'></input>
+                </view>
+                <view class='model_column' wx:if="{{repair!==true}}">
                     <text class='type'><text style='color:red;'>*</text>申请类型</text>
                     <view class='right'>
                         <picker name="type" bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
@@ -98,11 +110,11 @@
                     <text class='teacher'><text style='color:red;'>*</text>调整后地点</text>
                     <textarea name="address2" class="address" maxlength="120" placeholder='如需地点调整请与二级学院教务科确认调整后上课地点并务必在此填写'></textarea>
                 </view>
-                <view class='model_column'>
+                <view class='model_column' wx:if="{{repair!==true}}">
                     <text class='reason'><text style='color:red;'>*</text>申请原因</text>
                     <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="160" placeholder="请在此处填写申请原因"></textarea>
                 </view>
-                <view class='model_column'>
+                <view class='model_column' wx:if="{{repair!==true}}">
                     <text class='reason'>申请证明（酌情填写）</text>
                     <button bindtap='upload' wx:if="{{filepath==''}}" class="add_image">+</button>
                     <view wx:if="{{filepath!==''}}" class="image_container">

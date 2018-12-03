@@ -105,13 +105,13 @@
             </view>
             <view wx:if="{{form.form_status==='待审批'}}" class='button'>
                 <button wx:if="{{jwk==0||form.form_type==2}}" class='submit' catchtap='agree' disabled='{{disabled}}'>同意</button>
-                <button wx:if="{{jwk==0}}" class='refuse' catchtap='refuse'>拒绝</button>
+                <button class='refuse' catchtap='refuse'>拒绝</button>
             </view>
         </view>
     </view>
     <view wx:if="{{refuse_modal==='true'}}" class='refuse_modal_mask'></view>
     <view wx:if="{{refuse_modal==='true'}}" class='refuse_modal_container'>
-        <form  bindsubmit="refuse_confirm">
+        <form bindsubmit="refuse_confirm">
         <view class="refuse_modal_form">
             <view class='refuse_modal_text'>拒绝原因</view>
             <view class='refuse_modal_reason'>

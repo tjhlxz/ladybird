@@ -39,6 +39,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        repair:false,
         filepath: '',
         list: [],
         url: '',
@@ -238,6 +239,9 @@ Page({
     formSubmit(e) {
         var data = e.detail.value;
         var regRule = /\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g;
+        if(this.data.repair===true){
+            data.reason_input='';
+        }
         if (data.classname.match(regRule) || data.reason_input.match(regRule) || data.teacher.match(regRule)) {
             wx.showToast({
                 title: '禁止输入表情',
@@ -326,7 +330,10 @@ Page({
                         fail: function(res) {},
                         complete: function(res) {},
                     })
-
+                    if(that.data.repair===true){
+                        data.type=1;
+                        data.reason_input="多媒体故障，故障教室："+data.repair_room;
+                    }
                     wx.request({
                         url: app.globalData.config + "add_form_base",
                         method: "POST",
@@ -342,7 +349,9 @@ Page({
                             form_reason: data.reason_input,
                             form_teacher: data.teacher,
                             form_picurl: that.data.url,
-                            form_place: data.address2
+                            form_place: data.address2,
+                            repair:that.data.repair,
+                            repair_room:data.repair_room
                         },
                         header: {
                             'content-type': 'application/x-www-form-urlencoded'
@@ -438,7 +447,10 @@ Page({
     },
     confirm(e) {
         var data = e.detail.value;
-
+        if(this.data.repair===true){
+            data.type=1;
+            data.reason_input='教室多媒体故障';
+        }
         //申请类型为空
         if (!data.type) {
             wx.showToast({
@@ -490,6 +502,14 @@ Page({
                 var patt1 = /undefined/;
                 var date1 = str.match(patt1);
                 var date2 = str1.match(patt1);
+                if (this.data.repair && data.repair_room==''){
+                    wx.showToast({
+                        title: '请填写故障教室',
+                        image: '/static/ico/zhuyi.png',
+                        duration: 1000,
+                        mask: true,
+                    })
+                }else{
                 if (data.classname == '') {
                     wx.showToast({
                         title: '请填写课程名',
@@ -526,15 +546,23 @@ Page({
                     }
                 }
             }
+            }
         }
     },
-    submitFail(e) {
-        wx.showToast({
-            title: '请填写完整信息',
-            image: '/static/ico/zhuyi.png'
+    repairChange(e){
+        if(e.detail.value===true){
+            this.setData({
+                index:1
+            })
+        }else{
+            this.setData({
+                index:null
+            })
+        }
+        this.setData({
+            repair:e.detail.value
         })
     },
-
     submitSuccess(e) {
         var data = e.detail.value;
     },
