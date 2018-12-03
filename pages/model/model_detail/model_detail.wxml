@@ -1,3 +1,4 @@
+
 <import src="change-date-template/change-date-template.wxml" />
 <view wx:if="{{first_request==='first'}}" class='first_request_mask'>
     <view class='first_title'>申请填写须知</view>
@@ -99,7 +100,7 @@
                 </view>
                 <view class='model_column'>
                     <text class='reason'><text style='color:red;'>*</text>申请原因</text>
-                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="255" placeholder="请在此处填写申请原因"></textarea>
+                    <textarea class="reason-input" name="reason_input" cursor-spacing="20px" adjust-position="true" maxlength="160" placeholder="请在此处填写申请原因"></textarea>
                 </view>
                 <view class='model_column'>
                     <text class='reason'>申请证明（酌情填写）</text>
