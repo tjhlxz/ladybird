@@ -106,7 +106,7 @@ Page({
                     Region: app.globalData.Region, // 地域
                     Key: fileName + '.' + et,
                     FilePath: filepath, // 本地文件临时地址
-                }, requestCallback(null, ''));
+                }, requestCallback);
             }
         })
     },
@@ -574,8 +574,8 @@ Page({
                             showCancel: false,
                             success: function(res) {
                                 wx.clearStorageSync('user');
-                                wx.redirectTo({
-                                    url: '../login/login',
+                              wx.reLaunch({
+                                  url: '/pages/login/login',
                                 })
                             }
                         })

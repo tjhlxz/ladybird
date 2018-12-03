@@ -138,8 +138,8 @@ Page({
                 showCancel: false,
                 success: function (res) {
                   wx.clearStorageSync('user');
-                  wx.redirectTo({
-                    url: '../login/login',
+                  wx.reLaunch({
+                    url: '/pages/login/login',
                   })
                 }
               })
