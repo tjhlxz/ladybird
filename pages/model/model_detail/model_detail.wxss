@@ -150,7 +150,9 @@ radio {
   border: #0ab179;
   width: 100%;
 }
-
+button::after{ 
+  border: none; 
+}
 .form_head_status {
   font-size: 35rpx;
 }

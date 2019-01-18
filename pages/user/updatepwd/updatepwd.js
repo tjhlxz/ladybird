@@ -28,36 +28,19 @@ Page({
                 mask: true
             })
         } else{
-        var re_n = /[^\d]/g;
-        var re_t = /[^a-zA-z]/g;
-        var n_result = re_n.test(newpwd);
-        var t_result = re_t.test(newpwd);
         if (oldpwd === "") {
             wx.showModal({
                 title: '密码无效',
                 content: '您输入的原密码不正确',
                 showCancel: false
             })
-        } else if (newpwd.length < 6 || newpwd.length > 12) {
+        } else if (newpwd.length!==6 ) {
             wx.showModal({
                 title: '密码无效',
-                content: '密码由6-12个字符组成',
+                content: '密码由6位数字组成',
                 showCancel: false
             })
         } else {
-            if (!n_result) {
-                wx.showModal({
-                    title: '密码无效',
-                    content: '密码不能全为数字',
-                    showCancel: false
-                })
-            } else if (!t_result) {
-                wx.showModal({
-                    title: '密码无效',
-                    content: '密码不能全为字母',
-                    showCancel: false
-                })
-            } else {
                 if (newpwd === newpwdagin) {
                     wx.showLoading({
                         title: '正在修改',
@@ -112,7 +95,6 @@ Page({
                     })
                 }
             }
-        }
         }
     },
     /**

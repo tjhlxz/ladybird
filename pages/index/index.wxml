@@ -1,6 +1,7 @@
 <view class='main'>
     <view class='header'>
         <!-- <image src='../../static/img/index_bg.jpg' mode='aspectFill'></image> -->
+        <image src='../../static/ico/ladybird1.png' style="height:125rpx;width:250rpx;margin:20rpx 0;"></image>
         <text class='title_header'>教务掌上审批系统</text>
     </view>
     <view class='nav'>
@@ -97,8 +98,8 @@
             
             <view class='more' wx:if="{{a.length>4 && pgzx == 0}}">"我的审批"中查看更多</view>
         </view>
-        <view wx:else class='empty'>
-            <image class='empty_ico' src='/static/ico/empty.png'></image>
+        <view wx:else class='empty' style='color:#ddd;'>
+            <image class='empty_ico' src='/static/ico/empty.png' ></image>
             <view wx:if='{{pgzx==0}}' class='empty_text'>暂无待审批</view>
             <view wx:if='{{pgzx==1}}' class='empty_text'>督导暂无未读消息</view>
         </view>

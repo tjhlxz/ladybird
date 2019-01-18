@@ -29,7 +29,7 @@
     height: 160rpx;
 }
 .empty_text{
-    font-size: 35rpx;
+    font-size: 30rpx;
     margin-top: 40rpx;
     color: #666;
 }
@@ -47,7 +47,7 @@
 }
 
 .title_header {
-    margin-top: 100rpx;
+    margin-top: 0rpx;
     font-size: 65rpx;
     font-family: Microsoft Yahei;
     font-weight: 700;

@@ -1,6 +1,6 @@
 <view class='container'>
     <view class='person-container'>
-        <image class='avatar' src='/static/ico/logo1.jpg'></image>
+        <image src='../../static/ico/ladybird1.png' style="height:150rpx;width:300rpx;margin:20rpx 0 50rpx 0;"></image>
         <text class='username' style='margin-bottom: 20rpx; font-size:60rpx;color:#0ab179;font-weight:bold;'>教务掌上审批系统</text>
         <text class='username' style='color: #0ab179;font-size:38rpx;'>{{storage_data[0].staff_name}}</text>
     </view> 

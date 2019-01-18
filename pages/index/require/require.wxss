@@ -24,8 +24,8 @@
 .block{
     padding:20rpx 0rpx;
     display: flex;
+    height:100%;
     flex-direction: column;
-    background-color: #fafafa;
 }
 .form_detail{
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);

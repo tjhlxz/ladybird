@@ -1,5 +1,6 @@
 <view class='wrapper'>
   <view class='title'>
+  <image src='../../static/ico/ladybird1.png' style="height:150rpx;width:300rpx;margin:20rpx 0;"></image>
     <view class='xitong'>教务掌上审批系统</view>
     <view class='welcome'>欢迎您!</view>
   </view>

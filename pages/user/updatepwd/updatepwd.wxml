@@ -7,15 +7,15 @@
         </view>
         <view class='list_container'>
             <text class='title'>新密码</text>
-            <input placeholder="请输入新密码" name="newpwd" password='true'></input>
+            <input placeholder="请输入新密码" name="newpwd" password type="number" ></input>
         </view>
         <view class='list_container'>
             <text class='title'>确认密码</text>
-            <input placeholder="请确认密码" name="newpwdagin" password='true'></input>
+            <input placeholder="请确认密码" name="newpwdagin" password type="number" ></input>
         </view>
         
         <view class='desc'>
-        <text>密码必须是6-12位的数字、字母、符号组合(不能是纯数字、纯字母)。有问题请联系管理员：0451-88036057。</text>
+        <text>密码必须是6位数字。有问题请联系管理员：0451-88036057。</text>
         </view>
         <button form-type='submit'>确定</button>
     </form>

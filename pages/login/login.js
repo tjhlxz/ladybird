@@ -45,13 +45,22 @@ Page({
           }
             var num = this.data.username;
             var pas = this.data.password;
+            console.log(pas);
             //向服务器发送请求 由此用户则登录
             wx.showLoading({
               title: '正在登录',
               mask: true
             }),
             wx.request({
-                url: app.globalData.config + "login?staff_id=" + num + '&pwd=' + pas,
+                url: app.globalData.config + "login",
+                method: "POST",
+                data: {
+                    staff_id:num,
+                    pwd:pas
+                },
+                header: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
                 success(res) {
                     if (res.data.status == 200) {
                       wx.hideLoading();

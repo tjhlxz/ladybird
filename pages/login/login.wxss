@@ -6,7 +6,7 @@
 
 .title {
     text-align: center;
-    margin: 36px 0;
+    /* margin: 36px 0; */
 }
 
 .xitong {
@@ -73,5 +73,5 @@ button {
     color:#999;
     font-size:34rpx;
     position: fixed;
-    bottom: 10%;
+    bottom: 5%;
 }
